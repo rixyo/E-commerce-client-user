@@ -33,9 +33,12 @@ const MainNav:React.FC<MainNavProps> = ({user}) => {
             isActive:pathname === "/auth"
         } 
     ]
+     const logout = () => {
+      localStorage.removeItem('token');
+    };
     const handleLogout=()=>{
-      localStorage.removeItem('token')
-      router.push('/auth')
+      logout();
+      window.location.href = '/auth';
     }
     const handleProfle=()=>{
       if(pathname.includes(`/${user?.id}/${user?.displayName}`)) return;
@@ -57,7 +60,7 @@ const MainNav:React.FC<MainNavProps> = ({user}) => {
                    </Link>
                 ))}
             </div>
-            <div className='w-full'>
+            <div className='hidden lg:block w-full'>
               <Input type='search' placeholder='Search' />
             </div>
            {user && (

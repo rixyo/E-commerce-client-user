@@ -9,17 +9,14 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { toast } from 'react-toastify';
 import axios from 'axios';
 type SignupFormProps = {
-    variant?: "signup" | "signin" | "forgot-password";
     setVariant:()=>void;
-   
-
 };
 const formSchema = z.object({
     displayName: z.string().min(3).max(100),
     email: z.string().email(),
     password: z.string().min(6).max(100),
 });
-const SignupForm:React.FC<SignupFormProps> = ({variant,setVariant}) => {
+const SignupForm:React.FC<SignupFormProps> = ({setVariant}) => {
     const [loading, setLoading] = useState<boolean>(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -32,7 +29,7 @@ const SignupForm:React.FC<SignupFormProps> = ({variant,setVariant}) => {
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         try {
             setLoading(true);
-            await axios.post('http://localhost:5000/auth/signup',data).then(()=>{
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,data).then(()=>{
                 setLoading(false);
                 toast('Account created successfully',{
                     type: 'success',

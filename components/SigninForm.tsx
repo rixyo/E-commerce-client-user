@@ -36,7 +36,7 @@ const SigninForm:React.FC<SigninFormProps> = ({variant,setVariant}) => {
     })
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setLoading(true);
-     await axios.post('http://localhost:5000/auth/login',data).then((res)=>{
+     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`,data).then((res)=>{
             setLoading(false);
             LocalStorageManager.setItemWithExpiration('token',res.data,60);
             toast('Logged in successfully',{

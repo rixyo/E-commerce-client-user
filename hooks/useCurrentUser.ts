@@ -8,13 +8,7 @@ export type User = {
     displayName: string;
     email: string;
     userRole: string;
-    address:[{
-        id: string;
-        addressType: string;
-        street: string;
-        city: string;
-        state: string;
-    }]
+    avatarUrl: string;
 };
 const useCurrentUser = () => {
     const token = LocalStorageManager.getItemWithExpiration("token");
