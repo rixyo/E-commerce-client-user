@@ -1,10 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-export type Billboard = {
-    id: string;
-    label: string;
-    imageUrl: string;
-};
+
 const useGetAllBillboards = () => {
     const {
         data,

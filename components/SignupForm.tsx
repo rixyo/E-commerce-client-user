@@ -32,7 +32,7 @@ const SignupForm:React.FC<SignupFormProps> = ({setVariant}) => {
             await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,data).then(()=>{
                 setLoading(false);
                 toast('Account created successfully',{
-                    type: 'success',
+                  type:'success'
                 })
                setVariant()
                 

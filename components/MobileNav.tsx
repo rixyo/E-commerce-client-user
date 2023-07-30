@@ -7,21 +7,28 @@ import Link from 'next/link';
 import {Button} from '@/components/ui/button';
 
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+  Menubar,
+ 
+  MenubarContent,
+ 
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
 
-import {Home, LayoutList, UserIcon, LogInIcon, ShoppingBag} from "lucide-react"
+
+
+import {Home, LayoutList, UserIcon, LogInIcon, ShoppingBag,AlignJustifyIcon} from "lucide-react"
+import AnimatedText from './ui/AnimatedText';
+import NavbarAction from './NavbarAction';
 
 type MainNavProps = {
   user:User|undefined
 };
 
 const MobileNav:React.FC<MainNavProps> = ({user}) => {
+  const sentence='E-commerce'.split('')
     const pathname = usePathname();
     const router=useRouter()
     const routes=[
@@ -61,51 +68,52 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
 
     
     return (
-      <nav className={`fixed  w-full bottom-0 z-40 flex  ${user?"justify-around":"justify-around"} p-5 items-center bg-white border-t-[1px] md:hidden`}>
-      
-          {routes.map((route)=>(
-            <Link key={route.href} href={route.href} title={route.label} className={clsx(`
-            group 
-            flex 
-            gap-x-3 
-            rounded-md 
-            p-3 
-            text-sm 
-            leading-6 
-            font-semibold 
-            text-sky-400 
-            hover:text-black 
-            hover:bg-gray-100
-          `,
-            route.isActive && 'bg-gray-100 text-black'
-          )}>
-              {route.icon}
-            </Link>
-          ))}
-            <Button size="icon"  className="flex items-center w-auto rounded-full bg-black px-4 py-2">
-                <ShoppingBag size={25} className="text-white" />
-
-            </Button>
-          {!user &&<LogInIcon size={30} className="text-sky-400" onClick={()=>router.push('/auth')}/>}
-         {user && <DropdownMenu>
-  <DropdownMenuTrigger>
-    <UserIcon size={30} className="text-sky-400"/>
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-    <DropdownMenuSeparator />
-    <DropdownMenuItem className='hover:underline cursor-pointer' onClick={gotProfile}>Profile</DropdownMenuItem>
-    <DropdownMenuItem className='hover:underline cursor-pointer' onClick={gotProfile}>My Orders</DropdownMenuItem>
-    <DropdownMenuItem className='hover:underline cursor-pointer' onClick={gotProfile}>My Reviews</DropdownMenuItem>
-    <DropdownMenuItem className='hover:underline cursor-pointer' onClick={settings}>Setting</DropdownMenuItem>
-    <DropdownMenuItem className='hover:underline cursor-pointer' onClick={handleLogout}>Log out</DropdownMenuItem>
-   
-  </DropdownMenuContent>
-</DropdownMenu>
- }
-       
+ 
+      <div className={`fixed  w-full top-0 z-40 flex p-5 items-center bg-white border-t-[1px] md:hidden`}>
     
-        </nav>
+          <Link href="/" className="flex gap-x-2 ml-10">
+           {sentence.map((letter,index)=>(
+            <AnimatedText key={index}>
+                {letter === " " ? "\u00A0" : letter}
+            </AnimatedText>
+           ))}
+          </Link>
+          <NavbarAction/>
+           <Button variant="ghost" className="absolute top-4 left-2 inline-flex items-center peer justify-center rounded-md p-2   hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white group">
+            <AlignJustifyIcon className='text-gray-400' size={30}/>
+           </Button>
+        
+
+           <div className="p-6 w-1/2 h-screen bg-gray-300 z-20 fixed top-0 -left-96 lg:left-0 lg:w-60  peer-focus:left-0 peer:transition ease-out delay-150 duration-200" >
+           {/* DropDownMenue */}
+      
+
+   
+          {routes.map((route,index)=>(
+          <div key={index} >
+            <Menubar>
+              <MenubarMenu>
+              <MenubarTrigger>
+                <div className="flex items-center justify-between ">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full ">
+                      {route.label}
+                    </div>
+                  </div>
+                </div>
+              </MenubarTrigger>
+
+              </MenubarMenu>
+            </Menubar>
+          </div>
+          ))}
+          
+             </div>
+     
+        
+       </div>
+
+       
     )
 }
 export default MobileNav;

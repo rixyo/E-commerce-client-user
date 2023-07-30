@@ -1,11 +1,12 @@
 "use client"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import './globals.css'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Head from "next/head";
+
 import {  Urbanist  } from 'next/font/google'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from "@/components/Footer";
-import Header from "@/components/ui/Header";
 import Navbar from "@/components/Navbar";
 const urbanist =  Urbanist ({ subsets: ['latin'] })
 
@@ -18,17 +19,19 @@ export default  function RootLayout({
   const queryClient = new QueryClient();
   return (
     <html lang="en">
-      <head>
+      <Head>
         <meta charSet="utf-8" />
         <meta name="description" content="E-commerce" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>E-commerce</title>
-      </head>
+      </Head>
       <body className={urbanist.className}>
       <QueryClientProvider client={queryClient}>
 
         <ToastContainer
-        position="top-center"/>
+        position="top-center"
+        theme="light"
+       />
         <Navbar/>
         {children}
         <Footer/>

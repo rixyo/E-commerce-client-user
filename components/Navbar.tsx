@@ -32,9 +32,9 @@ const Navbar:React.FC = () => {
         {user && <MainNav user={user}/>  }
         {!user &&<UnAuthNav/>}
         <NavbarAction/>
-       {currentPath==='/' &&<MobileNav user={user}/>}   
         </div>
-        {currentPath==='/' && <div className='block lg:hidden w-full p-3'>
+       {currentPath==='/' &&<MobileNav user={user}/>}   
+        {currentPath==='/' && <div className='block md:hidden z-40 w-full p-3 mt-5'>
               <Input type='search' placeholder='Search' />
             </div> }  
 

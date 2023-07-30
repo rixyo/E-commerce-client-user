@@ -2,17 +2,15 @@
 
 import React,{useEffect, useState} from 'react';
 import useCurrentUser from '@/hooks/useCurrentUser';
-
+import Link from 'next/link';
 import Image from 'next/image';
-
-import Header from '@/components/ui/Header';
 import { useParams, usePathname } from 'next/navigation';
 
+
+import Header from '@/components/ui/header';
 import { Card, CardContent} from "@/components/ui/card"
-import Link from 'next/link';
 
 
-  
 const Profile:React.FC= () => {
     const {data,isLoading}=useCurrentUser()
     const [mounted,setIsMounted]=useState<boolean>(false)

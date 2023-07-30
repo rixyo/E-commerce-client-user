@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import {useForm} from "react-hook-form"
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -40,7 +40,7 @@ const SigninForm:React.FC<SigninFormProps> = ({variant,setVariant}) => {
             setLoading(false);
             LocalStorageManager.setItemWithExpiration('token',res.data,60);
             toast('Logged in successfully',{
-                type: 'success',
+                type:'success' 
             })
            window.location.href = '/';
      }).catch((err)=>{

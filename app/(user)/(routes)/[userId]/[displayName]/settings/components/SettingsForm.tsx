@@ -7,7 +7,7 @@ import axios from 'axios';
 import LocalStorageManager from '@/lib/LocalStorageManager';
 import { User } from '@/hooks/useCurrentUser';
 
-import Header from '@/components/ui/Header';
+import Header from '@/components/ui/header';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 import ImageUpload from './ImageUpload';
@@ -40,7 +40,6 @@ const SettingsForm:React.FC<SettingsFormProps> = ({user}) => {
     })
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         const token = LocalStorageManager.getItemWithExpiration('token');
-        console.log(token);
         setLoading(true);
         await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/auth/update`,data,{
             headers: {
