@@ -1,9 +1,7 @@
 "use client"
 import { User } from '@/hooks/useCurrentUser';
-import { cn } from '@/lib/utils';
-import Link from 'next/link';
 import { usePathname,useRouter } from 'next/navigation';
-import React from 'react';
+import {useEffect,useState} from 'react';
 import { Input } from './ui/input';
 import {
     Menubar,
@@ -14,25 +12,18 @@ import {
     MenubarTrigger,
   } from "@/components/ui/menubar"
 import {Smile,Package,Star,LogOut} from "lucide-react"
+
 type MainNavProps = {
-    user:User|undefined
+    user:User
 };
 
 const MainNav:React.FC<MainNavProps> = ({user}) => {
-    const pathname = usePathname();
-    const router=useRouter()
-    const data=[
-        {
-            label:"Home",
-            href:"/",
-            isActive:pathname === "/"
-        },
-        {
-            label:"Signin/Signup",
-            href:"/auth",
-            isActive:pathname === "/auth"
-        } 
-    ]
+  const [mounted, setMounted] = useState<boolean>(false);
+  const pathname = usePathname();
+  const router=useRouter()
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+  
      const logout = () => {
       localStorage.removeItem('token');
     };
@@ -46,24 +37,9 @@ const MainNav:React.FC<MainNavProps> = ({user}) => {
     }
     return (
         <nav className='hidden md:flex mx-6  justify-between items-center space-x-4 lg:space-x-6 w-full'> 
-            <div className='flex justify-center items-center gap-5'>
-                {!user && data.map((item)=>(
-                       <Link
-                       key={item.href}
-                       href={item.href}
-                       className={cn(
-                         'text-sm font-medium transition-colors hover:text-black',
-                         item.isActive ? 'text-black' : 'text-neutral-500'
-                       )}
-                     >
-                       {item.label}
-                   </Link>
-                ))}
-            </div>
             <div className='hidden lg:block w-full'>
               <Input type='search' placeholder='Search' />
             </div>
-           {user && (
             <Menubar className='w-full'>
             <MenubarMenu>
               <MenubarTrigger className='hover:cursor-pointer hover:text-red-600 hover:underline text-lg'>{user.displayName} &apos;s Profile</MenubarTrigger>
@@ -78,9 +54,6 @@ const MainNav:React.FC<MainNavProps> = ({user}) => {
               </MenubarContent>
             </MenubarMenu>
           </Menubar>
-
-           )} 
-
         </nav>
     )
 }

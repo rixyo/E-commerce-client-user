@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from "@/components/Footer";
 import Header from "@/components/ui/Header";
+import Navbar from "@/components/Navbar";
 const urbanist =  Urbanist ({ subsets: ['latin'] })
 
 
@@ -25,8 +26,10 @@ export default  function RootLayout({
       </head>
       <body className={urbanist.className}>
       <QueryClientProvider client={queryClient}>
+
         <ToastContainer
         position="top-center"/>
+        <Navbar/>
         {children}
         <Footer/>
         </QueryClientProvider>

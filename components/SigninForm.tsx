@@ -42,7 +42,7 @@ const SigninForm:React.FC<SigninFormProps> = ({variant,setVariant}) => {
             toast('Logged in successfully',{
                 type: 'success',
             })
-            router.push('/')
+           window.location.href = '/';
      }).catch((err)=>{
             setLoading(false);
             toast.error(err.response.data.message)

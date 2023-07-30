@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import {Home, LayoutList, UserIcon, LogInIcon, ShoppingBag} from "lucide-react"
-import NavbarAction from './NavbarAction';
+
 type MainNavProps = {
   user:User|undefined
 };

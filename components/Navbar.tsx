@@ -6,19 +6,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import AnimatedText from './ui/AnimatedText';
 import MainNav from './MainNav';
-import { User } from '@/hooks/useCurrentUser';
+import useCurrentUser from '@/hooks/useCurrentUser';
 import {Input} from '@/components/ui/input';
 
 
 import MobileNav from './MobileNav';
 import NavbarAction from './NavbarAction';
-type NavbarProps = {
-    user: User | undefined;
-}
-const Navbar:React.FC<NavbarProps> = ({user}) => {
+import UnAuthNav from './UnAuthNav';
+const Navbar:React.FC = () => {
   
     const sentence='E-commerce'.split('')
     const currentPath=usePathname()
+    const {data:user,isLoading}=useCurrentUser()
+
     return (
         <Container>
         <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-6">
@@ -30,7 +30,7 @@ const Navbar:React.FC<NavbarProps> = ({user}) => {
            ))}
           </Link>
         {user && <MainNav user={user}/>  }
-          {!user&& <MainNav user={undefined} />}
+        {!user &&<UnAuthNav/>}
         <NavbarAction/>
        {currentPath==='/' &&<MobileNav user={user}/>}   
         </div>
