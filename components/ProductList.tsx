@@ -1,27 +1,20 @@
-import { useState } from "react";
+
 import NoResults from "./ui/no-results";
 import ProductCart from "./ui/product-cart";
-import { Button } from "./ui/button";
-
-
 
 interface ProductListProps {
   title: string;
   items: Product[]|undefined;
   nextPage: () => void;
-  isProductLoading:boolean
+
 }
 
 const ProductList: React.FC<ProductListProps> = ({
   title,
   items,
-  isProductLoading
+
 
 }) => {
-  if(isProductLoading){
-    return <div className="flex justify-center item-center h-full text-xl">Loading......</div>
-  }
- 
   return (
     <div className="space-y-4">
       <h3 className="font-bold text-3xl">{title}</h3>

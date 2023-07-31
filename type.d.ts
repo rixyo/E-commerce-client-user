@@ -7,6 +7,7 @@ type Category ={
     id:string,
     name:string,
     gender:string,
+    imageUrl:string,
     billboard:Billboard,
 }
 type Product ={

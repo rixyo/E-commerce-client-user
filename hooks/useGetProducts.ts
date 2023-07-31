@@ -32,6 +32,7 @@ const useGetProducts =  (query:Query) => {
             const {data} = await axios.get(`${url}`);
             return data as Product[];
         },
+        
     });
     return {
         data,

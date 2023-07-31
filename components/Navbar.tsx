@@ -21,7 +21,7 @@ const Navbar:React.FC = () => {
 
     return (
         <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center gap-6">
+        <div className="hidden md:flex relative px-4 sm:px-6 lg:px-8  h-16 items-center gap-6">
           <Link href="/" className="flex gap-x-2">
            {sentence.map((letter,index)=>(
             <AnimatedText key={index}>

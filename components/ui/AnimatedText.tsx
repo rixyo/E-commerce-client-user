@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
-
+import { cn } from "@/lib/utils";
 type AnimatedTextProps = {
     children: React.ReactNode;
+    className?: string;
 };
 
 const AnimatedText:React.FC<AnimatedTextProps> = ({
-    children
+    children,
+    className
 }) => {
     const controls = useAnimationControls();
     const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -30,7 +32,10 @@ const AnimatedText:React.FC<AnimatedTextProps> = ({
   
     
     return (
-        <motion.span className='text-xl hover:text-red-600' animate={controls} onMouseOver={()=>{
+        <motion.span   className={cn(
+            'text-xl hover:text-red-500 hover:underline cursor-pointer',
+            className
+          )} animate={controls} onMouseOver={()=>{
             if(!isHovered){
                 rubberBand()
             }

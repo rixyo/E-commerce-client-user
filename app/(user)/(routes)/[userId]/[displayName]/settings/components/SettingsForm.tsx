@@ -1,11 +1,12 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as z from 'zod';
 import {useForm} from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import LocalStorageManager from '@/lib/LocalStorageManager';
 import { User } from '@/hooks/useCurrentUser';
+import { useRouter } from 'next/navigation';
 
 import Header from '@/components/ui/header';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -29,13 +30,14 @@ const formSchema = z.object({
 
 const SettingsForm:React.FC<SettingsFormProps> = ({user}) => {
     const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
    
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: user.email,
             displayName: user.displayName,
-            avaterUrl: user.avatarUrl,
+            avaterUrl: user.avatarUrl||'',
         },
     })
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
@@ -51,6 +53,7 @@ const SettingsForm:React.FC<SettingsFormProps> = ({user}) => {
             toast('Profile updated successfully',{
                 type: 'success',
             })
+           window.location.href= `/${user.id}/${user.displayName}`
         }).catch((err)=>{
             setLoading(false);
             console.log(err);

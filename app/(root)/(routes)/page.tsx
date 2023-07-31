@@ -17,7 +17,7 @@ export default function Home() {
   const {data:billboard,isLoading}=useGetAllBillboards()
   const [page,setPage]=useState<number>(1)
   const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const {data:currentProducts,isLoading:isProductsLoading}=useGetProducts({
+  const {data:currentProducts,isLoading:isProductsLoading,isPreviousData}=useGetProducts({
    isFeatured: true,
     page: page,
   })
@@ -44,21 +44,20 @@ export default function Home() {
 
     </Head>
    {billboard && <Billboard data={billboard}/> } 
-   <div className="px-4 sm:px-6 lg:px-8 mt-2">
+  
    {mancategories && <ManCategories data={mancategories} title="Men Categories"/> } 
     <Separator className="my-5"/>
    {womancategories && <WomanCategories data={womancategories} title="Women Categories"/>}
 
-   </div>
+ 
   <Container>
         <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
-          <ProductList title="Featured Products" items={allProducts} nextPage={nextPage} isProductLoading={isProductsLoading}  /> 
+        {currentProducts && <ProductList title="Featured Products" items={allProducts} nextPage={nextPage}   />  }   
         <div className="flex items-center mb-5 justify-center">
      {currentProducts&&currentProducts.length>0 && <Button disabled={!currentProducts?.length} onClick={nextPage}>
-    Load More
+        Load More
     </Button> } 
-    {!currentProducts?.length && <p className="mb-2 text-sm">You have reached the end.Do a search to keep exploring!
-   </p>}
+    {!isProductsLoading && currentProducts?.length === 0 && <p className="text-center">You have reached the end.Do a search to keep exploring!</p>}
         </div>
         </div>
   </Container>

@@ -6,9 +6,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useParams, usePathname } from 'next/navigation';
 
-
 import Header from '@/components/ui/header';
-import { Card, CardContent} from "@/components/ui/card"
+
 
 
 const Profile:React.FC= () => {
@@ -38,17 +37,14 @@ const Profile:React.FC= () => {
             title='Profile Information'
             description='Welcome to the Profile section! 🎉 Here, you&apos;ll find all the essential components that make up your unique and personalized profile.'
             />    
-            <div className='flex flex-col md:flex-row'>
-                <div className='flex flex-col w-full md:w-1/3'>
-                    <Card>
-                        <CardContent>
-                          
+       
+                <div className='flex-col items-center justify-center  w-full md:w-1/3'>
                             <div className='flex flex-col items-center'>
-                                <div className='w-32 h-32 relative'>
-                   {data?.avatarUrl &&<Image src={data.avatarUrl} height={100} width={100} alt={'profile'}  className='rounded-full'/> } 
-                                </div>
+                               
+                   {data?.avatarUrl &&<Image src={data.avatarUrl} style={{"objectFit":"cover"}} height={300} width={300} alt={'profile'}  className='rounded'/> } 
+                               
                             </div>
-                            <div className='flex items-center justify-center gap-20'>
+                            <div className='p-2 mt-3 lg:flex lg:items-center lg:justify-center gap-20'>
                             <div className='flex flex-col items-center'>
                                 <h1 className='text-2xl font-semibold'>Name</h1>
                                 <p className='text-md font-semibold'>{data?.displayName}</p>
@@ -59,11 +55,7 @@ const Profile:React.FC= () => {
                             </div>
 
                             </div>
-                
-                        </CardContent>
-                        </Card>
-                      
-                            <div className='hidden md:flex justify-center  gap-10 hover:underline cursor-pointer'>
+                            <div className='flex justify-center  gap-10 hover:underline cursor-pointer'>
                           {routes.map((route,index)=>(
                               <Link href={route.href} key={index}>
                                     <p className={`text-lg font-semibold ${route.isActive ? 'text-blue-500' : 'text-gray-500'}`}>{route.label}</p>
@@ -72,7 +64,7 @@ const Profile:React.FC= () => {
 
                             </div>
                 </div>
-            </div>
+         
                
              </div>
         </>
