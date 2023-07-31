@@ -1,24 +1,13 @@
 "use client";
-import { User } from '@/hooks/useCurrentUser';
-import { usePathname,useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import Link from 'next/link';
-import {Button} from '@/components/ui/button';
+import { User } from '@/hooks/useCurrentUser';
+import useGetAllCategories from '@/hooks/useGetAllCategories';
+import { usePathname,useRouter } from 'next/navigation';
 
-import {Home,X,AlignJustifyIcon, Cat} from "lucide-react"
+import {Home,X,AlignJustifyIcon} from "lucide-react"
 import AnimatedText from './ui/AnimatedText';
 import NavbarAction from './NavbarAction';
-import useGetAllCategories from '@/hooks/useGetAllCategories';
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from "@/components/ui/menubar"
-import CategoryCart from './ui/category-cart';
+import {Button} from '@/components/ui/button';
 import MobileMenCategory from './MobileMenCategory';
 import MobileWomenCategory from './MobileWomenCategory';
 

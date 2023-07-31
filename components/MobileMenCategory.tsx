@@ -1,7 +1,7 @@
 import React from 'react';
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from './ui/menubar';
-import AnimatedText from './ui/AnimatedText';
 import Link from 'next/link';
+
+import AnimatedText from './ui/AnimatedText';
 
 type MobileMenCategoryProps = {
     categories:Category[]
