@@ -25,7 +25,7 @@ const CategoryCart:React.FC<categorycartProps> = ({data}) => {
           className="aspect-square object-cover rounded-md" alt={data.name} />
   </CardHeader>
   <CardContent>
-    <p className='text-xl font-bold hover:underline'>{data.name}</p>
+    <p className='text-md font-medium hover:translate-x-3'>{data.name}</p>
   </CardContent>
     </Card>
 

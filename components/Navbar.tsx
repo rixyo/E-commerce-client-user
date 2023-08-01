@@ -34,7 +34,7 @@ const Navbar:React.FC = () => {
         <NavbarAction/>
         </div>
        {currentPath==='/' &&<MobileNav user={user}/>}   
-        {currentPath==='/' && <div className='block md:hidden z-40 w-full p-3 mt-5'>
+        {currentPath==='/' && <div className='block md:hidden w-full p-3 mt-5'>
               <Input type='search' placeholder='Search' />
             </div> }  
 

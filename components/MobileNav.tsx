@@ -52,9 +52,9 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
   }
     return (
       <>
-      <div onClick={()=>setOpen(!open)} className='fixed z-50 w-full flex justify-between top-0 left-0 p-5  items-center bg-white border-t-[1px] md:hidden'>
-        <AlignJustifyIcon size={30}/>
-      <div className='flex gap-x-2 ml-10'>
+      <div onClick={()=>setOpen(!open)} className='fixed z-50 w-screen flex justify-between top-0 left-0 p-5   items-center bg-white border-t-[1px] md:hidden'>
+        <AlignJustifyIcon className='cursor-pointer ' size={30}/>
+      <div className='flex gap-x-2 mx-3'>
         {sentence.map((letter,index)=>(
         <AnimatedText className='hover:text-pink-600' key={index}>
             {letter  === " " ? "\u00A0" : letter}
