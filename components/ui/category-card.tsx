@@ -1,12 +1,11 @@
+"use client"
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
     Card,
     CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
-    CardTitle,
   } from "@/components/ui/card"
   
 type categorycartProps = {
@@ -14,10 +13,12 @@ type categorycartProps = {
 };
 
 const CategoryCart:React.FC<categorycartProps> = ({data}) => {
+
     
     return (
      
-    <Card className='cursor-pointer'>
+    <Card className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4  border-gray-200'>
+    <Link href={`category/${data.id}/${data.name}`}>
   <CardHeader>
     <Image src={data.imageUrl}
     width={163.33}
@@ -27,6 +28,8 @@ const CategoryCart:React.FC<categorycartProps> = ({data}) => {
   <CardContent>
     <p className='text-md font-medium hover:translate-x-3'>{data.name}</p>
   </CardContent>
+
+    </Link>
     </Card>
 
         

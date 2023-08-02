@@ -12,11 +12,11 @@ const AuthForm:React.FC = () => {
     return (
         
     <div key={Math.random()/10} className="bg-white  p-10 rounded-lg sm:w-auto lg:w-1/3">
-      {variant === "signup" && <SignupForm variant='signup' setVariant={()=>{
+      {variant === "signup" && <SignupForm  setVariant={()=>{
           setVariant("signin")
       }} />}
       {variant === "signin" &&(
-      <SigninForm variant='signin' setVariant={()=>{
+      <SigninForm  setVariant={()=>{
           setVariant("signup")
       }} />
       )}

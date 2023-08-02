@@ -1,20 +1,22 @@
 "use client"
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
-import AnimatedText from './ui/AnimatedText';
+
+import {  useEffect, useState } from 'react';
 
 interface BillboardProps {
-    data: Billboard[];
+    data: Billboard[]|undefined;
+    isbillboardFetching:boolean
   }
   
-  const Billboard: React.FC<BillboardProps> = ({
-    data
+  const Billboards: React.FC<BillboardProps> = ({
+    data,
   }) => {
-    if (data.length === 0) {
-      return <div>No images to display.</div>;
-    }
-    
-    
+    const [mute, setMute] = useState<boolean>(false);
+    useEffect(() => {
+      setMute(true)
+    }, [mute]);
+    if(!mute) return null
     const divStyle = {
       display: 'flex',
       alignItems: 'center',
@@ -25,23 +27,18 @@ interface BillboardProps {
     return ( 
       <>
       <div className="slide-container p-3">
-        <Slide canSwipe   duration={10000}>
-         {data.map((data, index)=> (
+        <Slide canSwipe  autoplay duration={10000}>
+         {data?.map((data, index)=> (
             <div  key={index}>
               <div   style={{ ...divStyle, 'backgroundImage': `url(${data.imageUrl})` }}>
               <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-8">
           <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs">
-          <div className='flex gap-x-2'>
-
-{data.label.split('').map((letter,index)=>(
-<AnimatedText className='' key={index}>
-    {letter  === " " ? "\u00A0" : letter}
-</AnimatedText>
-))}
-</div>
+          <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs">
+            {data.label}
+          </div>
           </div>
         </div>
-              </div>
+            </div>
             </div>
           ))} 
         </Slide>
@@ -50,4 +47,4 @@ interface BillboardProps {
      );
   };
   
-  export default Billboard;
+  export default Billboards;

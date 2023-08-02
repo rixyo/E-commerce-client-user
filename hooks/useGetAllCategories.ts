@@ -13,7 +13,7 @@ const useGetAllCategories = (query?:Query) => {
             gender:query?.gender,
         }
     })
-    const {data,isLoading} = useQuery({
+    const {data,isLoading,isFetching} = useQuery({
         queryKey:['categories',query],
         queryFn: async () => {
             const {data} = await axios.get(`${url}`);
@@ -23,6 +23,8 @@ const useGetAllCategories = (query?:Query) => {
     return {
         data,
         isLoading,
+        isFetching
+        
     };
 };
 export default useGetAllCategories;

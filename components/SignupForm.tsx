@@ -1,13 +1,15 @@
 "use client"
 import React, { useState } from 'react';
 import { useForm} from "react-hook-form"
+import axios from 'axios';
 import * as z from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from './ui/input';
-import { Button } from './ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import {EyeIcon,EyeOffIcon} from 'lucide-react'
+import Header from './ui/header';
 type SignupFormProps = {
     setVariant:()=>void;
 };
@@ -18,6 +20,7 @@ const formSchema = z.object({
 });
 const SignupForm:React.FC<SignupFormProps> = ({setVariant}) => {
     const [loading, setLoading] = useState<boolean>(false);
+    const [passwordType, setPasswordType] = useState<string>("password");
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -47,12 +50,23 @@ const SignupForm:React.FC<SignupFormProps> = ({setVariant}) => {
         }
         
     };
+    const ShowPassword= () => {
+        if (passwordType === "password") {
+            setPasswordType("text");
+        } else {
+            setPasswordType("password");
+        }
+
+    };
     
     return (
         <>
             <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-            <h1 className="text-2xl font-bold mb-4">Sign up</h1>
+          <Header
+            title="Create an account"
+            description='Welcome to the Signup section! Please fill in the form below to create an account.'
+           />
             <FormField
               control={form.control}
               name="displayName"
@@ -86,7 +100,11 @@ const SignupForm:React.FC<SignupFormProps> = ({setVariant}) => {
                 <FormItem className='mt-2'>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input key={field.name} disabled={loading} type='password'  placeholder="Password" {...field} />
+                    <div className='flex gap-2 items-center'>
+                    <Input key={field.name} disabled={loading} type={passwordType} placeholder="Password" {...field} />
+                   {passwordType==="password" && <EyeIcon className='cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/> } 
+                    {passwordType==="text" && <EyeOffIcon className='cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/>}
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

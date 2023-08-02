@@ -5,7 +5,8 @@ const useGetAllBillboards = () => {
     const {
         data,
         isLoading,
-        isError
+        isError,
+        isFetching
     } = useQuery({
         queryKey: ['billboards'],
         queryFn: async () => {
@@ -18,7 +19,8 @@ const useGetAllBillboards = () => {
     return {
         data,
         isLoading,
-        isError
+        isError,
+        isFetching
     };
 };
 export default useGetAllBillboards;

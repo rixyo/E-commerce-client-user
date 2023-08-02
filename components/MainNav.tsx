@@ -32,8 +32,8 @@ const MainNav:React.FC<MainNavProps> = ({user}) => {
       window.location.href = '/auth';
     }
     const handleProfle=()=>{
-      if(pathname.includes(`/${user?.id}/${user?.displayName}`)) return;
-      else router.push(`/${user?.id}/${user?.displayName}`)
+      if(pathname.includes(`user/${user?.id}/${user?.displayName}`)) return;
+      else router.push(`user/${user?.id}/${user?.displayName}`)
     }
     return (
         <nav className='hidden md:flex mx-6  justify-between items-center space-x-4 lg:space-x-6 w-full'> 

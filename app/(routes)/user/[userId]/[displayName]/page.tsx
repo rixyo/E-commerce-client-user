@@ -4,20 +4,26 @@ import React,{useEffect, useState} from 'react';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useParams, usePathname } from 'next/navigation';
+import { useRouter, usePathname, redirect } from 'next/navigation';
 
 import Header from '@/components/ui/header';
 
 
+type pageProps = {
+    params:{
+        userId:string
+        displayName:string
+    }
+}
 
-const Profile:React.FC= () => {
-    const {data,isLoading}=useCurrentUser()
+const Profile:React.FC<pageProps>= ({params}) => {
+    const {data}=useCurrentUser()
+    const router=useRouter()
     const [mounted,setIsMounted]=useState<boolean>(false)
-    const params=useParams()
     const pathname=usePathname()
     const routes=[
         {
-            href:`/${params.userId}/${params.displayName}/settings`,
+            href:`${pathname}/settings`,
             label:'Settings',
             isActive:pathname.includes('settings')
 
@@ -57,7 +63,7 @@ const Profile:React.FC= () => {
                             </div>
                             <div className='flex justify-center  gap-10 hover:underline cursor-pointer'>
                           {routes.map((route,index)=>(
-                              <Link href={route.href} key={index}>
+                              <Link href={route.href}  key={index}>
                                     <p className={`text-lg font-semibold ${route.isActive ? 'text-blue-500' : 'text-gray-500'}`}>{route.label}</p>
                               </Link>
                           ))}

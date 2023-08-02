@@ -11,11 +11,13 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { toast } from 'react-toastify';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import Header from './ui/header';
 
 
 
 type SigninFormProps = {
-    variant?: "signup" | "signin" | "forgot-password";
+    
     setVariant:()=>void;
 };
 
@@ -23,9 +25,9 @@ const formSchema = z.object({
     email: z.string().email(),
     password: z.string().min(6).max(100),
 });
-const SigninForm:React.FC<SigninFormProps> = ({variant,setVariant}) => {
+const SigninForm:React.FC<SigninFormProps> = ({setVariant}) => {
     const [loading, setLoading] = useState<boolean>(false);
-    
+    const [passwordType, setPasswordType] = useState<string>("password");
     const router = useRouter();
     const form= useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -48,10 +50,20 @@ const SigninForm:React.FC<SigninFormProps> = ({variant,setVariant}) => {
             toast.error(err.response.data.message)
      })
     }
-    
+    const ShowPassword= () => {
+      if (passwordType === "password") {
+          setPasswordType("text");
+      } else {
+          setPasswordType("password");
+      }
+
+  };
     return(
         <>
-            <h1 className="text-2xl font-semibold">Sign in</h1>
+              <Header
+            title="Create an account"
+            description='Welcome to the Signin section! Please fill in the form below to signin.'
+           />
             <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
@@ -74,7 +86,11 @@ const SigninForm:React.FC<SigninFormProps> = ({variant,setVariant}) => {
                 <FormItem className='mt-2'>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input key={field.name} disabled={loading} type='password'  placeholder="Password" {...field} />
+                  <div className='flex gap-2 items-center'>
+                    <Input key={field.name} disabled={loading} type={passwordType} placeholder="Password" {...field} />
+                   {passwordType==="password" && <EyeIcon className='cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/> } 
+                    {passwordType==="text" && <EyeOffIcon className='cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/>}
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

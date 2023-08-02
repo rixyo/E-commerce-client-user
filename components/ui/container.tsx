@@ -6,7 +6,7 @@ interface ContainerProps {
     children
   }) => {
     return ( 
-      <div className="max-w-7xl">
+      <div className="mx-auto max-w-7xl">
         {children}
       </div>
      );

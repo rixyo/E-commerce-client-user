@@ -53,7 +53,7 @@ const SettingsForm:React.FC<SettingsFormProps> = ({user}) => {
             toast('Profile updated successfully',{
                 type: 'success',
             })
-           window.location.href= `/${user.id}/${user.displayName}`
+           window.location.href= `user/${user.id}/${user.displayName}`
         }).catch((err)=>{
             setLoading(false);
             console.log(err);
