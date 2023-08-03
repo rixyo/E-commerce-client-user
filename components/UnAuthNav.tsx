@@ -1,13 +1,17 @@
 "use client"
+// this component is for unauthenticated navigation
 import Link from 'next/link';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {cn} from '@/lib/utils';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Input } from './ui/input';
+import NavbarAction from './NavbarAction';
 
 
 const UnAuthNav:React.FC= () => {
-    const currentPath=usePathname()
+  const [search, setSearch] = useState<string>("");
+  const router=useRouter()
+  const currentPath=usePathname()
     const data=[
         {
             label:"Home",
@@ -20,7 +24,11 @@ const UnAuthNav:React.FC= () => {
             isActive:currentPath === "/auth"
         } 
     ]
-    
+    const onSearch=useCallback((event:React.FormEvent)=>{
+      event.preventDefault()
+      const encodedSearch=encodeURI(search)
+      router.push(`/result?search_query=${encodedSearch}`)
+  },[search,router])
     return (
         <nav className='hidden md:block w-full'> 
                <div className='flex justify-center items-center gap-5'>
@@ -37,8 +45,13 @@ const UnAuthNav:React.FC= () => {
                    </Link>
                 ))}
                 <div className=' w-full p-3'>
-              <Input type='search' placeholder='Search' />
+                <form onSubmit={onSearch}>
+              <Input   onChange={(e)=>setSearch(e.target.value)}
+         value={search} type='search' placeholder='Search' />
+              </form>
             </div>
+            <NavbarAction/>
+            
             </div>
         </nav>
     )

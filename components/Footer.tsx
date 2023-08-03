@@ -1,4 +1,5 @@
 "use client";
+// this component is for footer
 import React, { useEffect, useState } from 'react';
 import AnimatedText from './ui/AnimatedText';
 
@@ -6,7 +7,7 @@ import AnimatedText from './ui/AnimatedText';
 
 const Footer:React.FC = () => {
   const [mounted,setIsMounted]=useState<boolean>(false)
-  const sentence='© 2023 Store, Inc. All rights reserved.'.split('')
+  const sentence='© 2023 E-commerce, Inc. All rights reserved.'.split('')
   useEffect(() => {
       setIsMounted(true);
   }, []);
@@ -15,7 +16,7 @@ const Footer:React.FC = () => {
   }
     
     return (
-        <footer className="bg-white border-t text-center">
+        <footer className="mb-10 md:mb-1  bg-white border-t text-center">
        {sentence.map((letter,index)=>(
         <AnimatedText key={index}>
             {letter === ' ' ? "\u00A0" : letter}

@@ -32,6 +32,7 @@ type ProductSize ={
 type ProductColor ={
     id:string,
     value:string,
+    name:string,
 }
 type Review ={
     id:string,

@@ -1,19 +1,34 @@
 "use client"
-import React from 'react';
+import React, { useEffect, useState,MouseEventHandler } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import IconButton from './icon-button';
 import { Expand, ShoppingCart } from "lucide-react";
 import Currency from './currency';
+import usePreviewModal from '@/hooks/usePreviewModal';
 
 type productcartProps = {
-    data:Product;
-    
+    data:Product;  
 };
 
-const ProductCart:React.FC<productcartProps> = ({data}) => {
+const ProductCard:React.FC<productcartProps> = ({data}) => {
+  const [mounted,setIsMounted]=useState<boolean>(false)
+    const router=useRouter()
+    const previewModal = usePreviewModal();
+    useEffect(() => {
+      setIsMounted(true);
+    }, [])
+    if(!mounted) return null
+  const hanleClick=()=>{
+    router.push(`/product/${data.id}/${data.name}`)
+  }
+  const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+
+    previewModal.onOpen(data);
+  };
     return (
         <div className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'>
-            {/* Images And Action*/}
             <div className='aspect-square rounded-xl bg-gray-100 relative'>
             <Image 
           src={data.Images?.[0]?.url} 
@@ -25,7 +40,7 @@ const ProductCart:React.FC<productcartProps> = ({data}) => {
         <div className='opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5'>
             <div className='flex gap-x-6 justify-center'>
             <IconButton 
-              onClick={() => {}} 
+              onClick={onPreview} 
               icon={<Expand size={20} className="text-gray-600" />}
             />
             <IconButton
@@ -36,7 +51,7 @@ const ProductCart:React.FC<productcartProps> = ({data}) => {
         </div>
             </div>
             <div>
-            <div>
+            <div  onClick={hanleClick}>
         <p className="font-semibold text-lg">{data.name}</p>
         <p className="text-sm text-gray-500">{data.category?.name}</p>
       </div>
@@ -58,4 +73,4 @@ const ProductCart:React.FC<productcartProps> = ({data}) => {
         </div>
     )
 }
-export default ProductCart;
+export default ProductCard;

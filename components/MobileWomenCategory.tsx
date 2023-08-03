@@ -26,10 +26,10 @@ const MobileWomenCategory:React.FC<MobileWomenCategoryProps> = ({categories,titl
           ))}
             </div>
             {open && (
-            <div className=' bg-gray-100 z-50' >
-                <div className=' ml-8 p-3'>
+            <div>
+                <div className='ml-8'>
                     {categories?.map((category,index)=>(
-                    <div className='text-lg  font-medium hover:translate-x-5 hover:underline'  key={index}>
+                    <div className='text-lg font-medium hover:translate-x-5 hover:underline'  key={index}>
                         <Link href={`/category/${category.id}/${category.name}`} scroll={false}>
                         <p onClick={handleLinkClick}>{category.name}</p>
                         </Link>

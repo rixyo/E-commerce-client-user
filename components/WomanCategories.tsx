@@ -1,4 +1,5 @@
 
+// this components for Desktop WomanCategories
 import React from 'react';
 
 import AnimatedText from './ui/AnimatedText';
@@ -8,13 +9,11 @@ import CategoryCard from './ui/category-card';
 
 type CategoriesProps = {
     data:Category[] | undefined ;
-    isFatching:boolean
-
    title:string
     
 };
 
-const WomanCategories:React.FC<CategoriesProps> = ({data,title,isFatching}) => {
+const WomanCategories:React.FC<CategoriesProps> = ({data,title}) => {
     const [mute, setMute] = React.useState<boolean>(false);
     
     React.useEffect(() => {

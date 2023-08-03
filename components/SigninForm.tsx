@@ -61,7 +61,7 @@ const SigninForm:React.FC<SigninFormProps> = ({setVariant}) => {
     return(
         <>
               <Header
-            title="Create an account"
+            title="Login to your account"
             description='Welcome to the Signin section! Please fill in the form below to signin.'
            />
             <Form {...form}>
@@ -87,9 +87,9 @@ const SigninForm:React.FC<SigninFormProps> = ({setVariant}) => {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                   <div className='flex gap-2 items-center'>
-                    <Input key={field.name} disabled={loading} type={passwordType} placeholder="Password" {...field} />
+                    <Input key={field.name} disabled={loading} type={passwordType} className='static' placeholder="Password" {...field} />
                    {passwordType==="password" && <EyeIcon className='cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/> } 
-                    {passwordType==="text" && <EyeOffIcon className='cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/>}
+                    {passwordType==="text" && <EyeOffIcon className=' cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/>}
                     </div>
                   </FormControl>
                   <FormMessage />

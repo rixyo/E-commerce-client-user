@@ -1,7 +1,8 @@
 "use client"
+// this component is for desktop navigation functionality: got to user profile, logout, search
 import { User } from '@/hooks/useCurrentUser';
 import { usePathname,useRouter } from 'next/navigation';
-import {useEffect,useState} from 'react';
+import {useCallback, useEffect,useState} from 'react';
 import { Input } from './ui/input';
 import {
     Menubar,
@@ -12,18 +13,26 @@ import {
     MenubarTrigger,
   } from "@/components/ui/menubar"
 import {Smile,Package,Star,LogOut} from "lucide-react"
+import NavbarAction from './NavbarAction';
 
 type MainNavProps = {
     user:User
 };
 
-const MainNav:React.FC<MainNavProps> = ({user}) => {
+const DesktopNav:React.FC<MainNavProps> = ({user}) => {
   const [mounted, setMounted] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
   const pathname = usePathname();
   const router=useRouter()
   useEffect(() => setMounted(true), []);
+  const onSearch=useCallback((event:React.FormEvent)=>{
+    event.preventDefault()
+    const encodedSearch=encodeURI(search)
+    router.push(`/result?search_query=${encodedSearch}`)
+},[search,router])
   if (!mounted) return null;
   
+ 
      const logout = () => {
       localStorage.removeItem('token');
     };
@@ -36,10 +45,14 @@ const MainNav:React.FC<MainNavProps> = ({user}) => {
       else router.push(`user/${user?.id}/${user?.displayName}`)
     }
     return (
-        <nav className='hidden md:flex mx-6  justify-between items-center space-x-4 lg:space-x-6 w-full'> 
-            <div className='hidden lg:block w-full'>
-              <Input type='search' placeholder='Search' />
+        <nav className='hidden md:flex gap-6  w-full'> 
+            <div className='hidden md:block w-full'>
+              <form onSubmit={onSearch}>
+              <Input   onChange={(e)=>setSearch(e.target.value)}
+         value={search} type='search' placeholder='Search' />
+              </form>
             </div>
+          <NavbarAction/>
             <Menubar className='w-full'>
             <MenubarMenu>
               <MenubarTrigger className='hover:cursor-pointer hover:text-red-600 hover:underline text-lg'>{user.displayName} &apos;s Profile</MenubarTrigger>
@@ -57,4 +70,4 @@ const MainNav:React.FC<MainNavProps> = ({user}) => {
         </nav>
     )
 }
-export default MainNav;
+export default DesktopNav;

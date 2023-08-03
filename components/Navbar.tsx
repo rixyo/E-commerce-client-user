@@ -1,23 +1,23 @@
 "use client"
-
+// this component is parent of all navigation 
 import React from 'react';
 import Container from '@/components/ui/container';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import AnimatedText from './ui/AnimatedText';
-import MainNav from './MainNav';
+import DesktopNav from './DesktopNav';
 import useCurrentUser from '@/hooks/useCurrentUser';
-import {Input} from '@/components/ui/input';
+
 
 
 import MobileNav from './MobileNav';
 import NavbarAction from './NavbarAction';
 import UnAuthNav from './UnAuthNav';
+import { Input } from './ui/input';
 const Navbar:React.FC = () => {
-  
+  // animate the navbar title
     const sentence='E-commerce'.split('')
-    const currentPath=usePathname()
-    const {data:user,isLoading}=useCurrentUser()
+
+    const {data:user}=useCurrentUser()
 
     return (
         <Container>
@@ -29,9 +29,8 @@ const Navbar:React.FC = () => {
             </AnimatedText>
            ))}
           </Link>
-        {user && <MainNav user={user}/>  }
+        {user && <DesktopNav user={user}/>  }
         {!user &&<UnAuthNav/>}
-        <NavbarAction/>
         </div>
        <MobileNav user={user}/>
       </Container>

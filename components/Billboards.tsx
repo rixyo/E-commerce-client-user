@@ -1,4 +1,5 @@
 "use client"
+// this component is for billboards
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 
@@ -6,7 +7,7 @@ import {  useEffect, useState } from 'react';
 
 interface BillboardProps {
     data: Billboard[]|undefined;
-    isbillboardFetching:boolean
+   
   }
   
   const Billboards: React.FC<BillboardProps> = ({
@@ -15,7 +16,7 @@ interface BillboardProps {
     const [mute, setMute] = useState<boolean>(false);
     useEffect(() => {
       setMute(true)
-    }, [mute]);
+    }, []);
     if(!mute) return null
     const divStyle = {
       display: 'flex',

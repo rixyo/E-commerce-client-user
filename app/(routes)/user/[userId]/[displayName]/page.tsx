@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useRouter, usePathname, redirect } from 'next/navigation';
 
 import Header from '@/components/ui/header';
+import Container from '@/components/ui/container';
 
 
 type pageProps = {
@@ -37,14 +38,12 @@ const Profile:React.FC<pageProps>= ({params}) => {
         return null
     }
     return (
-        <>
-        <div className=' p-10 mx-10'>
+                <Container>
             <Header
             title='Profile Information'
             description='Welcome to the Profile section! 🎉 Here, you&apos;ll find all the essential components that make up your unique and personalized profile.'
             />    
-       
-                <div className='flex-col items-center justify-center  w-full md:w-1/3'>
+             
                             <div className='flex flex-col items-center'>
                                
                    {data?.avatarUrl &&<Image src={data.avatarUrl} style={{"objectFit":"cover"}} height={300} width={300} alt={'profile'}  className='rounded'/> } 
@@ -69,11 +68,13 @@ const Profile:React.FC<pageProps>= ({params}) => {
                           ))}
 
                             </div>
-                </div>
+            
+
+                </Container>
          
                
-             </div>
-        </>
+           
+    
     )
 }
 export default Profile;

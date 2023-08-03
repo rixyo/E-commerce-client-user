@@ -1,4 +1,4 @@
-
+// this component is for Desktop ManCategories
 import React from 'react';
 import AnimatedText from './ui/AnimatedText';
 import CategoryCard from './ui/category-card';
@@ -6,12 +6,12 @@ import CategoryCard from './ui/category-card';
 
 type CategoriesProps = {
     data:Category[] | undefined ;
-    isFatching:boolean
+ 
    title:string
     
 };
 
-const ManCategories:React.FC<CategoriesProps> = ({data,title,isFatching}) => {
+const ManCategories:React.FC<CategoriesProps> = ({data,title}) => {
     const [mute, setMute] = React.useState<boolean>(false);
     React.useEffect(() => {
         setMute(true)
