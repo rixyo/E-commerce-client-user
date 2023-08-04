@@ -1,10 +1,10 @@
 "use client";
 
 
-import Gallery from "@/components/gallery";
+import usePreviewModal from "@/hooks/modal/usePreviewModal";
 
+import Gallery from "@/components/gallery";
 import Modal from "@/components/ui/modal";
-import usePreviewModal from "@/hooks/usePreviewModal";
 import Info from "./Info";
 
 
@@ -21,7 +21,7 @@ const PreviewModal = () => {
       open={previewModal.isOpen} 
       onClose={previewModal.onClose}
     >
-      <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
+      <div className="grid mt-10 md:mt-0 w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
         <div className="sm:col-span-4 lg:col-span-5">
           <Gallery images={product.Images} />
         </div>

@@ -4,7 +4,7 @@ import React,{useEffect, useState} from 'react';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter, usePathname, redirect } from 'next/navigation';
+import { useRouter, usePathname} from 'next/navigation';
 
 import Header from '@/components/ui/header';
 import Container from '@/components/ui/container';
@@ -39,11 +39,10 @@ const Profile:React.FC<pageProps>= ({params}) => {
     }
     return (
                 <Container>
-            <Header
-            title='Profile Information'
-            description='Welcome to the Profile section! 🎉 Here, you&apos;ll find all the essential components that make up your unique and personalized profile.'
-            />    
-             
+                        <Header
+                        title='Profile Information'
+                        description='Welcome to the Profile section! 🎉 Here, you&apos;ll find all the essential components that make up your unique and personalized profile.'
+                        />    
                             <div className='flex flex-col items-center'>
                                
                    {data?.avatarUrl &&<Image src={data.avatarUrl} style={{"objectFit":"cover"}} height={300} width={300} alt={'profile'}  className='rounded'/> } 

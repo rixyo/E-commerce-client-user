@@ -4,16 +4,20 @@ import { Button } from '@/components/ui/button';
 import Container from '@/components/ui/container';
 import useGetResults from '@/hooks/useGetResults';
 import { useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 const SearchPage:React.FC = () => {
-    const [page,setPage]=React.useState<number>(1)
-
+    const [page,setPage]=useState<number>(1)
+    const [mounted,setMounted]=useState<boolean>(false)
     const search=useSearchParams()
     const serachQuery=search?search.get("search_query"):null
     const encodedSearchQuery=encodeURI(serachQuery as string)
     const {data,isFetching}=useGetResults(encodedSearchQuery,page)
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+    if(!mounted) return null
     const nextPage=()=>{
         setPage(page+1)
     }
@@ -29,7 +33,7 @@ const SearchPage:React.FC = () => {
         </div>
         <div className="flex items-center mb-5 justify-center">
         {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {data&&data.length>0 &&!isFetching && <Button disabled={data.length!==10} onClick={nextPage}>
+     {data&&!isFetching && <Button disabled={data.length!==10} onClick={nextPage}>
         Load More
     </Button> } 
         </div>

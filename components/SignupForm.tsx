@@ -100,10 +100,10 @@ const SignupForm:React.FC<SignupFormProps> = ({setVariant}) => {
                 <FormItem className='mt-2'>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <div className='flex gap-2 items-center'>
-                    <Input key={field.name} disabled={loading} type={passwordType} placeholder="Password" {...field} />
-                   {passwordType==="password" && <EyeIcon className='cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/> } 
-                    {passwordType==="text" && <EyeOffIcon className='cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/>}
+                    <div className='relative'>
+                    <Input key={field.name} className='relative' disabled={loading} type={passwordType} placeholder="Password" {...field} />
+                   {passwordType==="password" && <EyeIcon className='absolute top-1/2 right-1 -translate-y-1/2  cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/> } 
+                    {passwordType==="text" && <EyeOffIcon className='absolute top-1/2 right-1 -translate-y-1/2  cursor-pointer text-gray-400' onClick={ShowPassword}  size={20}/>}
                     </div>
                   </FormControl>
                   <FormMessage />

@@ -10,9 +10,9 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 
 
 import MobileNav from './MobileNav';
-import NavbarAction from './NavbarAction';
+
 import UnAuthNav from './UnAuthNav';
-import { Input } from './ui/input';
+
 const Navbar:React.FC = () => {
   // animate the navbar title
     const sentence='E-commerce'.split('')

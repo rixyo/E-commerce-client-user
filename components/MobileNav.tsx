@@ -27,7 +27,6 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
   const title='SignIn/SignUp'.split('')
     const pathname = usePathname();
     const router=useRouter()
-    const categoryForMan='Men Collections'
     const sentence='E-commerce'.split('')
   const {data:categories}=useGetAllCategories(
     {gender:'male'}
@@ -84,8 +83,8 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
          value={search} type='search' placeholder='Search' />
               </form>
             </div>
-           {categories &&  <MobileMenCategory categories={categories} title={categoryForMan}/> }
-           {categoriesForWomen && <MobileWomenCategory categories={categoriesForWomen} title={"Women Collections"}/>}
+           {categories &&  <MobileMenCategory categories={categories} title={"Men Categories"}/> }
+           {categoriesForWomen && <MobileWomenCategory categories={categoriesForWomen} title={"Women Categories"}/>}
            {!user && (
               <div className=' mt-3 ml-8' onClick={navHandle.onClose}>
                 <Link href='/auth' className='flex space-x-3 ' scroll={false}>

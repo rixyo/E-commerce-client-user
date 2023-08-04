@@ -19,7 +19,7 @@ const GalleryTab: React.FC<GalleryTabProps> = ({
             <NextImage 
               fill 
               src={image.url} 
-              alt="" 
+              alt="E-commerce" 
               className="object-cover object-center" 
             />
           </span>

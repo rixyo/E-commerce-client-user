@@ -38,3 +38,12 @@ type Review ={
     id:string,
     rating:number,
 }
+type CartProduct ={
+    id:string,
+    name:string,
+    price:number,
+    image:string,
+    quantity:number,
+    size:string,
+    color:string,
+}

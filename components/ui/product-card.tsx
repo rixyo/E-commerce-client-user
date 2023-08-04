@@ -5,7 +5,10 @@ import Image from 'next/image';
 import IconButton from './icon-button';
 import { Expand, ShoppingCart } from "lucide-react";
 import Currency from './currency';
-import usePreviewModal from '@/hooks/usePreviewModal';
+import usePreviewModal from '@/hooks/modal/usePreviewModal';
+import useCart from '@/hooks/useCart';
+import useCurrentUser from '@/hooks/useCurrentUser';
+import useAuthModal from '@/hooks/modal/useAuthModal';
 
 type productcartProps = {
     data:Product;  
@@ -22,13 +25,16 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
   const hanleClick=()=>{
     router.push(`/product/${data.id}/${data.name}`)
   }
+  // product preview
   const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
 
     previewModal.onOpen(data);
   };
+
+
     return (
-        <div className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'>
+        <div className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'  onClick={hanleClick}>
             <div className='aspect-square rounded-xl bg-gray-100 relative'>
             <Image 
           src={data.Images?.[0]?.url} 
@@ -43,15 +49,11 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
               onClick={onPreview} 
               icon={<Expand size={20} className="text-gray-600" />}
             />
-            <IconButton
-              onClick={() => {}} 
-              icon={<ShoppingCart size={20} className="text-gray-600" />} 
-            />
             </div>
         </div>
             </div>
             <div>
-            <div  onClick={hanleClick}>
+            <div>
         <p className="font-semibold text-lg">{data.name}</p>
         <p className="text-sm text-gray-500">{data.category?.name}</p>
       </div>

@@ -6,8 +6,7 @@ import NoResults from '@/components/ui/no-results';
 import ProductCard from '@/components/ui/product-card';
 import useGetCategoryById from '@/hooks/useGetCategoryById';
 import useGetProducts from '@/hooks/useGetProducts';
-import React, { useState } from 'react';
-import useGetAllSizes from '@/hooks/useGetAllSizes';
+import React, { useEffect, useState } from 'react';
 
 type pageProps = {
     params:{
@@ -19,7 +18,8 @@ type pageProps = {
     }
 };
 
-const Category:React.FC<pageProps> = ({params,searchParams}) => {
+const Category:React.FC<pageProps> = ({params}) => {
+  const [mounted,setMounted]=useState<boolean>(false)
     const encodedString = params.categoryName;
     const [page,setPage]=useState<number>(1)
     const decodedString = decodeURIComponent(encodedString);
@@ -28,7 +28,10 @@ const Category:React.FC<pageProps> = ({params,searchParams}) => {
         page:page,
     })
     const {data:category}=useGetCategoryById(params.categoryId)
-    const {data:sizes}=useGetAllSizes()
+    useEffect(() => {
+        setMounted(true);
+    }, [])
+    if(!mounted) return null
     const nextPage=()=>{
         setPage(page+1)
     }

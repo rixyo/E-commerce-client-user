@@ -11,6 +11,7 @@ import useGetAllBillboards from "@/hooks/useGetAllBillboards"
 import useGetAllCategories from "@/hooks/useGetAllCategories";
 import useGetProducts from "@/hooks/useGetProducts"
 import { Separator } from "@radix-ui/react-menubar";
+import { Layout } from "lucide-react";
 
 
 export default function Home() {
@@ -35,15 +36,15 @@ export default function Home() {
     <>
    {billboard && <Billboards data={billboard} /> }
   <Container>
-  {mancategories && <ManCategories data={mancategories} title="Men Categories" />   } 
+    {mancategories && <ManCategories data={mancategories} title="Men Categories" />   } 
     <Separator className="my-5"/>
-   {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
+    {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
         <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
          <ProductList title="Featured Products" items={currentProducts}  />     
         </div>
         <div className="flex items-center mb-2 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {currentProducts&&currentProducts.length>0 &&!isFetching && <Button disabled={currentProducts?.length!==10} onClick={nextPage}>
+     {currentProducts &&!isFetching && <Button disabled={currentProducts?.length!==10} onClick={nextPage}>
         Load More
     </Button> } 
         </div>
