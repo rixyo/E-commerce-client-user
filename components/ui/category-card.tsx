@@ -17,8 +17,8 @@ const CategoryCart:React.FC<categorycartProps> = ({data}) => {
     
     return (
      
-    <Link href={`category/${data.id}/${data.name}`}>
-    <Card className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4  border-gray-200'>
+      <Card className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4  border-gray-200'>
+      <Link href={`category/${data.id}/${data.name}`}>
   <CardHeader>
     <Image src={data.imageUrl}
     width={163.33}
@@ -29,8 +29,8 @@ const CategoryCart:React.FC<categorycartProps> = ({data}) => {
     <p className='text-md font-medium hover:translate-x-3'>{data.name}</p>
   </CardContent>
 
-    </Card>
     </Link>
+    </Card>
 
         
        

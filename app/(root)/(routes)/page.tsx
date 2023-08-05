@@ -40,7 +40,7 @@ export default function Home() {
     <Separator className="my-5"/>
     {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
         <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
-         <ProductList title="Featured Products" items={currentProducts}  />     
+         {currentProducts &&<ProductList title="Featured Products" items={currentProducts}  /> } 
         </div>
         <div className="flex items-center mb-2 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}

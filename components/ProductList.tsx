@@ -6,7 +6,7 @@ import AnimatedText from "./ui/AnimatedText";
 
 interface ProductListProps {
   title: string;
-  items: Product[]|undefined;
+  items: Product[]
 
 }
 
@@ -17,7 +17,7 @@ const ProductList: React.FC<ProductListProps> = ({
  
   return (
     <div className="space-y-4">
-      <div className="flex gap-x-2">
+      {items && <div className="flex gap-x-2">
       {title.split('').map((letter,index)=>(
         <AnimatedText  key={index}>
           {letter === " " ? "\u00A0" : letter}
@@ -25,6 +25,7 @@ const ProductList: React.FC<ProductListProps> = ({
       ))}
 
       </div>
+}
       
        {items?.length === 0 && <NoResults/>}
      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">

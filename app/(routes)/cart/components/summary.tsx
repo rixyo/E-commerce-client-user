@@ -3,15 +3,18 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-
+import { loadStripe } from '@stripe/stripe-js'
 import Currency from "@/components/ui/currency";
 import { Button } from "@/components/ui/button";
 import useCart from "@/hooks/useCart";
 import { toast } from "react-toastify";
+import LocalStorageManager from "@/lib/LocalStorageManager";
 
 
 
 const Summary = () => {
+  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string)
+  const token = LocalStorageManager.getItemWithExpiration("token");
   const searchParams = useSearchParams();
   const items = useCart((state) => state.items);
   const removeAll = useCart((state) => state.clearCart);
@@ -33,12 +36,18 @@ const Summary = () => {
 
   const onCheckout = async () => {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
-      productIds: items.map((item) => item.id)
+      productIds: items.map((item) => item.id),
+      quantity:items.map((item) => item.quantity),
+    },{
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      }
     });
-
+    const stripe = await stripePromise;
+    await stripe?.redirectToCheckout({ sessionId: response.data.id });
     window.location = response.data.url;
   }
-
   return ( 
     <div
       className="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8"

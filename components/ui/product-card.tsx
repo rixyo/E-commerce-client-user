@@ -22,7 +22,8 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
       setIsMounted(true);
     }, [])
     if(!mounted) return null
-  const hanleClick=()=>{
+  const hanleClick=(event:any)=>{
+    event.preventDefault();
     router.push(`/product/${data.id}/${data.name}`)
   }
   // product preview
