@@ -47,3 +47,19 @@ type CartProduct ={
     size:string,
     color:string,
 }
+type Order ={
+    id:string,
+    orderItems:orderItem[],
+    createdAt: Date;
+}
+type orderItem ={
+    id:string,
+    product: {
+        id: string;
+        name: string;
+        Images:Image[]; 
+    }
+    quantity:number,
+    size:string,
+    color:string,
+}

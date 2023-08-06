@@ -44,6 +44,10 @@ const DesktopNav:React.FC<MainNavProps> = ({user}) => {
       if(pathname.includes(`user/${user?.id}/${user?.displayName}`)) return;
       else router.push(`user/${user?.id}/${user?.displayName}`)
     }
+    const goToOrdersPage=()=>{
+      if(pathname.includes(`user/${user?.id}/${user?.displayName}/orders`)) return;
+      else router.push(`user/${user?.id}/${user?.displayName}/orders`)
+    }
     return (
         <nav className='hidden md:flex gap-6  w-full'> 
             <div className='hidden md:block w-full'>
@@ -59,9 +63,9 @@ const DesktopNav:React.FC<MainNavProps> = ({user}) => {
               <MenubarContent>
                 <MenubarItem className='hover:underline cursor-pointer' onClick={handleProfle}><Smile className='mr-2'/> Manage My Account</MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem className='hover:underline cursor-pointer'><Star className='mr-2'/>My Reviews</MenubarItem>
+                <MenubarItem className='hover:underline cursor-pointer' ><Star className='mr-2'/>My Reviews</MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem className='hover:underline cursor-pointer'><Package className='mr-2'/>My Orders</MenubarItem>
+                <MenubarItem className='hover:underline cursor-pointer' onClick={goToOrdersPage}><Package className='mr-2'/>My Orders</MenubarItem>
                 <MenubarSeparator />
                 <MenubarItem className='hover:underline cursor-pointer' onClick={handleLogout}><LogOut className='mr-2'/>Logout</MenubarItem>
               </MenubarContent>

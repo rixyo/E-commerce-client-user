@@ -5,7 +5,7 @@ import CategoryCard from './ui/category-card';
 
 
 type CategoriesProps = {
-    data:Category[] | undefined ;
+    data:Category[]  ;
  
    title:string
     

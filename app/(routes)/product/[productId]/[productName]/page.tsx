@@ -36,10 +36,6 @@ const Productpage:React.FC<pageProps> = ({params}) => {
     }
     return (
         <>
-            <Head>
-        <title>{data?.name}</title>
-        <meta name="description" content={data?.description} />
-            </Head>
         <div className="bg-white">
       <Container>
         <div className="px-4 py-10 sm:px-6 lg:px-8">
@@ -50,7 +46,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
             </div>
           </div>
           <hr className="my-10" />
-          <ProductList title="Related Items" items={suggestedProducts} />
+         {suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} /> } 
           <div className="flex items-center mb-2 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
      {suggestedProducts &&!isFetching && <Button disabled={!suggestedProducts?.length} onClick={nextPage}>

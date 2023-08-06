@@ -17,9 +17,8 @@ type pageProps = {
     }
 }
 
-const Profile:React.FC<pageProps>= ({params}) => {
+const Profile:React.FC<pageProps>= () => {
     const {data}=useCurrentUser()
-    const router=useRouter()
     const [mounted,setIsMounted]=useState<boolean>(false)
     const pathname=usePathname()
     const routes=[
