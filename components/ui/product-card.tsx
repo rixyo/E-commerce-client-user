@@ -1,14 +1,12 @@
 "use client"
-import React, { useEffect, useState,MouseEventHandler } from 'react';
+import React, { useEffect, useState,MouseEventHandler, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import IconButton from './icon-button';
-import { Expand, ShoppingCart } from "lucide-react";
+import { Expand } from "lucide-react";
 import Currency from './currency';
 import usePreviewModal from '@/hooks/modal/usePreviewModal';
-import useCart from '@/hooks/useCart';
-import useCurrentUser from '@/hooks/useCurrentUser';
-import useAuthModal from '@/hooks/modal/useAuthModal';
+
 
 type productcartProps = {
     data:Product;  
@@ -22,8 +20,7 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
       setIsMounted(true);
     }, [])
     if(!mounted) return null
-  const hanleClick=(event:any)=>{
-    event.preventDefault();
+  const hanleClick=()=>{
     router.push(`/product/${data.id}/${data.name}`)
   }
   // product preview
@@ -35,6 +32,8 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
 
 
     return (
+      <Suspense fallback={<div>Loading...</div>}>
+
         <div className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'  onClick={hanleClick}>
             <div className='aspect-square rounded-xl bg-gray-100 relative'>
             <Image 
@@ -74,6 +73,7 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
       </div>
 
         </div>
+      </Suspense>
     )
 }
 export default ProductCard;

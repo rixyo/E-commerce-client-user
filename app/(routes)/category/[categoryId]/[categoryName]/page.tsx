@@ -6,7 +6,7 @@ import NoResults from '@/components/ui/no-results';
 import ProductCard from '@/components/ui/product-card';
 import useGetCategoryById from '@/hooks/useGetCategoryById';
 import useGetProducts from '@/hooks/useGetProducts';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 
 type pageProps = {
     params:{
@@ -40,6 +40,7 @@ const Category:React.FC<pageProps> = ({params}) => {
     }
 
     return (
+      <Suspense fallback={<div>loading......</div>}>
         <div className="bg-white">
         <Container>
        {category &&  <Billboard data={category.billboard} /> }
@@ -68,6 +69,7 @@ const Category:React.FC<pageProps> = ({params}) => {
           </div>
         </Container>
       </div>
+        </ Suspense>
     )
 }
 export default Category;

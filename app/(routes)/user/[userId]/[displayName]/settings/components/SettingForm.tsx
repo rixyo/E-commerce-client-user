@@ -11,10 +11,11 @@ import { useRouter } from 'next/navigation';
 import Header from '@/components/ui/header';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
-import ImageUpload from './ImageUpload';
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'react-toastify';
+import ImageUpload from '@/components/ui/image-upload';
 
 type SettingsFormProps = {
     user:User;
@@ -69,10 +70,23 @@ const SettingsForm:React.FC<SettingsFormProps> = ({user}) => {
          />
          <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full' >
-            <ImageUpload
-           value={form.watch('avaterUrl')}
-              onChange={(value)=>form.setValue('avaterUrl',value)}
-              onRemove={()=>form.setValue('avaterUrl','')}
+        <FormField
+              control={form.control}
+              name="avaterUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Avatar</FormLabel>
+                  <FormControl>
+                    <ImageUpload 
+                      value={field.value ? [field.value] : []} 
+                      disabled={loading} 
+                      onChange={(url) => field.onChange(url)}
+                      onRemove={() => field.onChange('')}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
             <div className='md:grid md:grid-cols-2 gap-8'>
             <FormField

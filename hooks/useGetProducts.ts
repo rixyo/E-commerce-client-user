@@ -8,7 +8,6 @@ interface Query {
     maxPrice?: number;
     minPrice?: number;
     'category[name]'?: string;
-       'Sizes[value]'?: string;
   }
 
 const useGetProducts =  (query:Query) => {
@@ -21,10 +20,11 @@ const useGetProducts =  (query:Query) => {
           maxPrice: query.maxPrice,
           minPrice: query.minPrice,
           'category[name]': query['category[name]'],
-          'Sizes[value]': query['Sizes[value]'],
+         
         },
       });
     const {data,isLoading,isPreviousData,isFetching} = useQuery({
+      
         queryKey: ['products',query],
         queryFn: async () => {
             const {data} = await axios.get(`${url}`);

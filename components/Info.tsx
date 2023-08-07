@@ -26,7 +26,6 @@ const Info: React.FC<InfoProps> = ({ data }) => {
   };
   const handleColorClick = (colorValue: string) => {
     setSelectedColor(colorValue);
-    console.log(colorValue);
   }  
   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();

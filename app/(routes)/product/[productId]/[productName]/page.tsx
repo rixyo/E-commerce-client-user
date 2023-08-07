@@ -7,7 +7,7 @@ import Container from '@/components/ui/container';
 import useGetProduct from '@/hooks/useGetProduct';
 import useGetProducts from '@/hooks/useGetProducts';
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 
 type pageProps = {
     params:{
@@ -17,17 +17,16 @@ type pageProps = {
 };
 
 const Productpage:React.FC<pageProps> = ({params}) => {
-    const [mounted,setMounted]=useState<boolean>(false)
+  
     const [page,setPage]=useState<number>(1)
     const {data}=useGetProduct(params.productId)
+    const category=data?.category?.name
     const {data:suggestedProducts,isFetching}=useGetProducts({
         page:page,
-        'category[name]':data?.category.name
+        'category[name]':category,
     })
-    useEffect(() => {
-        setMounted(true);
-    }, [])
-    if(!mounted) return null
+ 
+
     const nextPage=()=>{
         setPage(page+1)
     }
@@ -35,7 +34,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
         setPage(page-1)
     }
     return (
-        <>
+        <Suspense fallback={<div>loading......</div>}>
         <div className="bg-white">
       <Container>
         <div className="px-4 py-10 sm:px-6 lg:px-8">
@@ -46,7 +45,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
             </div>
           </div>
           <hr className="my-10" />
-         {suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} /> } 
+         {data && suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} /> } 
           <div className="flex items-center mb-2 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
      {suggestedProducts &&!isFetching && <Button disabled={!suggestedProducts?.length} onClick={nextPage}>
@@ -56,7 +55,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
         </div>
       </Container>
     </div>  
-        </>
+        </Suspense>
     )
 }
 export default Productpage;

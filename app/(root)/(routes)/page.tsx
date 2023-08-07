@@ -1,17 +1,20 @@
 "use client"
-import {  useEffect, useState } from "react"
 export const revalidate = 0;
+
+import {  Suspense, useState } from "react"
+import useGetAllBillboards from "@/hooks/useGetAllBillboards"
+import useGetAllCategories from "@/hooks/useGetAllCategories";
+import useGetProducts from "@/hooks/useGetProducts"
+
 import Billboards from "@/components/Billboards"
 import ManCategories from "@/components/ManCategories";
 import ProductList from "@/components/ProductList"
 import WomanCategories from "@/components/WomanCategories";
 import { Button } from "@/components/ui/button"
 import Container from "@/components/ui/container"
-import useGetAllBillboards from "@/hooks/useGetAllBillboards"
-import useGetAllCategories from "@/hooks/useGetAllCategories";
-import useGetProducts from "@/hooks/useGetProducts"
-import { Separator } from "@radix-ui/react-menubar";
-import { Layout } from "lucide-react";
+
+
+import Loading from "@/components/ui/loading";
 
 
 export default function Home() {
@@ -33,11 +36,10 @@ export default function Home() {
   };
   const prevPage = () => setPage(prev => prev - 1)
   return (
-    <>
+    <Suspense fallback={<Loading title="Customization"/>}>
    {billboard && <Billboards data={billboard} /> }
   <Container>
     {mancategories && <ManCategories data={mancategories} title="Men Categories" />   } 
-    <Separator className="my-5"/>
     {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
         <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
          {currentProducts &&<ProductList title="Featured Products" items={currentProducts}  /> } 
@@ -49,6 +51,6 @@ export default function Home() {
     </Button> } 
         </div>
   </Container>
-    </>
+    </Suspense>
   )
 }

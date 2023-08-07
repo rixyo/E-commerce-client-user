@@ -51,6 +51,7 @@ type Order ={
     id:string,
     orderItems:orderItem[],
     createdAt: Date;
+    deliveredAt: Date;
 }
 type orderItem ={
     id:string,

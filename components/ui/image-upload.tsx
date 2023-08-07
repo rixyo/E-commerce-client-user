@@ -11,7 +11,7 @@ interface ImageUploadProps {
   disabled?: boolean;
   onChange: (value: string) => void;
   onRemove: (value: string) => void;
-  value: string;
+  value: string[];
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -20,7 +20,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   onRemove,
   value
 }) => {
-  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState(false);
+ 
 
   useEffect(() => {
     setIsMounted(true);
@@ -33,25 +34,25 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   if (!isMounted) {
     return null;
   }
+
   return ( 
     <div>
       <div className="mb-4 flex items-center gap-4">
-       
-          {value !=='' && <div key={value} className="relative w-[200px] h-[200px] rounded-md overflow-hidden">
+        {value.map((url) => (
+          <div key={url} className="relative w-[200px] h-[200px] rounded-md overflow-hidden">
             <div className="z-10 absolute top-2 right-2">
-              <Button type="button" onClick={() => onRemove(value)} variant="destructive" size="sm">
+              <Button type="button" onClick={() => onRemove(url)} variant="destructive" size="sm">
                 <Trash className="h-4 w-4" />
               </Button>
             </div>
-           <Image
+            <Image
               fill
-              sizes='200px'
               className="object-cover"
               alt="Image"
-              src={value}
-            /> 
+              src={url}
+            />
           </div>
-  }
+        ))}
       </div>
       <CldUploadWidget onUpload={onUpload} uploadPreset='tw9uaoam'>
         {({ open }) => {

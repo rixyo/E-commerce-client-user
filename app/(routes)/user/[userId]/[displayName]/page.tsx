@@ -4,7 +4,7 @@ import React,{useEffect, useState} from 'react';
 import useCurrentUser from '@/hooks/useCurrentUser';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter, usePathname} from 'next/navigation';
+import {usePathname} from 'next/navigation';
 
 import Header from '@/components/ui/header';
 import Container from '@/components/ui/container';

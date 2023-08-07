@@ -36,9 +36,7 @@ const SignupForm:React.FC<SignupFormProps> = ({setVariant}) => {
                 setLoading(false);
                 toast('Account created successfully',{
                   type:'success'
-                })
-               setVariant()
-                
+                })    
                 
             })
             

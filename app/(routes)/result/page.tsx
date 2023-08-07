@@ -29,7 +29,7 @@ const SearchPage:React.FC = () => {
     return (
         <Container>
               <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
-         <ProductList title="Search Results"items={data}     />     
+        {data &&  <ProductList title="Search Results"items={data}     />   }   
         </div>
         <div className="flex items-center mb-5 justify-center">
         {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}

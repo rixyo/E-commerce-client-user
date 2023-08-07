@@ -1,33 +1,22 @@
-"use client"    
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
-import Container from './container';
+import React from 'react';
 
-type OrderCard= {
+import Image from 'next/image';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import Header from '@/components/ui/header';
+import { format } from 'date-fns';
+
+type panddingcardProps = {
     data:Order
+    title:string
     
 };
 
-const OrderCard:React.FC<OrderCard> = ({data}) => {
-    const [mounted,setMounted]=useState<boolean>(false)
-    useEffect(() => {
-        setMounted(true);
-    }, [])
-    if(!mounted) return null
-    console.log(data)
+const Pandding:React.FC<panddingcardProps> = ({data,title}) => {
     
     return (
-        <Container>
-            <div className='flex items-center justify-center mt-10 md:mt-0' >
-            <Card className='p-2'>
+        <>
+        <Card className='p-2 border-2 border-gray-200 mb-3'>
+        <Header title={title}/>
         <CardHeader>
             <CardTitle>{data.id}</CardTitle>
         </CardHeader>
@@ -60,10 +49,16 @@ const OrderCard:React.FC<OrderCard> = ({data}) => {
          ))}
 
         </CardContent>
+        <CardFooter>
+            {data.createdAt && (
+                <div className="flex gap-2  items-center">
+                    <p>Order At:</p>
+                    <p>{format(new Date(data.createdAt), 'MMMM do, yyyy').toString()}</p>
+                </div>
+            )}
+        </CardFooter>
         </Card>
-
-            </div>
-        </Container>
+        </>
     )
 }
-export default OrderCard;
+export default Pandding;

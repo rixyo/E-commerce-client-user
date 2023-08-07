@@ -41,12 +41,12 @@ const DesktopNav:React.FC<MainNavProps> = ({user}) => {
       window.location.href = '/auth';
     }
     const handleProfle=()=>{
-      if(pathname.includes(`user/${user?.id}/${user?.displayName}`)) return;
-      else router.push(`user/${user?.id}/${user?.displayName}`)
+      if(pathname.includes(`/user/${user?.id}/${user?.displayName}`)) return;
+      else router.push(`/user/${user?.id}/${user?.displayName}`)
     }
     const goToOrdersPage=()=>{
-      if(pathname.includes(`user/${user?.id}/${user?.displayName}/orders`)) return;
-      else router.push(`user/${user?.id}/${user?.displayName}/orders`)
+      if(pathname.includes(`/user/${user?.id}/${user?.displayName}/orders`)) return;
+      else router.push(`/user/${user?.id}/${user?.displayName}/orders`)
     }
     return (
         <nav className='hidden md:flex gap-6  w-full'> 
