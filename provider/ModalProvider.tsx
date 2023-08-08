@@ -1,6 +1,6 @@
 "use client";
 
-import PreviewModal from "@/components/PreviewModal";
+import PreviewModal from "@/components/modal/PreviewModal";
 import { useEffect, useState } from "react";
 
 

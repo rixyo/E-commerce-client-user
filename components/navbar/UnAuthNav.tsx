@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useCallback, useState } from 'react';
 import {cn} from '@/lib/utils';
 import { usePathname, useRouter } from 'next/navigation';
-import { Input } from './ui/input';
+import { Input } from '../ui/input';
 import NavbarAction from './NavbarAction';
 
 

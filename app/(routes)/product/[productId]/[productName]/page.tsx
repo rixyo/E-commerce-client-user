@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/button';
 import Container from '@/components/ui/container';
 import useGetProduct from '@/hooks/useGetProduct';
 import useGetProducts from '@/hooks/useGetProducts';
-import Head from 'next/head';
-import React, { Suspense, useEffect, useState } from 'react';
+
+import React, { Suspense, useState } from 'react';
+import Reviews from './components/reviews';
 
 type pageProps = {
     params:{
@@ -44,11 +45,15 @@ const Productpage:React.FC<pageProps> = ({params}) => {
              {data &&  <Info data={data} /> }
             </div>
           </div>
+          {/** reviews */}
+            <div className="mt-10">
+             {data && <Reviews id={params.productId} /> }
+            </div>
           <hr className="my-10" />
          {data && suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} /> } 
           <div className="flex items-center mb-2 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {suggestedProducts &&!isFetching && <Button disabled={!suggestedProducts?.length} onClick={nextPage}>
+     {suggestedProducts &&!isFetching && <Button disabled={suggestedProducts.length!=10} onClick={nextPage}>
         Load More
     </Button> } 
         </div>

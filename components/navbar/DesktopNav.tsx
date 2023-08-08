@@ -3,7 +3,7 @@
 import { User } from '@/hooks/useCurrentUser';
 import { usePathname,useRouter } from 'next/navigation';
 import {useCallback, useEffect,useState} from 'react';
-import { Input } from './ui/input';
+import { Input } from '../ui/input';
 import {
     Menubar,
     MenubarContent,
@@ -63,7 +63,7 @@ const DesktopNav:React.FC<MainNavProps> = ({user}) => {
               <MenubarContent>
                 <MenubarItem className='hover:underline cursor-pointer' onClick={handleProfle}><Smile className='mr-2'/> Manage My Account</MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem className='hover:underline cursor-pointer' ><Star className='mr-2'/>My Reviews</MenubarItem>
+                <MenubarItem className='hover:underline cursor-pointer'  onClick={()=>router.push(`/user/${user?.id}/${user?.displayName}/reviews`)}><Star className='mr-2'/>My Reviews</MenubarItem>
                 <MenubarSeparator />
                 <MenubarItem className='hover:underline cursor-pointer' onClick={goToOrdersPage}><Package className='mr-2'/>My Orders</MenubarItem>
                 <MenubarSeparator />

@@ -6,6 +6,8 @@ import IconButton from './icon-button';
 import { Expand } from "lucide-react";
 import Currency from './currency';
 import usePreviewModal from '@/hooks/modal/usePreviewModal';
+import Rating from './rating';
+import { Product } from '@/type';
 
 
 type productcartProps = {
@@ -13,6 +15,8 @@ type productcartProps = {
 };
 
 const ProductCard:React.FC<productcartProps> = ({data}) => {
+  const totalRating = data.rewiews.reduce((sum, review) => sum + review.rating, 0);
+  const averageRating = totalRating / data.rewiews.length;
   const [mounted,setIsMounted]=useState<boolean>(false)
     const router=useRouter()
     const previewModal = usePreviewModal();
@@ -60,15 +64,9 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
             </div>
               {/* Price & Reiew */}
       <div className="flex items-center justify-between">
+        <div className="flex-col items-center gap-x-2">
+          {Number.isNaN(averageRating)===false &&  <Rating value={averageRating} /> }
         <Currency value={data?.price} />
-        <div className="flex items-center gap-x-2">
-            <div className="flex items-center gap-x-1">
-             {data?.reviews?.length > 0 && (
-                <>
-                    <p className="text-sm text-gray-500">{data?.reviews?.length}</p>
-                </>
-             )}
-            </div>
         </div>
       </div>
 

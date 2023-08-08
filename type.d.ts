@@ -1,3 +1,5 @@
+import { type } from "os"
+
 type Billboard ={
     id:string,
     label:string,
@@ -19,7 +21,7 @@ type Product ={
     Images:Image[],
     Sizes:ProductSize[],
     Colors:ProductColor[],
-    reviews:Review[],
+    rewiews:Review[],
 }
 type Image ={
     id:string,
@@ -37,6 +39,23 @@ type ProductColor ={
 type Review ={
     id:string,
     rating:number,
+    comment:string,
+    averageRating:number,
+    createdAt: Date;
+    images:Image[],
+    product:ReviewProduct,
+    user:User,
+}
+type User ={
+    id:string,
+    displayName:string,
+    avatarUrl:string,
+}
+type ReviewProduct ={
+    id:string,
+    name:string,
+    price:number,
+    Images:Image[],
 }
 type CartProduct ={
     id:string,

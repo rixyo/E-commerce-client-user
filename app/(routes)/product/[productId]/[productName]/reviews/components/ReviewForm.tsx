@@ -5,6 +5,8 @@ import  localstorage  from '@/lib/LocalStorageManager'
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { useRouter } from 'next/navigation';
+
 import { Star } from 'lucide-react';
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -17,7 +19,7 @@ import { toast } from 'react-toastify';
 
 
 const formSchema = z.object({
-  comment: z.string().nonempty("Description is required"),
+  comment: z.string().nonempty("Description is required").max(200),
   images: z.object({ url: z.string() }).array(),
 });
 
@@ -31,6 +33,7 @@ type Image = {
 const ReviewForm: React.FC<ReviewFormProps> = ({
     productId,
 }) => {
+  const router = useRouter();
     const [rating, setRating] = useState<number>(0);
     const [hover, setHover] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
@@ -60,7 +63,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
             toast('Review added successfully',{
                 type: 'success',
             })
-            window.location.href= `/`;
+            router.push( `/`);
 
         }).catch((err)=>{
             setLoading(false);

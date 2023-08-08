@@ -2,6 +2,7 @@
 
 import NextImage from "next/image";
 import { Tab } from "@headlessui/react";
+import { Image } from "@/type";
 
 
 import GalleryTab from "./gallery-tab";

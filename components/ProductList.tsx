@@ -3,10 +3,11 @@ import {  useEffect } from "react";
 import NoResults from "./ui/no-results";
 import ProductCart from "./ui/product-card";
 import AnimatedText from "./ui/AnimatedText";
+import { Product } from "@/type";
 
 interface ProductListProps {
   title: string;
-  items: Product[]
+  items: Product[];
 
 }
 

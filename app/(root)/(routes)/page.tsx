@@ -46,7 +46,7 @@ export default function Home() {
         </div>
         <div className="flex items-center mb-2 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {currentProducts &&!isFetching && <Button disabled={currentProducts?.length!==10} onClick={nextPage}>
+     {!isFetching && <Button disabled={currentProducts?.length!==10} onClick={nextPage}>
         Load More
     </Button> } 
         </div>

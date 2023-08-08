@@ -14,7 +14,7 @@ type Vairant="pending" | "delivered";
   
 const OrderPage:React.FC= () => {
     const [variant, setVariant] = useState<Vairant>("pending")
-    const {data:pendingsData,isLoading}=useGetOrders()
+    const {data:pendingsData}=useGetOrders()
     const {data:deliveredData}=useGetDeliveredOrders()
     const handleVariant=(name:Vairant)=>{
         setVariant(name)
@@ -37,9 +37,9 @@ const OrderPage:React.FC= () => {
 
   return (
     <Container>
-      <h1 className="text-2xl font-bold">Orders</h1>
-      <div className="mt-4">
-        <div className='flex justify-center gap-5 border-b-2 border-gray-300 mb-2 p-2 cursor-pointer mt-12 md:mt-0'>
+      <h1 className="hidden md:block text-2xl font-bold">Orders</h1>
+      <div className="mt-24 md:mt-0">
+        <div className='flex justify-center gap-5 border-b-2 border-gray-300 mb-2 p-2 cursor-pointer  md:mt-0'>
           {variantVar.map((item, index) => (
             <div
               key={index}
@@ -51,19 +51,30 @@ const OrderPage:React.FC= () => {
             </div>
           ))}
         </div>
-        <div className='mt-5'>
+        <div>
+          <div>
+           {variant==="pending"  && <h1 className='text-center text-xl font-medium border-b-2 border-gray-300'>Pending Orders</h1> } 
             {variant==="pending"  && pendingsData?.map((item,index)=>(
                 <div key={index} className='flex items-center justify-center'>
 
                     <Pandding title='Pending Orders'  data={item}/>
                 </div>
             ))}
-               {variant==="delivered"  && deliveredData?.map((item,index)=>(
+
+          </div>
+        <div>
+         
+           {variant==="delivered" && <h1 className='text-center text-xl font-medium border-b-2 border-gray-300'>Delivered Orders</h1> } 
+              {variant==='delivered' && deliveredData?.map((item,index)=>(
                 <div key={index} className='flex items-center justify-center'>
 
                     <Delivered title='Delivered Orders'  data={item}/>
                 </div>
             ))}
+          
+          
+
+        </div>
            
         </div>
       </div>

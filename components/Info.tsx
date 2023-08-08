@@ -9,12 +9,18 @@ import useAuthModal from "@/hooks/modal/useAuthModal";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useCart from "@/hooks/useCart";
 import { toast } from "react-toastify";
+import useGetProductReviews from "@/hooks/useGetProductReviews";
+import Rating from "./ui/rating";
+import { Product } from "@/type";
+
 
 interface InfoProps {
   data: Product
 };
 
 const Info: React.FC<InfoProps> = ({ data }) => {
+  const [page, setPage] = useState<number>(1);
+  const {data:reviews}=useGetProductReviews(data.id,page)
   const authModal = useAuthModal();
   const {data:user}=useCurrentUser()
   const cart=useCart()
@@ -51,7 +57,7 @@ const Info: React.FC<InfoProps> = ({ data }) => {
   };
  
   return ( 
-    <div>
+    <div className=" p-5">
       <h1 className="text-3xl font-bold text-gray-900">{data.name}</h1>
       <div className="mt-3 flex items-end justify-between">
         <div className="text-2xl text-gray-900">
@@ -104,6 +110,15 @@ const Info: React.FC<InfoProps> = ({ data }) => {
             <h3 className="font-semibold text-black">Description:</h3>
             <p className="text-gray-900">{data.description}</p>
         </div>
+        {/* review */}
+      <div className="flex justify-start mt-5  items-center w-full">
+        <div className="flex-col items-center justify-center">
+        <h3 className="font-semibold text-black">Rating:</h3>
+            <p className="text-4xl font-bold">{reviews?.averageRating}/<span className="text-gray-400 text-xl font-serif">5</span></p>
+        <p className="text-xl text-gray-900">{reviews?.reviews?.length} reviews</p>
+     {reviews?.averageRating && <Rating value={reviews?.averageRating}/> } 
+        </div>
+      </div>
     </div>
   );
 }

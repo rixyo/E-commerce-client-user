@@ -5,15 +5,15 @@ import useGetAllCategories from '@/hooks/useGetAllCategories';
 import { usePathname,useRouter } from 'next/navigation';
 
 import {Home,X,AlignJustifyIcon, Smile, Star, Package, LogOut} from "lucide-react"
-import AnimatedText from './ui/AnimatedText';
+import AnimatedText from '../ui/AnimatedText';
 import NavbarAction from './NavbarAction';
 import {Button} from '@/components/ui/button';
-import MobileMenCategory from './MobileMenCategory';
-import MobileWomenCategory from './MobileWomenCategory';
+import MobileMenCategory from '../MobileMenCategory';
+import MobileWomenCategory from '../MobileWomenCategory';
 import Link from 'next/link';
 import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
-import { Input } from './ui/input';
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from './ui/menubar';
+import { Input } from '../ui/input';
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '../ui/menubar';
 
 
 

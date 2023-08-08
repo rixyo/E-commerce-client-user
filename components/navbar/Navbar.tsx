@@ -3,7 +3,7 @@
 import React from 'react';
 import Container from '@/components/ui/container';
 import Link from 'next/link';
-import AnimatedText from './ui/AnimatedText';
+import AnimatedText from '../ui/AnimatedText';
 import DesktopNav from './DesktopNav';
 import useCurrentUser from '@/hooks/useCurrentUser';
 

@@ -7,10 +7,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ModalProvider from '@/provider/ModalProvider';
 import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 import { ReactQueryProvider } from '@/provider/ReactQueryProvider';
 const urbanist =  Urbanist ({ subsets: ['latin'] })
 import AuthModalProvider from '@/provider/AuthModalProvider';
+import Navbar from '@/components/navbar/Navbar';
 
 export const metadata:Metadata={
   title:"E-commerce",

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Header from '@/components/ui/header';
+import { Order } from '@/type';
 
 type DeliveredProps = {
     data:Order
@@ -18,7 +19,6 @@ const Delivered:React.FC<DeliveredProps> = ({data,title}) => {
     return (
       <>
         <Card className='p-2 border-2 border-gray-200 mb-3'>
-        <Header title={title}/>
         <CardHeader>
             <CardTitle>{data.id}</CardTitle>
         </CardHeader>

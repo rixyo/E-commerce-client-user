@@ -1,9 +1,8 @@
 "use client"
 import useAuthModal from '@/hooks/modal/useAuthModal';
-import React, { useEffect, useState } from 'react';
-import Modal from './modal';
+import Modal from '../ui/modal';
 import AuthForm from '../AuthForm';
-import Container from './container';
+
 
 const AuthModal:React.FC = () => {
     const authModal = useAuthModal();
