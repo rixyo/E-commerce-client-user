@@ -1,14 +1,15 @@
+// Desc: Review card component for user reviews page
 import React, { useState } from 'react';
 
+import LocalStorageManager from '@/lib/LocalStorageManager';
 import { useRouter } from 'next/navigation';
 
 import Image from 'next/image';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 import Rating from '@/components/ui/rating';
 import { AlertModal } from '@/components/modal/alert-modal';
 import axios from 'axios';
-import LocalStorageManager from '@/lib/LocalStorageManager';
 import { toast } from 'react-toastify';
 import { Button } from '@/components/ui/button';
 import { Trash } from 'lucide-react';
@@ -69,7 +70,7 @@ const ReviewCard:React.FC<ReviewCardProps> = ({data}) => {
                 <div className="flex justify-center items-center gap-x-6">
                     <div className="flex items-center">
                         <div className="mr-4">
-                            <Image src={data.product.Images[0].url} width={50} height={50} alt={data.product.name}/>
+                            <Image src={data.product?.Images[0]?.url} width={50} height={50} alt={data.product.name}/>
                         </div>
                         <div className='cursor-pointer' onClick={()=>router.push(`/product/${data.product.id}/${data.product.name}`)}>
                             <p>{data.product.name}</p>
@@ -86,7 +87,7 @@ const ReviewCard:React.FC<ReviewCardProps> = ({data}) => {
                            <Rating value={data.rating}/>
                             </div>
                             <div className='flex items-center gap-5 '>
-                                <Image src={data.images[0].url} width={50} height={50} alt={data.product.name}/>
+                                <Image src={data?.images[0]?.url} width={50} height={50} alt={data.product.name}/>
                             <div>
                                 <p>{data.comment}</p>
                             </div>

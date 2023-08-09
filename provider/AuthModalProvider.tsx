@@ -1,3 +1,4 @@
+// this provider is used to show the auth modal
 "use client";
 
 import AuthModal from "@/components/modal/auth-modal";

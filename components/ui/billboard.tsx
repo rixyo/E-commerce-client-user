@@ -1,3 +1,5 @@
+// this component is used to display a billboard in the home page
+import { Billboard } from "@/type";
 
 interface BillboardProps {
   data: Billboard

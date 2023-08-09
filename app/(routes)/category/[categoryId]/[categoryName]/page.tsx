@@ -13,21 +13,22 @@ type pageProps = {
         categoryId:string
         categoryName:string
     },
-    searchParams: {
-      sizeValue: string;
-    }
 };
 
 const Category:React.FC<pageProps> = ({params}) => {
   const [mounted,setMounted]=useState<boolean>(false)
     const encodedString = params.categoryName;
     const [page,setPage]=useState<number>(1)
+    // remove %20 from string
     const decodedString = decodeURIComponent(encodedString);
+    // get products by category
     const {data,isFetching}=useGetProducts({
         'category[name]': decodedString,
         page:page,
     })
+    // get category by id
     const {data:category}=useGetCategoryById(params.categoryId)
+    // fixed bug when refresh page
     useEffect(() => {
         setMounted(true);
     }, [])

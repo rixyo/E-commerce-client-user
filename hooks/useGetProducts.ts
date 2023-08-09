@@ -1,7 +1,8 @@
+// this hook is used to get products from the server with pagination and filter
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import qs from "query-string"
-
+import { Product } from "@/type";
 interface Query {
     page: number;
     isFeatured?: boolean;
@@ -11,7 +12,7 @@ interface Query {
   }
 
 const useGetProducts =  (query:Query) => {
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/product`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/product/${process.env.NEXT_PUBLIC_STORE_ID}/filter`;
     const url = qs.stringifyUrl({
         url: baseUrl,
         query: {

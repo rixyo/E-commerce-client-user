@@ -1,3 +1,4 @@
+// home page 
 "use client"
 export const revalidate = 0;
 
@@ -18,19 +19,23 @@ import Loading from "@/components/ui/loading";
 
 
 export default function Home() {
-  const {data:billboard}=useGetAllBillboards()
+  // get all billboards
   const [page,setPage]=useState<number>(1)
+  const {data:billboard}=useGetAllBillboards()
+  // get all featured products 
   const {data:currentProducts,isFetching}=useGetProducts({
    isFeatured: true,
     page: page,
   })
+  // get all categories for men
   const {data:mancategories}=useGetAllCategories({
     gender:"Male"
   })
+  // get all categories for women
   const {data:womancategories}=useGetAllCategories({
     gender:"Female"
   })
-
+// pagination
  const nextPage = () => {
     setPage((prevPage) => prevPage + 1);
   };
@@ -44,6 +49,7 @@ export default function Home() {
         <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
          {currentProducts &&<ProductList title="Featured Products" items={currentProducts}  /> } 
         </div>
+        {/* pagination */}
         <div className="flex items-center mb-2 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
      {!isFetching && <Button disabled={currentProducts?.length!==10} onClick={nextPage}>

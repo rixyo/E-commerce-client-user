@@ -1,4 +1,4 @@
-
+// this is a helper class to manage local storage with expiration time
 interface ItemWithExpiration {
   value: any;
   expiration: number;

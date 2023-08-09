@@ -1,3 +1,5 @@
+// form user settings page
+
 "use client"
 import React, { useState } from 'react';
 import * as z from 'zod';
@@ -6,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import LocalStorageManager from '@/lib/LocalStorageManager';
 import { User } from '@/hooks/useCurrentUser';
-import { useRouter } from 'next/navigation';
+
 
 import Header from '@/components/ui/header';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -31,7 +33,7 @@ const formSchema = z.object({
 
 const SettingsForm:React.FC<SettingsFormProps> = ({user}) => {
     const [loading, setLoading] = useState<boolean>(false);
-    const router = useRouter();
+
    
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -64,12 +66,12 @@ const SettingsForm:React.FC<SettingsFormProps> = ({user}) => {
     }
     
     return (
-        <>
+        <div className='mt-10 md:mt-0'>
         <Header title="Settings"
         description="Update your profile information"
          />
          <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full' >
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 w-full md:mt-0' >
         <FormField
               control={form.control}
               name="avaterUrl"
@@ -121,7 +123,7 @@ const SettingsForm:React.FC<SettingsFormProps> = ({user}) => {
             </div>
         </form>
         </Form>
-        </>
+        </div>
     )
 }
 export default SettingsForm;

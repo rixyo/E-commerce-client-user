@@ -15,9 +15,9 @@ export default function CartLayout({children}:{
         redirect('/auth')
     }
     return (
-            <main>
+            <>
                 {children}
-            </main>
+            </>
       
     )
 }

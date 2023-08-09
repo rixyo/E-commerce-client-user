@@ -1,3 +1,5 @@
+//  Purpose: Display reviews of a product
+
 import { Review } from '@/type';
 import React from 'react';
 import useGetProductReviews from '@/hooks/useGetProductReviews';
@@ -11,6 +13,7 @@ type reviewcardProps = {
 
 const Reviews:React.FC<reviewcardProps> = ({id}) => {
     const [page,setPage]=React.useState<number>(1)
+    // get product reviews
     const {data:review,isFetching}=useGetProductReviews(id,page)
     const nextPage=()=>{
         setPage(page+1)
@@ -21,9 +24,8 @@ const Reviews:React.FC<reviewcardProps> = ({id}) => {
    
     return (
         <>
-            <div className='w-full p-2'>
-               {review?.reviews?.length!==0 && <h1 className='text-center text-xl font-medium border-b-2 border-gray-300'>Reviews</h1> } 
-
+        <h1 className='text-2xl font-bold text-gray-500'>Reviews</h1>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4'>
              {review?.reviews.map((data:Review,index:number)=>(
                 <ReviewItem key={index} data={data}/>
              ))}

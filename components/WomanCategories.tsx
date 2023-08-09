@@ -4,11 +4,10 @@ import React from 'react';
 
 import AnimatedText from './ui/AnimatedText';
 import CategoryCard from './ui/category-card';
-
-
+import { Category } from '@/type';
 
 type CategoriesProps = {
-    data:Category[] | undefined ;
+    data:Category[] ;
    title:string
     
 };

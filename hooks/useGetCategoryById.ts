@@ -1,6 +1,8 @@
+// Type: Hook
+// Description: useGetCategoryById hook is used to get a category by id
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-
+import { Category } from "@/type";
 const useGetCategoryById = (id:string) => {
     const {data,isLoading,isPreviousData,isFetching} = useQuery({
         queryKey: ['category',id],

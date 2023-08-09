@@ -1,4 +1,4 @@
-
+// parent layout for all pages
 import './globals.css'
 
 import { Metadata } from 'next';

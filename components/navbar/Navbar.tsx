@@ -1,5 +1,5 @@
-"use client"
 // this component is parent of all navigation 
+"use client"
 import React from 'react';
 import Container from '@/components/ui/container';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ import MobileNav from './MobileNav';
 import UnAuthNav from './UnAuthNav';
 
 const Navbar:React.FC = () => {
-  // animate the navbar title
+  // convert string to array of letters
     const sentence='E-commerce'.split('')
 
     const {data:user}=useCurrentUser()

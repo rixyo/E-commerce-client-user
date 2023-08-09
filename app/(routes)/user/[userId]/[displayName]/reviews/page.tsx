@@ -1,3 +1,4 @@
+// user reviews page
 "use client"
 
 import Container from '@/components/ui/container';
@@ -7,7 +8,7 @@ import ReviewCard from './components/ReviewCard';
 
 
 const ReviewsPage:React.FC= () => {
-  
+  // get user reviews
     const {data:reviews}=useGetUserReviews()
   return (
     <Container>

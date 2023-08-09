@@ -1,3 +1,5 @@
+
+// single product page
 "use client"
 import Info from '@/components/Info';
 import ProductList from '@/components/ProductList';
@@ -20,7 +22,9 @@ type pageProps = {
 const Productpage:React.FC<pageProps> = ({params}) => {
   
     const [page,setPage]=useState<number>(1)
+    // get product by id
     const {data}=useGetProduct(params.productId)
+    // get suggested products base on current product category
     const category=data?.category?.name
     const {data:suggestedProducts,isFetching}=useGetProducts({
         page:page,

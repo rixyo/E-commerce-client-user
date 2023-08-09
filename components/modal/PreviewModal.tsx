@@ -1,6 +1,6 @@
+// Note: Preview Modal
+// this is a child component for modal and is used to preview the product
 "use client";
-
-
 import usePreviewModal from "@/hooks/modal/usePreviewModal";
 
 import Gallery from "@/components/gallery";

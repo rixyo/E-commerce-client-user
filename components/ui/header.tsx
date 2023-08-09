@@ -1,3 +1,4 @@
+// header component for all pages
 import React from 'react';
 import AnimatedText from './AnimatedText';
 import{ChevronLeft} from "lucide-react"

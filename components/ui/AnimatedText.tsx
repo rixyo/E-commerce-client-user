@@ -1,3 +1,5 @@
+// Note: AnimatedText component
+// this component is for animating text
 import React, { useState } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
 import { cn } from "@/lib/utils";

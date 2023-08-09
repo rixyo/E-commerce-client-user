@@ -1,5 +1,5 @@
-"use client";
 // this component is for footer
+"use client";
 import React, { useEffect, useState } from 'react';
 import AnimatedText from './ui/AnimatedText';
 

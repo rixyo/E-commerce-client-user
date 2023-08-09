@@ -3,17 +3,13 @@ import React, { useEffect, useState } from 'react';
 
 import Container from '@/components/ui/container';
 import useCart from '@/hooks/useCart';
-import NoResults from '@/components/ui/no-results';
-import ProductCard from '@/components/ui/product-card';
 import CartItem from './components/cartItem';
 import Summary from './components/summary';
 import useCurrentUser from '@/hooks/useCurrentUser';
 
-type pageProps = {
-    
-};
 
-const CartPage:React.FC<pageProps> = () => {
+
+const CartPage:React.FC = () => {
     const [mounted,setIsMounted]=useState<boolean>(false)
     const {data:user}=useCurrentUser()
     const cart=useCart()

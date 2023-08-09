@@ -1,5 +1,7 @@
+// this hook is used to get a product by id
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { Product } from "@/type";
 
 const useGetProduct =  (id: string) => {
     const {data,isLoading}=useQuery({

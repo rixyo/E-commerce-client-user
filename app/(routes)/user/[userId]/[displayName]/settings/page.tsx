@@ -1,3 +1,5 @@
+// parent component of settingform
+
 "use client"
 import useCurrentUser from '@/hooks/useCurrentUser';
 import React, { useEffect, useState } from 'react';
@@ -5,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import SettingForm from './components/SettingForm';
 
 const SettingPage:React.FC = () => {
-    const {data:user,isLoading}=useCurrentUser()
+    const {data:user}=useCurrentUser()
     const [mounted,setIsMounted]=useState<boolean>(false)
     useEffect(() => {
         setIsMounted(true);

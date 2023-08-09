@@ -1,3 +1,4 @@
+// this component is used to render the signup and signin form
 "use client"
 import React, { useState } from 'react';
 

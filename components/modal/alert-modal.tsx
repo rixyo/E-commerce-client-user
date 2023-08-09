@@ -1,3 +1,5 @@
+// Note: Alert Modal Component
+// this is a child component for modal and is used to show alert message when user wants to delete a product
 "use client";
 
 import { useEffect, useState } from "react";

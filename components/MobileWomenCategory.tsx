@@ -1,8 +1,10 @@
+// this component is for women categories in mobile nav
 import React from 'react';
 
 import AnimatedText from './ui/AnimatedText';
 import Link from 'next/link';
 import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
+import { Category } from '@/type';
 
 type MobileWomenCategoryProps = {
     categories:Category[]

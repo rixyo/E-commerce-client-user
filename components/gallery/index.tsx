@@ -1,3 +1,4 @@
+// used to show multiple images in singele product page 
 "use client";
 
 import NextImage from "next/image";

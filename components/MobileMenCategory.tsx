@@ -1,9 +1,12 @@
+// this component is for Mobile ManCategories
 import React, { useState } from 'react';
 import Link from 'next/link';
 
 
 import AnimatedText from './ui/AnimatedText';
 import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
+import { Category } from '@/type';
+
 
 type MobileMenCategoryProps = {
     categories:Category[]

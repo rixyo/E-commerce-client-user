@@ -1,3 +1,4 @@
+// this component is for category card
 "use client"
 import React from 'react';
 import Image from 'next/image';
@@ -7,6 +8,7 @@ import {
     CardContent,
     CardHeader,
   } from "@/components/ui/card"
+import { Category } from '@/type';
   
 type categorycartProps = {
     data:Category

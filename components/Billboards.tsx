@@ -1,12 +1,13 @@
-"use client"
 // this component is for billboards
+"use client"
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
+import { Billboard } from '@/type';
 
 import {  useEffect, useState } from 'react';
 
 interface BillboardProps {
-    data: Billboard[]|undefined;
+    data: Billboard[];
    
   }
   

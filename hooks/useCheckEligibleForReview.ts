@@ -1,8 +1,10 @@
+// Type: React Custom Hook
+// Description: useCheckEligibleForReview hook is used to check if the user is eligible to review a product
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import localStorageManager from "@/lib/LocalStorageManager";
 
-export const useCheckEligableForReview = (productId:string) => {
+ const useCheckEligibleForReview = (productId:string) => {
     const { data, isLoading, isError } = useQuery(
         ["checkEligableForReview", productId],
         async () => {
@@ -18,3 +20,4 @@ export const useCheckEligableForReview = (productId:string) => {
     
     return { data, isLoading };
 };
+export default useCheckEligibleForReview;

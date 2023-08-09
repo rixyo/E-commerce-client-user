@@ -1,3 +1,5 @@
+// Type: Layout Component check if user is authenticated or not and redirect to login page if not
+
 "use client"
 
 import useCurrentUser from "@/hooks/useCurrentUser"
@@ -15,9 +17,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         redirect('/')
     }
     return (
-        <div>
-           
-                    {children}
-        </div>
+        <>
+           {children}
+        </>
     )
 }

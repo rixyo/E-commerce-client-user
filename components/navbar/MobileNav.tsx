@@ -1,10 +1,11 @@
+// this component is for mobile navigation
 "use client";
 import React, { useCallback, useState } from 'react';
 import { User } from '@/hooks/useCurrentUser';
 import useGetAllCategories from '@/hooks/useGetAllCategories';
 import { usePathname,useRouter } from 'next/navigation';
 
-import {Home,X,AlignJustifyIcon, Smile, Star, Package, LogOut} from "lucide-react"
+import {X,AlignJustifyIcon, Smile, Star, Package, LogOut} from "lucide-react"
 import AnimatedText from '../ui/AnimatedText';
 import NavbarAction from './NavbarAction';
 import {Button} from '@/components/ui/button';
@@ -13,7 +14,7 @@ import MobileWomenCategory from '../MobileWomenCategory';
 import Link from 'next/link';
 import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
 import { Input } from '../ui/input';
-import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarSeparator, MenubarTrigger } from '../ui/menubar';
+import { cn } from '@/lib/utils';
 
 
 
@@ -29,11 +30,11 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
     const router=useRouter()
     const sentence='E-commerce'.split('')
   const {data:categories}=useGetAllCategories(
-    {gender:'male'}
+    {gender:'Male'}
   )
  const {data:categoriesForWomen}=useGetAllCategories(
   {
-    gender:'female'
+    gender:'Female'
   }
  )
  const onSearch=useCallback((event:React.FormEvent)=>{
@@ -42,20 +43,44 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
   const encodedSearch=encodeURI(search)
   router.push(`/result?search_query=${encodedSearch}`)
 },[search,router,navHandle])
-   const gotoProfile=()=>{
-      if(user){
-        navHandle.onClose()
-        if(pathname.includes(`user/${user.id}/${user.displayName}`)) return;
-        else router.push(`user/${user?.id}/${user?.displayName}`)
-      }
-   }
-   const logout = () => {
+  const logout = () => {
     localStorage.removeItem('token');
   };
   const handleLogout=()=>{
     logout();
     window.location.href = '/auth';
   }
+  const handleProfle=()=>{
+    if(pathname.includes(`/user/${user?.id}/${user?.displayName}`)) return;
+    else router.push(`/user/${user?.id}/${user?.displayName}`)
+  }
+  const goToOrdersPage=()=>{
+    if(pathname.includes(`/user/${user?.id}/${user?.displayName}/orders`)) return;
+    else router.push(`/user/${user?.id}/${user?.displayName}/orders`)
+  }
+    const goToReviewsPage=()=>{
+    router.push(`/user/${user?.id}/${user?.displayName}/reviews`)
+  }
+  const Routes = [
+    {
+      name:'Profile',
+      icon:<Smile size={20}/>,
+      href:`/user/${user?.id}/${user?.displayName}`,
+      isActive:pathname.includes(`/user/${user?.id}/${user?.displayName}`)
+    },
+    {
+      name:'Orders',
+      icon:<Package size={20}/>,
+      href:`/user/${user?.id}/${user?.displayName}/orders`,
+      isActive:pathname.includes(`/user/${user?.id}/${user?.displayName}/orders`)
+    },
+    {
+      name:'Reviews',
+      icon:<Star size={20}/>,
+      href:`/user/${user?.id}/${user?.displayName}/reviews`,
+      isActive:pathname.includes(`/user/${user?.id}/${user?.displayName}/reviews`)
+    }
+  ];
     return (
       <>
       <div className='fixed z-50 w-screen flex justify-between top-0 left-0 p-5   items-center bg-white border-t-[1px] md:hidden'>
@@ -97,20 +122,33 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
               </div>
            )}
            {user && (
-             <Menubar className='mx-5'>
-             <MenubarMenu>
-               <MenubarTrigger className='text-center hover:cursor-pointer hover:text-red-600 hover:underline text-lg'>{user.displayName} &apos;s Profile</MenubarTrigger>
-               <MenubarContent>
-                 <MenubarItem className='hover:underline cursor-pointer' onClick={gotoProfile}><Smile className='mr-2'/> Manage My Account</MenubarItem>
-                 <MenubarSeparator />
-                 <MenubarItem className='hover:underline cursor-pointer'><Star className='mr-2'/>My Reviews</MenubarItem>
-                 <MenubarSeparator />
-                 <MenubarItem className='hover:underline cursor-pointer'><Package className='mr-2'/>My Orders</MenubarItem>
-                 <MenubarSeparator />
-                 <MenubarItem className='hover:underline cursor-pointer' onClick={handleLogout}><LogOut className='mr-2'/>Logout</MenubarItem>
-               </MenubarContent>
-             </MenubarMenu>
-           </Menubar>
+            <>
+            <h1 className='mt-3 ml-8 text-xl font-bold text-gray-900'>{user?.displayName}</h1>
+              <div className='flex-row items-center justify-center'>
+                {Routes.map((route,index)=>(
+                  <div key={index} className='flex-col items-center justify-center gap-x-2 mt-3 ml-8' onClick={navHandle.onClose}>
+
+                     <Link href={route.href} key={route.href} className={cn(
+                      "text-lg font-medium transition-colors text-gray-900 hover:text-primary focus:outline-none focus:text-gray-700  duration-150 ease-in-out"
+                      ,route.isActive ? 'text-black dark:text-white' : 'text-muted-foreground '
+                  )}>
+                    <div className='flex items-center justify-start gap-x-2 '>
+                      {route.icon}
+                      <span>{route.name}</span>
+                    </div>
+                  </Link>
+
+                  </div>
+                ))}
+                <div className='flex items-center gap-2 mt-2' onClick={handleLogout}>
+
+                <LogOut  className='h-5 w-5 ml-8' />
+                <span>Logout</span>
+                </div>
+
+              </div>
+            </>
+          
            )}
            </div>
     </>

@@ -1,3 +1,5 @@
+// this is pandding card for user order page
+
 import React from 'react';
 
 import Image from 'next/image';
@@ -8,11 +10,10 @@ import { Order } from '@/type';
 
 type panddingcardProps = {
     data:Order
-    title:string
     
 };
 
-const Pandding:React.FC<panddingcardProps> = ({data,title}) => {
+const Pandding:React.FC<panddingcardProps> = ({data}) => {
     
     return (
         <>

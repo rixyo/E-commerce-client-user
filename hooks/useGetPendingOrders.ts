@@ -1,7 +1,8 @@
+// this hook is used to get all pending orders
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import  localStorageManager  from "../lib/LocalStorageManager";
-
+import { Order } from "@/type";
 const useGetPendingOrders = () => {
     const token = localStorageManager.getItemWithExpiration("token");
     const { data, isLoading} = useQuery({

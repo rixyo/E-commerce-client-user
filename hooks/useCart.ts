@@ -1,6 +1,10 @@
+// this hook is used to manage the cart state it uses zustand to manage the state and react-toastify to show the toast messages
+// it also uses zustand/middleware to persist the cart state in localstorage so that the cart state is not lost on page refresh
+
+
 import {create} from 'zustand';
 import { persist, createJSONStorage } from "zustand/middleware";
-
+import { CartProduct } from '@/type';
 import { toast } from 'react-toastify';
 interface CartStore {
     items:CartProduct[];

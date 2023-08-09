@@ -1,3 +1,4 @@
+// this is a modal for previewing the product
 "use client";
 
 import PreviewModal from "@/components/modal/PreviewModal";

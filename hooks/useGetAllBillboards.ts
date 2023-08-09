@@ -1,5 +1,8 @@
+// Type: Hook
+// Description: useGetAllBillboards hook is used to get all billboards
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { Billboard } from "@/type";
 
 const useGetAllBillboards = () => {
     const {

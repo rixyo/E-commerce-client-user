@@ -1,4 +1,4 @@
-
+// user can add review to product 
 import React, { useState } from 'react';
 import axios from 'axios';
 import  localstorage  from '@/lib/LocalStorageManager'
@@ -48,6 +48,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         const token = localstorage.getItemWithExpiration('token');
+        // convert values and rating to data object
         const data ={
             ...values,
             rating,

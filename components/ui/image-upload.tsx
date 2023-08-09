@@ -1,3 +1,4 @@
+// used to upload images in various places
 "use client";
 
 import { CldUploadWidget } from 'next-cloudinary';

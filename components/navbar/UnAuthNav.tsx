@@ -1,5 +1,5 @@
-"use client"
 // this component is for unauthenticated navigation
+"use client"
 import Link from 'next/link';
 import React, { useCallback, useState } from 'react';
 import {cn} from '@/lib/utils';

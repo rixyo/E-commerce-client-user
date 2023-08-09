@@ -1,16 +1,19 @@
-"use client"
+// parent component of reviewform
 
-import { useCheckEligableForReview } from '@/hooks/useCheckEligableForReview';
+"use client"
+import useCheckEligibleForReview from '@/hooks/useCheckEligibleForReview';
+import { useRouter } from 'next/navigation';
+
 import ReviewForm from './components/ReviewForm';
 
-import { useRouter } from 'next/navigation';
 
 const Review = ({params}:{
     params:{
         productId:string;
     }
 }) => {
-    const {data:isEligable}=useCheckEligableForReview(params.productId);
+    // check if user is eligible to review the product
+    const {data:isEligable}=useCheckEligibleForReview(params.productId);
     
     const router=useRouter();
  

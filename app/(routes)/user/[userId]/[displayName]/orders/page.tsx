@@ -1,3 +1,4 @@
+// parent component for all orders
 "use client"
 
 import Container from '@/components/ui/container';
@@ -14,9 +15,12 @@ type Vairant="pending" | "delivered";
   
 const OrderPage:React.FC= () => {
     const [variant, setVariant] = useState<Vairant>("pending")
+    // get pending orders
     const {data:pendingsData}=useGetOrders()
+    // get delivered orders
     const {data:deliveredData}=useGetDeliveredOrders()
     const handleVariant=(name:Vairant)=>{
+      // take the name of variant and set it to state
         setVariant(name)
     }
 
@@ -53,22 +57,24 @@ const OrderPage:React.FC= () => {
         </div>
         <div>
           <div>
-           {variant==="pending"  && <h1 className='text-center text-xl font-medium border-b-2 border-gray-300'>Pending Orders</h1> } 
+           {variant==="pending"  && <h1 className='text-center text-xl font-medium border-b-2 border-gray-300 p-2'>Pending Orders</h1> } 
+           {variant==='pending' && pendingsData?.length===0 && <h1 className='text-center text-xl font-medium  p-2'>No Orders</h1>}
             {variant==="pending"  && pendingsData?.map((item,index)=>(
                 <div key={index} className='flex items-center justify-center'>
 
-                    <Pandding title='Pending Orders'  data={item}/>
+                    <Pandding  data={item}/>
                 </div>
             ))}
 
           </div>
         <div>
          
-           {variant==="delivered" && <h1 className='text-center text-xl font-medium border-b-2 border-gray-300'>Delivered Orders</h1> } 
+           {variant==="delivered" && <h1 className='text-center text-xl font-medium border-b-2 border-gray-300 p-2'>Delivered Orders</h1> } 
+           {variant==='delivered' && deliveredData?.length===0 && <h1 className='text-center text-xl font-medium  p-2'>No Orders</h1>}
               {variant==='delivered' && deliveredData?.map((item,index)=>(
                 <div key={index} className='flex items-center justify-center'>
 
-                    <Delivered title='Delivered Orders'  data={item}/>
+                    <Delivered  data={item}/>
                 </div>
             ))}
           

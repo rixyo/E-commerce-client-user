@@ -1,5 +1,5 @@
-"use client"
 // this component is for desktop navigation functionality: got to user profile, logout, search
+"use client"
 import { User } from '@/hooks/useCurrentUser';
 import { usePathname,useRouter } from 'next/navigation';
 import {useCallback, useEffect,useState} from 'react';
@@ -48,6 +48,9 @@ const DesktopNav:React.FC<MainNavProps> = ({user}) => {
       if(pathname.includes(`/user/${user?.id}/${user?.displayName}/orders`)) return;
       else router.push(`/user/${user?.id}/${user?.displayName}/orders`)
     }
+    const goToReviewsPage=()=>{
+      router.push(`/user/${user?.id}/${user?.displayName}/reviews`)
+    }
     return (
         <nav className='hidden md:flex gap-6  w-full'> 
             <div className='hidden md:block w-full'>
@@ -63,7 +66,7 @@ const DesktopNav:React.FC<MainNavProps> = ({user}) => {
               <MenubarContent>
                 <MenubarItem className='hover:underline cursor-pointer' onClick={handleProfle}><Smile className='mr-2'/> Manage My Account</MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem className='hover:underline cursor-pointer'  onClick={()=>router.push(`/user/${user?.id}/${user?.displayName}/reviews`)}><Star className='mr-2'/>My Reviews</MenubarItem>
+                <MenubarItem className='hover:underline cursor-pointer'  onClick={goToReviewsPage}><Star className='mr-2'/>My Reviews</MenubarItem>
                 <MenubarSeparator />
                 <MenubarItem className='hover:underline cursor-pointer' onClick={goToOrdersPage}><Package className='mr-2'/>My Orders</MenubarItem>
                 <MenubarSeparator />

@@ -1,3 +1,6 @@
+// Type: Hooks
+// Description: useCurrentUser hook is used to get the current user data
+
 import axios from "axios";
 import {useQuery} from "@tanstack/react-query"
 import LocalStorageManager from "@/lib/LocalStorageManager"

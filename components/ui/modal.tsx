@@ -11,7 +11,7 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
 };
-
+//  this is a parent component for all modals
 const Modal: React.FC<ModalProps> = ({
   open,
   onClose,

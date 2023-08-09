@@ -1,3 +1,4 @@
+// container is a wrapper component that is used to wrap other components
 interface ContainerProps {
     children: React.ReactNode;
   }

@@ -2,10 +2,11 @@
 import React from 'react';
 import AnimatedText from './ui/AnimatedText';
 import CategoryCard from './ui/category-card';
+import { Category } from '@/type';
 
 
 type CategoriesProps = {
-    data:Category[]  ;
+    data:Category[]
  
    title:string
     
@@ -29,7 +30,7 @@ const ManCategories:React.FC<CategoriesProps> = ({data,title}) => {
            ))}
       </div>
             <div className='hidden md:grid md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4 p-5 mx-3'>
-            {data?.map((data,index)=>(
+            {data.map((data,index)=>(
           <div  key={index} >
               <CategoryCard data={data}/>
           </div>

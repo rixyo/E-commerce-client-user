@@ -1,3 +1,4 @@
+// Desc: This component is used to display the rating of a product
 import React from 'react';
 import { StarHalf , Star} from 'lucide-react';
 

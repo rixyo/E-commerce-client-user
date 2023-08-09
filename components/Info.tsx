@@ -1,3 +1,4 @@
+// this component is used to display product information and reviews and add to cart button
 "use client";
 
 import { ShoppingCart } from "lucide-react";

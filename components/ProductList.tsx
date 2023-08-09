@@ -1,5 +1,4 @@
-
-import {  useEffect } from "react";
+// this component is used to display the list of products
 import NoResults from "./ui/no-results";
 import ProductCart from "./ui/product-card";
 import AnimatedText from "./ui/AnimatedText";
