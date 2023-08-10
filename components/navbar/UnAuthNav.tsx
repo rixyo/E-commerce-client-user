@@ -46,7 +46,7 @@ const UnAuthNav:React.FC= () => {
                 ))}
                 <div className=' w-full p-3'>
                 <form onSubmit={onSearch}>
-              <Input   onChange={(e)=>setSearch(e.target.value)}
+              <Input onChange={(e)=>setSearch(e.target.value)}
          value={search} type='search' placeholder='Search' />
               </form>
             </div>

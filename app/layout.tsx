@@ -2,13 +2,16 @@
 import './globals.css'
 
 import { Metadata } from 'next';
-import {  Urbanist  } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ModalProvider from '@/provider/ModalProvider';
 import Footer from "@/components/Footer";
 import { ReactQueryProvider } from '@/provider/ReactQueryProvider';
-const urbanist =  Urbanist ({ subsets: ['latin'] })
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+})
 import AuthModalProvider from '@/provider/AuthModalProvider';
 import Navbar from '@/components/navbar/Navbar';
 
@@ -26,7 +29,7 @@ export default  function RootLayout({
   return (
     <ReactQueryProvider>
     <html lang="en">
-      <body className={urbanist.className}>
+      <body className={roboto.className}>
       <ModalProvider />
       <AuthModalProvider/>
         <ToastContainer

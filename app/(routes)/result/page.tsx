@@ -1,3 +1,4 @@
+// this component is for show search results
 "use client"
 import ProductList from '@/components/ProductList';
 import { Button } from '@/components/ui/button';
