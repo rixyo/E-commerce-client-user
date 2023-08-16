@@ -22,6 +22,7 @@ interface InfoProps {
 const Info: React.FC<InfoProps> = ({ data }) => {
   const [page, setPage] = useState<number>(1);
   const {data:reviews}=useGetProductReviews(data.id,page)
+  console.log(reviews)
   const authModal = useAuthModal();
   const {data:user}=useCurrentUser()
   const cart=useCart()
@@ -74,7 +75,7 @@ const Info: React.FC<InfoProps> = ({ data }) => {
                 <div
                 className={`text-gray-900 p-3 w-auto text-center  rounded-md cursor-pointer border-2 ${
                   selectedValue === size.value ? 'border-red-500' : 'border-gray-300'
-                } rounded-md`}
+                } rounded`}
                 key={index}
                 onClick={() => handleSizeClick(size.value)}
               >{size.value}</div>
@@ -87,7 +88,7 @@ const Info: React.FC<InfoProps> = ({ data }) => {
           {data.Colors.map((color,index) => (
             <div  className={`text-gray-900 p-3 w-13 cursor-pointer text-center border-2 ${
               selectedColor === color.value ? 'border-red-500' : 'border-gray-300'
-            } rounded-md`}   key={index}
+            } rounded`}   key={index}
             onClick={() => handleColorClick(color.value)} style={{ backgroundColor: color.value }} />
           ))}
         </div>
@@ -112,14 +113,18 @@ const Info: React.FC<InfoProps> = ({ data }) => {
             <p className="text-gray-900">{data.description}</p>
         </div>
         {/* review */}
+     {
+      reviews?.averageRating!==null &&
       <div className="flex justify-start mt-5  items-center w-full">
         <div className="flex-col items-center justify-center">
         <h3 className="font-semibold text-black">Rating:</h3>
             <p className="text-4xl font-bold">{reviews?.averageRating}/<span className="text-gray-400 text-xl font-serif">5</span></p>
         <p className="text-xl text-gray-900">{reviews?.reviews?.length} reviews</p>
-     {reviews?.averageRating && <Rating value={reviews?.averageRating}/> } 
+     {reviews?.averageRating!==null && <Rating value={reviews?.averageRating}/> } 
         </div>
       </div>
+     } 
+      
     </div>
   );
 }

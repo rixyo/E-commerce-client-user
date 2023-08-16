@@ -7,7 +7,7 @@ interface Query {
     gender: string;
 }
 const useGetAllCategories = (query:Query) => {
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/category/${process.env.NEXT_PUBLIC_STORE_ID}`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/category/${process.env.NEXT_PUBLIC_STORE_ID}/client`;
     const url= qs.stringifyUrl({
         url:baseUrl,
         query:{

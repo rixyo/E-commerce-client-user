@@ -20,7 +20,7 @@ import { toast } from 'react-toastify';
 
 const formSchema = z.object({
   comment: z.string().nonempty("Description is required").max(200),
-  images: z.object({ url: z.string() }).array(),
+  images: z.object({ url: z.string().nonempty('Image is required') }).array(),
 });
 
 type ReviewFormProps = {
@@ -69,7 +69,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         }).catch((err)=>{
             setLoading(false);
             console.log(err);
-            toast('Something went wrong',{
+            toast(err.response.data.message,{
                 type: 'error',
             })
         })

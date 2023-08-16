@@ -37,7 +37,7 @@ const SigninForm:React.FC= () => {
         setLoading(true);
      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`,data).then((res)=>{
             setLoading(false);
-            LocalStorageManager.setItemWithExpiration('token',res.data,60);
+            LocalStorageManager.setItemWithExpiration('token',res.data.access_token,60);
             toast('Logged in successfully',{
                 type:'success' 
             })

@@ -15,11 +15,16 @@ type MobileMenCategoryProps = {
 
 const MobileMenCategory:React.FC<MobileMenCategoryProps> = ({title,categories}) => {
     const [open,setOpen]=useState<boolean>(false)
+    const [mounted,setIsMounted]=useState<boolean>(false)
     const navOpen=useMobileNaveOpen()
     const handleLinkClick = () => {
         navOpen.onClose() //close the mobile nav
         setOpen(false); //close the category menu
       };
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, [])
+    if(!mounted) return null
     
     return (
         <>
@@ -35,7 +40,7 @@ const MobileMenCategory:React.FC<MobileMenCategoryProps> = ({title,categories}) 
          <div className='ml-8'>
              {categories?.map((category,index)=>(
              <div className='text-lg  font-medium hover:translate-x-5 hover:underline'  key={index}>
-                 <Link href={`/category/${category.id}/${category.name}`} scroll={false}>
+                 <Link href={`/category/${category.id}/${category.name}`} >
                   <p onClick={handleLinkClick}>{category.name}</p>
                 </Link>
              </div>

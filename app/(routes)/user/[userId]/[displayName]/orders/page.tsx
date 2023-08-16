@@ -3,28 +3,36 @@
 
 import Container from '@/components/ui/container';
 import useGetOrders from '@/hooks/useGetPendingOrders';
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 
 
 import {Truck, CheckCheck} from "lucide-react"
 import Pandding from './components/pandding-card';
 import Delivered from './components/deliveried';
 import useGetDeliveredOrders from '@/hooks/useGetDeliveredOrders';
+import useCurrentUser from '@/hooks/useCurrentUser';
+import { Button } from '@/components/ui/button';
 
 type Vairant="pending" | "delivered";
   
 const OrderPage:React.FC= () => {
-    const [variant, setVariant] = useState<Vairant>("pending")
-    // get pending orders
+  const [variant, setVariant] = useState<Vairant>("pending")
+  const {data:user,isLoading}=useCurrentUser()
+  // get pending orders
     const {data:pendingsData}=useGetOrders()
     // get delivered orders
     const {data:deliveredData}=useGetDeliveredOrders()
     const handleVariant=(name:Vairant)=>{
       // take the name of variant and set it to state
-        setVariant(name)
+      setVariant(name)
     }
 
-
+if(!user && !isLoading){
+  <div className="flex flex-col items-center justify-center h-screen">
+   <h1 className="text-2xl font-semibold">You are not eligible to access this page.</h1>
+                      
+     </div>
+}
   const variantVar = [
     {
       name: 'pending',
@@ -77,9 +85,6 @@ const OrderPage:React.FC= () => {
                     <Delivered  data={item}/>
                 </div>
             ))}
-          
-          
-
         </div>
            
         </div>

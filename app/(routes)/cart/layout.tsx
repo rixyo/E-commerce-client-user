@@ -11,7 +11,7 @@ export default function CartLayout({children}:{
             <h1 className='text-2xl font-semibold'>Authentication Checking..</h1>
         </div>
     )
-    else if(!user){
+    else if(!user && !isLoading){
         redirect('/auth')
     }
     return (

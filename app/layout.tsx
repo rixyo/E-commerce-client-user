@@ -30,6 +30,7 @@ export default  function RootLayout({
     <ReactQueryProvider>
     <html lang="en">
       <body className={roboto.className}>
+      
       <ModalProvider />
       <AuthModalProvider/>
         <ToastContainer

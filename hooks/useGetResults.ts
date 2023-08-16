@@ -8,7 +8,7 @@ const useGetResults = (query:string,page:number) => {
         queryKey: ["results",query,page],
         queryFn: async () => {
             const { data } = await axios.get(
-                `${process.env.NEXT_PUBLIC_API_URL}/product/${process.env.NEXT_PUBLIC_STORE_ID}/result/?search_query=${query}&page=${page}`
+                `${process.env.NEXT_PUBLIC_API_URL}/product/result/?search_query=${query}&page=${page}`
             );
             return data as Product[];
         },

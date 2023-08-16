@@ -26,7 +26,7 @@ const useGetProducts =  (query:Query) => {
       });
     const {data,isLoading,isPreviousData,isFetching} = useQuery({
       
-        queryKey: ['products',query],
+        queryKey: ['products',query.page,query.isFeatured,query['category[name]']],
         queryFn: async () => {
             const {data} = await axios.get(`${url}`);
             return data as Product[];

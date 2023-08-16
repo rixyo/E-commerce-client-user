@@ -1,18 +1,24 @@
 // delivery component for order detail
-import React from 'react';
-import { format } from 'date-fns';
+import React, { useEffect } from 'react';
+import { format, set } from 'date-fns';
 import { useRouter } from 'next/navigation';
 
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Order } from '@/type';
 
+
 type DeliveredProps = {
     data:Order   
 };
 
 const Delivered:React.FC<DeliveredProps> = ({data}) => {
+    const [muted,setMuted] = React.useState<boolean>(false)
     const router = useRouter();
+    useEffect(()=>{
+        setMuted(true)
+    },[])
+    if(!muted) return null
     
     return (
       <>

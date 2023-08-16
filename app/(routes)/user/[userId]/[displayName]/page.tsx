@@ -11,6 +11,7 @@ import Header from '@/components/ui/header';
 import Container from '@/components/ui/container';
 
 
+
 type pageProps = {
     params:{
         userId:string
@@ -19,9 +20,10 @@ type pageProps = {
 }
 
 const Profile:React.FC<pageProps>= () => {
-    const {data}=useCurrentUser()
+    const {data,isLoading}=useCurrentUser()
     const [mounted,setIsMounted]=useState<boolean>(false)
     const pathname=usePathname()
+
     const routes=[
         {
             href:`${pathname}/settings`,
@@ -36,6 +38,13 @@ const Profile:React.FC<pageProps>= () => {
       }, []);
     if(!mounted){
         return null
+    }
+    else if(!data && !isLoading){
+        <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-2xl font-semibold">You are not eligible to access this page.</h1>
+       
+</div>
+        
     }
     return (
                 <Container>

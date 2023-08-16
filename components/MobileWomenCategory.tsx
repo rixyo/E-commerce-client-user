@@ -1,5 +1,5 @@
 // this component is for women categories in mobile nav
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import AnimatedText from './ui/AnimatedText';
 import Link from 'next/link';
@@ -13,11 +13,16 @@ type MobileWomenCategoryProps = {
 
 const MobileWomenCategory:React.FC<MobileWomenCategoryProps> = ({categories,title}) => {
     const [open,setOpen]=React.useState<boolean>(false)
+    const [mounted,setIsMounted]=React.useState<boolean>(false)
     const navOpen=useMobileNaveOpen()
     const handleLinkClick = () => {
         navOpen.onClose() //close the mobile nav
         setOpen(false); //close the category menu
-      };
+    };
+    useEffect(() => {
+        setIsMounted(true);
+    }, [])
+    if(!mounted) return null
     return (
         <>
             <div className='flex  gap-x-2 ml-10 mt-5 ' onClick={()=>setOpen(!open)}>
