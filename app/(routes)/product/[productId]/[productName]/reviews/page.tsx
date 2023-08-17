@@ -1,4 +1,4 @@
-// parent component of reviewform
+// parent component of reviewform, this component is for writing review
 
 "use client"
 import useCheckEligibleForReview from '@/hooks/useCheckEligibleForReview';

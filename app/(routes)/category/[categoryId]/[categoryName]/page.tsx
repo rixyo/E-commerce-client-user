@@ -2,10 +2,12 @@
 import Billboard from '@/components/ui/billboard';
 import { Button } from '@/components/ui/button';
 import Container from '@/components/ui/container';
+import { Loader } from '@/components/ui/loader';
 import NoResults from '@/components/ui/no-results';
 import ProductCard from '@/components/ui/product-card';
 import useGetCategoryById from '@/hooks/useGetCategoryById';
 import useGetProducts from '@/hooks/useGetProducts';
+import { Product } from '@/type';
 import React, { Suspense, useEffect, useState } from 'react';
 
 type pageProps = {
@@ -22,12 +24,12 @@ const Category:React.FC<pageProps> = ({params}) => {
     // remove %20 from string
     const decodedString = decodeURIComponent(encodedString);
     // get products by category
-    const {data,isFetching}=useGetProducts({
+    const {data,isFetching,isLoading:categoriesProductLoader}=useGetProducts({
         'category[name]': decodedString,
         page:page,
     })
     // get category by id
-    const {data:category}=useGetCategoryById(params.categoryId)
+    const {data:category,isLoading}=useGetCategoryById(params.categoryId)
     // fixed bug when refresh page
     useEffect(() => {
         setMounted(true);
@@ -38,6 +40,11 @@ const Category:React.FC<pageProps> = ({params}) => {
     }
     const prevPage=()=>{
         setPage(page-1)
+    }
+    if(isLoading || categoriesProductLoader) {
+      return(
+        <Loader />
+      )
     }
 
     return (
@@ -53,13 +60,13 @@ const Category:React.FC<pageProps> = ({params}) => {
                <div className="mt-6 lg:col-span-4 lg:mt-0">
                 {data?.length === 0 && <NoResults />}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  {data?.map((item) => (
+                  {data?.map((item:Product) => (
                     <ProductCard key={item.id} data={item} />
                   ))}
                 </div>
-                <div className="flex items-center mb-5 justify-center">
+                <div className="flex items-center mb-5 mt-5 justify-center">
                 {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {data&&data.length>0 &&!isFetching && <Button disabled={data.length!==10} onClick={nextPage}>
+     {data&&data.length>0 &&!isFetching && <Button disabled={data.length!==12} onClick={nextPage}>
         Load More
     </Button> } 
         </div>

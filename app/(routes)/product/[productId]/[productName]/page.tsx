@@ -11,6 +11,7 @@ import useGetProducts from '@/hooks/useGetProducts';
 
 import React, { Suspense, useState } from 'react';
 import Reviews from './components/reviews';
+import { Loader } from '@/components/ui/loader';
 
 type pageProps = {
     params:{
@@ -23,13 +24,19 @@ const Productpage:React.FC<pageProps> = ({params}) => {
   
     const [page,setPage]=useState<number>(1)
     // get product by id
-    const {data}=useGetProduct(params.productId)
+    const {data,isLoading}=useGetProduct(params.productId)
     // get suggested products base on current product category
     const category=data?.category?.name
     const {data:suggestedProducts,isFetching}=useGetProducts({
         page:page,
         'category[name]':category,
     })
+
+    if(isLoading) {
+        return(
+            <Loader />
+        )
+    }
  
 
     const nextPage=()=>{
@@ -39,7 +46,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
         setPage(page-1)
     }
     return (
-        <Suspense fallback={<div>loading......</div>}>
+        <Suspense fallback>
         <div className="bg-white mt-12 md:mt-0">
       <Container>
         <div className="px-4 py-10 sm:px-6 lg:px-8">
@@ -55,9 +62,9 @@ const Productpage:React.FC<pageProps> = ({params}) => {
             </div>
           <hr className="my-10" />
          {data && suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} /> } 
-          <div className="flex items-center mb-2 justify-center">
+          <div className="flex items-center mb-2 mt-5 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {suggestedProducts &&!isFetching && <Button disabled={suggestedProducts.length!=10} onClick={nextPage}>
+     {suggestedProducts &&!isFetching && <Button disabled={suggestedProducts.length!=12} onClick={nextPage}>
         Load More
     </Button> } 
         </div>

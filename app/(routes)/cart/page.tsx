@@ -11,7 +11,7 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 
 const CartPage:React.FC = () => {
     const [mounted,setIsMounted]=useState<boolean>(false)
-    const {data:user}=useCurrentUser()
+    const {data:user,isLoading}=useCurrentUser()
     const cart=useCart()
     useEffect(() => {
         setIsMounted(true);

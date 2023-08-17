@@ -27,10 +27,10 @@ export default  function RootLayout({
   
   
   return (
-    <ReactQueryProvider>
     <html lang="en">
       <body className={roboto.className}>
       
+      <ReactQueryProvider>
       <ModalProvider />
       <AuthModalProvider/>
         <ToastContainer
@@ -40,9 +40,9 @@ export default  function RootLayout({
         <Navbar/>
         {children}
         <Footer/>
+    </ReactQueryProvider>
         </body>
     </html>
 
-    </ReactQueryProvider>
   )
 }

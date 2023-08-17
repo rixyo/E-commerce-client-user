@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 import Container from "@/components/ui/container"
 
 
-import Loading from "@/components/ui/loading";
+import { Loader } from "@/components/ui/loader";
 
 
 export default function Home() {
@@ -28,20 +28,25 @@ export default function Home() {
     page: page,
   })
   // get all categories for men
-  const {data:mancategories}=useGetAllCategories({
+  const {data:mancategories,isLoading:mancategoriesLoadin}=useGetAllCategories({
     gender:"Male"
   })
   // get all categories for women
-  const {data:womancategories}=useGetAllCategories({
+  const {data:womancategories,isLoading:femalecategoriesLoading}=useGetAllCategories({
     gender:"Female"
   })
+  if(mancategoriesLoadin || femalecategoriesLoading) {
+    return (
+      <Loader />
+    )
+  }
 // pagination
  const nextPage = () => {
     setPage((prevPage) => prevPage + 1);
   };
   const prevPage = () => setPage(prev => prev - 1)
   return (
-    <Suspense fallback={<Loading title="Customization"/>}>
+    <Suspense fallback={<Loader/>}>
    {billboard && <Billboards data={billboard} /> }
   <Container>
     {mancategories && <ManCategories data={mancategories} title="Men Categories" />   } 
@@ -52,7 +57,7 @@ export default function Home() {
         {/* pagination */}
         <div className="flex items-center mb-2 mt-5 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {!isFetching && <Button disabled={currentProducts?.length!==10} onClick={nextPage}>
+     {!isFetching && <Button disabled={currentProducts?.length!==12} onClick={nextPage}>
         Load More
     </Button> } 
         </div>

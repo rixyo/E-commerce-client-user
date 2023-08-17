@@ -54,7 +54,7 @@ const ReviewCard:React.FC<ReviewCardProps> = ({data}) => {
         <CardHeader>
 
             <div className="flex justify-between items-center gap-5">
-                <CardTitle>{data.id}</CardTitle>
+                <CardTitle className='text-center'>{data.id}</CardTitle>
             {data && 
              <Button variant='destructive'
              size={'icon'}

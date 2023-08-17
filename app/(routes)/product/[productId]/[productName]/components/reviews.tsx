@@ -35,7 +35,7 @@ const Reviews:React.FC<reviewcardProps> = ({id}) => {
             </div>
             <div className="flex items-center mb-2 justify-center">
     {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {!isFetching && <Button disabled={reviews?.reviews?.length!==5} onClick={nextPage}>
+     {!isFetching && <Button disabled={reviews?.reviews?.length!==3} onClick={nextPage}>
         Next Page
     </Button> } 
         </div>

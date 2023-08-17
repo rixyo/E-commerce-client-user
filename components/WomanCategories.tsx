@@ -23,14 +23,14 @@ const WomanCategories:React.FC<CategoriesProps> = ({data,title}) => {
     const sentence=title.split('')
     return (
       <div>
-            <div className='hidden md:flex gap-x-2 '>
+            <div className='hidden md:flex gap-x-2 mx-5'>
         {sentence.map((letter,index)=>(
         <AnimatedText className='hover:text-pink-600' key={index}>
             {letter  === " " ? "\u00A0" : letter}
         </AnimatedText>
         ))}
         </div>
-            <div className='hidden md:grid md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4 p-5 mx-3'>
+            <div className='hidden md:grid md:grid-cols-6 gap-4 p-5 mx-3'>
             {data?.map((data,index)=>(
           <div  key={index} >
               <CategoryCard data={data}/>

@@ -6,6 +6,7 @@ import React from 'react';
 import { useGetUserReviews } from '@/hooks/useGetUserReviews';
 import ReviewCard from './components/ReviewCard';
 import useCurrentUser from '@/hooks/useCurrentUser';
+import { Loader } from '@/components/ui/loader';
 
 
 
@@ -13,9 +14,14 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 const ReviewsPage:React.FC= () => {
 
   // get user reviews
-    const {data:reviews}=useGetUserReviews()
+    const {data:reviews,isLoading:reviewsLoading}=useGetUserReviews()
     // get current user
     const {data:user,isLoading}=useCurrentUser()
+    if(reviewsLoading) {
+      return(
+        <Loader />
+      )
+    }
     if(!user && !isLoading){
      <div className="flex flex-col items-center justify-center h-screen">
                       <h1 className="text-2xl font-semibold">You are not eligible to access this page.</h1>

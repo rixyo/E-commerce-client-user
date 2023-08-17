@@ -50,17 +50,6 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
     logout();
     window.location.href = '/auth';
   }
-  const handleProfle=()=>{
-    if(pathname.includes(`/user/${user?.id}/${user?.displayName}`)) return;
-    else router.push(`/user/${user?.id}/${user?.displayName}`)
-  }
-  const goToOrdersPage=()=>{
-    if(pathname.includes(`/user/${user?.id}/${user?.displayName}/orders`)) return;
-    else router.push(`/user/${user?.id}/${user?.displayName}/orders`)
-  }
-    const goToReviewsPage=()=>{
-    router.push(`/user/${user?.id}/${user?.displayName}/reviews`)
-  }
   const Routes = [
     {
       name:'Profile',
@@ -129,8 +118,8 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
                   <div key={index} className='flex-col items-center justify-center gap-x-2 mt-3 ml-8' onClick={navHandle.onClose}>
 
                      <Link href={route.href} key={route.href} className={cn(
-                      "text-lg font-medium transition-colors text-gray-900 hover:text-primary focus:outline-none focus:text-gray-700  duration-150 ease-in-out"
-                      ,route.isActive ? 'text-black dark:text-white' : 'text-muted-foreground '
+                      "text-lg font-medium transition-colors text-gray-900  focus:outline-none focus:text-gray-700  duration-150 ease-in-out"
+                      ,route.isActive ? 'text-black ' : 'text-muted-foreground '
                   )}>
                     <div className='flex items-center justify-start gap-x-2 '>
                       {route.icon}
