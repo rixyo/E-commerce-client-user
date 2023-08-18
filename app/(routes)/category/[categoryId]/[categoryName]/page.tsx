@@ -48,7 +48,7 @@ const Category:React.FC<pageProps> = ({params}) => {
     }
 
     return (
-      <Suspense fallback={<div>loading......</div>}>
+      <Suspense fallback>
         <div className="bg-white">
         <Container>
        {category &&  <Billboard data={category.billboard} /> }

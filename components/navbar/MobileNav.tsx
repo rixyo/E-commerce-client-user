@@ -2,7 +2,6 @@
 "use client";
 import React, { useCallback, useState } from 'react';
 import { User } from '@/hooks/useCurrentUser';
-import useGetAllCategories from '@/hooks/useGetAllCategories';
 import { usePathname,useRouter } from 'next/navigation';
 
 import {X,AlignJustifyIcon, Smile, Star, Package, LogOut} from "lucide-react"
@@ -15,6 +14,8 @@ import Link from 'next/link';
 import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
 import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
+import useGetMenCategories from '@/hooks/useGetMenCategories';
+import useGetWomenCategories from '@/hooks/useGetWomenCategories ';
 
 
 
@@ -23,20 +24,15 @@ type MainNavProps = {
 };
 
 const MobileNav:React.FC<MainNavProps> = ({user}) => {
+  const {data:menCategories}=useGetMenCategories()
+  const {data:womenCategories}=useGetWomenCategories()
   const [search, setSearch] = useState<string>("");
   const navHandle=useMobileNaveOpen()//handle mobile nav or close it
   const title='SignIn/SignUp'.split('')
     const pathname = usePathname();
     const router=useRouter()
     const sentence='E-commerce'.split('')
-  const {data:categories}=useGetAllCategories(
-    {gender:'Male'}
-  )
- const {data:categoriesForWomen}=useGetAllCategories(
-  {
-    gender:'Female'
-  }
- )
+
  const onSearch=useCallback((event:React.FormEvent)=>{
   event.preventDefault()
   navHandle.onClose()
@@ -97,8 +93,8 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
          value={search} type='search' placeholder='Search' />
               </form>
             </div>
-           {categories &&  <MobileMenCategory categories={categories} title={"Men Categories"}/> }
-           {categoriesForWomen && <MobileWomenCategory categories={categoriesForWomen} title={"Women Categories"}/>}
+           {menCategories &&  <MobileMenCategory categories={menCategories} title={"Men Categories"}/> }
+           {womenCategories && <MobileWomenCategory categories={womenCategories} title={"Women Categories"}/>}
            {!user && (
               <div className=' mt-3 ml-8' onClick={navHandle.onClose}>
                 <Link href='/auth' className='flex space-x-3 ' scroll={false}>

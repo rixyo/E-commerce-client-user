@@ -4,7 +4,7 @@ export const revalidate = 0;
 
 import {  Suspense, useState } from "react"
 import useGetAllBillboards from "@/hooks/useGetAllBillboards"
-import useGetAllCategories from "@/hooks/useGetAllCategories";
+
 import useGetProducts from "@/hooks/useGetProducts"
 
 import Billboards from "@/components/Billboards"
@@ -16,26 +16,25 @@ import Container from "@/components/ui/container"
 
 
 import { Loader } from "@/components/ui/loader";
+import useGetMenCategories from "@/hooks/useGetMenCategories";
+import useGetWomenCategories from "@/hooks/useGetWomenCategories ";
 
 
 export default function Home() {
   // get all billboards
   const [page,setPage]=useState<number>(1)
-  const {data:billboard}=useGetAllBillboards()
+  const {data:billboard,isLoading:billboardLoading}=useGetAllBillboards()
   // get all featured products 
-  const {data:currentProducts,isFetching}=useGetProducts({
+  const {data:currentProducts,isFetching,isLoading}=useGetProducts({
    isFeatured: true,
     page: page,
   })
   // get all categories for men
-  const {data:mancategories,isLoading:mancategoriesLoadin}=useGetAllCategories({
-    gender:"Male"
-  })
+ const {data:mancategories,isLoading:mancategoriesLoadin}=useGetMenCategories()
   // get all categories for women
-  const {data:womancategories,isLoading:femalecategoriesLoading}=useGetAllCategories({
-    gender:"Female"
-  })
-  if(mancategoriesLoadin || femalecategoriesLoading) {
+  const {data:womancategories,isLoading:femalecategoriesLoading}=useGetWomenCategories()
+
+  if(mancategoriesLoadin || femalecategoriesLoading || billboardLoading || isLoading) {
     return (
       <Loader />
     )
