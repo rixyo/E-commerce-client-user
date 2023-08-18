@@ -54,7 +54,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
             rating,
         }
         setLoading(true);
-        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/review/${productId}/create`,data,{
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/review/${productId}/${process.env.NEXT_PUBLIC_STORE_ID}/create`,data,{
             headers: {
                 "Content-Type":"application/json",
                 Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
         }).catch((err)=>{
             setLoading(false);
             console.log(err);
-            toast(err.response.data.message,{
+            toast("Some thing went wrong",{
                 type: 'error',
             })
         })

@@ -26,7 +26,7 @@ const ReviewCard:React.FC<ReviewCardProps> = ({data}) => {
   const handleDelete=()=>{
     const token =LocalStorageManager.getItemWithExpiration('token');
     setLoading(true)
-    axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/review/${data.id}`,{
+    axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/review/${data.id}/${process.env.NEXT_PUBLIC_STORE_ID}`,{
         headers:{
             Authorization:`Bearer ${token}`
         }

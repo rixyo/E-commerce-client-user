@@ -15,6 +15,7 @@ const Reviews:React.FC<reviewcardProps> = ({id}) => {
     const [page,setPage]=React.useState<number>(1)
     // get product reviews
     const {data:reviews,isFetching}=useGetProductReviews(id,page)
+    console.log(reviews)
     const nextPage=()=>{
         setPage(page+1)
     }

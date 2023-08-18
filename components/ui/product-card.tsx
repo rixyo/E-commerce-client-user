@@ -18,6 +18,7 @@ type productcartProps = {
 const ProductCard:React.FC<productcartProps> = ({data}) => {
   // calculate average rating
   const [mounted,setIsMounted]=useState<boolean>(false)
+  console.log(data)
   const totalRating = data.rewiews.reduce((sum, review) => sum + review.rating, 0);
   const averageRating = totalRating / data.rewiews.length;
     const router=useRouter()
