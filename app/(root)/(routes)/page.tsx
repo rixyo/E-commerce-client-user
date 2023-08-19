@@ -28,9 +28,9 @@ export default function Home() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const setCategories = useMenCategoryStore((state:any) => state.setCategories);
   const setWomenCategories = useWomenCategoryStore((state:any) => state.setCategories);
-  const {data:billboard}=useGetAllBillboards()
+  const {data:billboard,isLoading}=useGetAllBillboards()
   // get all featured products 
-  const {data:currentProducts,isFetching}=useGetProducts({
+  const {data:currentProducts,isFetching,isLoading:ProductsLoading}=useGetProducts({
    isFeatured: true,
     page: page,
   })
@@ -41,7 +41,7 @@ export default function Home() {
   const {data:womancategories,isLoading:femalecategoriesLoading}=useGetWomenCategories()
   setWomenCategories(womancategories)
 
-  if(mancategoriesLoadin || femalecategoriesLoading ) {
+  if(mancategoriesLoadin || femalecategoriesLoading || isLoading || ProductsLoading ) {
     return (
       <Loader />
     )
