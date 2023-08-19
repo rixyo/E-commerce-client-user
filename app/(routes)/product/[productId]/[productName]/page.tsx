@@ -26,17 +26,16 @@ const Productpage:React.FC<pageProps> = ({params}) => {
     // get product by id
     const {data,isLoading}=useGetProduct(params.productId)
     // get suggested products base on current product category
-    const category=data?.category?.name
-    const {data:suggestedProducts,isFetching}=useGetProducts({
+    const {data:suggestedProducts,isFetching,isLoading:suggestedProduct}=useGetProducts({
         page:page,
-        'category[name]':category,
+        'category[name]':data?.category.name,
     })
-
-    if(isLoading) {
+    if(isLoading || suggestedProduct) {
         return(
             <Loader />
         )
     }
+
  
 
     const nextPage=()=>{
@@ -46,7 +45,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
         setPage(page-1)
     }
     return (
-        <Suspense fallback>
+        <>
         <div className="bg-white mt-12 md:mt-0">
       <Container>
         <div className="px-4 py-10 sm:px-6 lg:px-8">
@@ -71,7 +70,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
         </div>
       </Container>
     </div>  
-        </Suspense>
+        </>
     )
 }
 export default Productpage;

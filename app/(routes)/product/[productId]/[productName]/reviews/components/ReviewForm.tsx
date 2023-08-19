@@ -143,7 +143,7 @@ const ReviewForm: React.FC<ReviewFormProps> = ({
             />
             <div className='flex justify-end'>
 
-            <Button className='mt-2 ' type="submit">Submit</Button>
+            <Button className='mt-2 ' type="submit">{loading?"Loading...":"Submit"}</Button>
             </div>
               
             </form>

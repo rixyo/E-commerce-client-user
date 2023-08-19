@@ -14,8 +14,10 @@ import Link from 'next/link';
 import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
 import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
-import useGetMenCategories from '@/hooks/useGetMenCategories';
+
 import useGetWomenCategories from '@/hooks/useGetWomenCategories ';
+import useMenCategoryStore from '@/hooks/store/mencategory';
+import useWomenCategoryStore from '@/hooks/store/womencategory';
 
 
 
@@ -24,8 +26,8 @@ type MainNavProps = {
 };
 
 const MobileNav:React.FC<MainNavProps> = ({user}) => {
-  const {data:menCategories}=useGetMenCategories()
-  const {data:womenCategories}=useGetWomenCategories()
+  const mencategories = useMenCategoryStore((state:any) => state.categories);
+  const womenCategories =useWomenCategoryStore((state:any)=>state.categories)
   const [search, setSearch] = useState<string>("");
   const navHandle=useMobileNaveOpen()//handle mobile nav or close it
   const title='SignIn/SignUp'.split('')
@@ -93,7 +95,7 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
          value={search} type='search' placeholder='Search' />
               </form>
             </div>
-           {menCategories &&  <MobileMenCategory categories={menCategories} title={"Men Categories"}/> }
+           {mencategories &&  <MobileMenCategory categories={mencategories} title={"Men Categories"}/> }
            {womenCategories && <MobileWomenCategory categories={womenCategories} title={"Women Categories"}/>}
            {!user && (
               <div className=' mt-3 ml-8' onClick={navHandle.onClose}>

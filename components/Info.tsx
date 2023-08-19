@@ -22,7 +22,6 @@ interface InfoProps {
 const Info: React.FC<InfoProps> = ({ data }) => {
   const [page, setPage] = useState<number>(1);
   const {data:reviews}=useGetProductReviews(data.id,page)
-  console.log(reviews)
   const authModal = useAuthModal();
   const {data:user}=useCurrentUser()
   const cart=useCart()
@@ -114,13 +113,13 @@ const Info: React.FC<InfoProps> = ({ data }) => {
         </div>
         {/* review */}
      {
-      reviews?.averageRating!==null &&
+      reviews?.averageRating!==undefined &&
       <div className="flex justify-start mt-5  items-center w-full">
         <div className="flex-col items-center justify-center">
         <h3 className="font-semibold text-black">Rating:</h3>
             <p className="text-4xl font-bold">{reviews?.averageRating}/<span className="text-gray-400 text-xl font-serif">5</span></p>
         <p className="text-xl text-gray-900">{reviews?.reviews?.length} reviews</p>
-     {reviews?.averageRating!==null && <Rating value={reviews?.averageRating}/> } 
+     {reviews?.averageRating!==undefined && <Rating value={reviews?.averageRating}/> } 
         </div>
       </div>
      } 

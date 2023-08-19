@@ -36,7 +36,7 @@ const SearchPage:React.FC = () => {
               <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
         {data &&  <ProductList title="Search Results"items={data}     />   }   
         </div>
-        <div className="flex items-center mb-5 justify-center">
+        <div className="flex items-center m-5 justify-center ">
         {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
      {data&&!isFetching && <Button disabled={data.length!==12} onClick={nextPage}>
         Load More

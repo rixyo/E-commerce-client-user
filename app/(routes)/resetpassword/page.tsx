@@ -15,7 +15,7 @@ const UpdatePasswordPage:React.FC = () => {
    if(!muted ) return null
     
     return (
-        <div className="flex items-center  p-4 justify-center w-full h-full bg-[url('/signin-bg.svg')] rounded-lg   md:mx-5">
+        <div className="flex items-center  p-4 justify-center w-full h-full bg-[url('/signin-bg.svg')] rounded-lg  md:mx-5">
         <UpdatePasswordForm
         token={value}
          />

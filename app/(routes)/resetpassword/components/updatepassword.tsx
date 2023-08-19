@@ -71,7 +71,7 @@ const UpdatePasswordForm:React.FC<UpdateFormProps>= ({token}) => {
     };
     
     return (
-        <div className='bg-white  p-10 rounded-lg'>
+        <div className='bg-white  p-10 rounded-lg w-full md:w-1/2'>
             <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Header
