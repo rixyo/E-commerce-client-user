@@ -29,7 +29,7 @@ const ManCategories:React.FC<CategoriesProps> = ({data,title}) => {
             </AnimatedText>
            ))}
       </div>
-            <div className='hidden md:grid md:grid-cols-6 gap-4 p-5 mx-3'>
+            <div className='hidden md:grid md:grid-cols-6 gap-4 p-3 mx-3 w-full'>
             {data.map((data,index)=>(
           <div  key={index} >
               <CategoryCard data={data}/>

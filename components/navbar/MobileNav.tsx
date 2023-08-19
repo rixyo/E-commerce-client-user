@@ -2,7 +2,11 @@
 "use client";
 import React, { useCallback, useState } from 'react';
 import { User } from '@/hooks/useCurrentUser';
+import useGetMenCategories from "@/hooks/useGetMenCategories";
+import useGetWomenCategories from "@/hooks/useGetWomenCategories ";
+import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
 import { usePathname,useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import {X,AlignJustifyIcon, Smile, Star, Package, LogOut} from "lucide-react"
 import AnimatedText from '../ui/AnimatedText';
@@ -10,15 +14,8 @@ import NavbarAction from './NavbarAction';
 import {Button} from '@/components/ui/button';
 import MobileMenCategory from '../MobileMenCategory';
 import MobileWomenCategory from '../MobileWomenCategory';
-import Link from 'next/link';
-import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
 import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
-
-import useGetWomenCategories from '@/hooks/useGetWomenCategories ';
-import useMenCategoryStore from '@/hooks/store/mencategory';
-import useWomenCategoryStore from '@/hooks/store/womencategory';
-
 
 
 type MainNavProps = {
@@ -26,8 +23,10 @@ type MainNavProps = {
 };
 
 const MobileNav:React.FC<MainNavProps> = ({user}) => {
-  const mencategories = useMenCategoryStore((state:any) => state.categories);
-  const womenCategories =useWomenCategoryStore((state:any)=>state.categories)
+ // get all categories for men
+ const {data:mencategories}=useGetMenCategories()
+ // get all categories for women
+ const {data:womencategories}=useGetWomenCategories()
   const [search, setSearch] = useState<string>("");
   const navHandle=useMobileNaveOpen()//handle mobile nav or close it
   const title='SignIn/SignUp'.split('')
@@ -96,7 +95,7 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
               </form>
             </div>
            {mencategories &&  <MobileMenCategory categories={mencategories} title={"Men Categories"}/> }
-           {womenCategories && <MobileWomenCategory categories={womenCategories} title={"Women Categories"}/>}
+           {womencategories && <MobileWomenCategory categories={womencategories} title={"Women Categories"}/>}
            {!user && (
               <div className=' mt-3 ml-8' onClick={navHandle.onClose}>
                 <Link href='/auth' className='flex space-x-3 ' scroll={false}>

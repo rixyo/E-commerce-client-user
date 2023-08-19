@@ -12,6 +12,7 @@ import useGetProducts from '@/hooks/useGetProducts';
 import React, { Suspense, useState } from 'react';
 import Reviews from './components/reviews';
 import { Loader } from '@/components/ui/loader';
+import Pagignation from '@/components/ui/Pagignation';
 
 type pageProps = {
     params:{
@@ -62,10 +63,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
           <hr className="my-10" />
          {data && suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} /> } 
           <div className="flex items-center mb-2 mt-5 justify-center">
-    {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {suggestedProducts &&!isFetching && <Button disabled={suggestedProducts.length!=12} onClick={nextPage}>
-        Load More
-    </Button> } 
+   <Pagignation page={page} prev={prevPage} next={nextPage} productLength={suggestedProducts?.length} />
         </div>
         </div>
       </Container>

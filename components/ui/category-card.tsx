@@ -19,7 +19,7 @@ const CategoryCart:React.FC<categorycartProps> = ({data}) => {
     
     return (
      
-      <Card className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4  border-gray-200'>
+      <Card className='bg-white group cursor-pointer rounded-xl border  space-y-4  p-2'>
       <Link href={`category/${data.id}/${data.name}`}>
   <CardHeader>
     <Image src={data.imageUrl}

@@ -18,7 +18,6 @@ type productcartProps = {
 const ProductCard:React.FC<productcartProps> = ({data}) => {
   // calculate average rating
   const [mounted,setIsMounted]=useState<boolean>(false)
-  console.log(data)
   const totalRating = data.rewiews.reduce((sum, review) => sum + review.rating, 0);
   const averageRating = totalRating / data.rewiews.length;
     const router=useRouter()
@@ -33,15 +32,14 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
   // product preview
   const onPreview: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
-
     previewModal.onOpen(data);
   };
 
 
     return (
-      <Suspense fallback={<div>Loading...</div>}>
+      <>
 
-        <div className='bg-white group cursor-pointer rounded-xl border p-3 space-y-4'  onClick={hanleClick}>
+        <div className='bg-white group cursor-pointer rounded-xl border  p-3 space-y-4'  onClick={hanleClick}>
             <div className='aspect-square rounded-xl bg-gray-100 relative'>
             <Image 
           src={data.Images?.[0]?.url} 
@@ -64,17 +62,15 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
         <p className="font-semibold text-lg">{data.name}</p>
         <p className="text-sm text-gray-500">{data.category?.name}</p>
       </div>
-            </div>
               {/* Price & Reiew */}
-      <div className="flex items-center justify-center">
-        <div className="flex-col items-center gap-x-2">
-          {Number.isNaN(averageRating)===false &&  <Rating value={averageRating} /> }
+      <div className="flex-col mx-2 items-center justify-center mt-1">
         <Currency value={data?.price} />
-        </div>
+          {Number.isNaN(averageRating)===false &&  <Rating value={averageRating} /> }
       </div>
+            </div>
 
         </div>
-      </Suspense>
+      </>
     )
 }
 export default ProductCard;
