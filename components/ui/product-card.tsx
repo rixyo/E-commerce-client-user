@@ -63,9 +63,9 @@ const ProductCard:React.FC<productcartProps> = ({data}) => {
         <p className="text-sm text-gray-500">{data.category?.name}</p>
       </div>
               {/* Price & Reiew */}
-      <div className="flex-col mx-2 items-center justify-center mt-1">
-        <Currency value={data?.price} />
+      <div className="flex-col mx-2 items-center mt-1">
           {Number.isNaN(averageRating)===false &&  <Rating value={averageRating} /> }
+        <Currency value={data?.price} />
       </div>
             </div>
 

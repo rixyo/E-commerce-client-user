@@ -21,10 +21,7 @@ import useGetWomenCategories from "@/hooks/useGetWomenCategories ";
 import Pagination from "@/components/ui/Pagination";
 
 
-
-
 export default function Home() {
-
   const [page,setPage]=useState<number>(1)
   const [showCategories, setShowCategories] = useState<boolean>(true);
   const [renderPagination,setRenderPagination]=useState<boolean>(false)
@@ -36,17 +33,17 @@ export default function Home() {
   // get all categories for women
   const {data:womancategories,isLoading:femalecategoriesLoading}=useGetWomenCategories()
   // get all featured products 
-  const {data:currentProducts,isFetching}=useGetProducts({
+  const {data:currentProducts,isFetching,isLoading:dataLoading}=useGetProducts({
    isFeatured: true,
     page: page,
   })
+
   useEffect(() => {
     setTimeout(() => {
       setRenderPagination(true)
     },2000);
-
   }, []);
-  if(mancategoriesLoadin || femalecategoriesLoading ||isLoading ) {
+  if(mancategoriesLoadin || femalecategoriesLoading ||isLoading || dataLoading  ) {
     return (
       <Loader />
     )
