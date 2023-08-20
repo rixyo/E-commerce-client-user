@@ -61,13 +61,13 @@ export default function Home() {
  
 // pagination
  const nextPage = () => {
-   setShowCategories(false);
    setPage(prev => prev + 1);
+   setShowCategories(false);
    setShowButton(true)
   };
   const prevPage = () => {
-    setShowCategories(false);
     setPage(prev => prev - 1);
+    setShowCategories(false);
     setShowButton(true)
   }
 
