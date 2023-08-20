@@ -7,16 +7,18 @@ import { Product } from "@/type";
 interface ProductListProps {
   title: string;
   items: Product[];
+  sectionRef: React.MutableRefObject<HTMLDivElement | null>;
 
 }
 
 const ProductList: React.FC<ProductListProps> = ({
   title,
   items,
+  sectionRef
 }) => {
  
   return (
-    <div className="space-y-4">
+    <div ref={sectionRef} id='section-1' className="space-y-4">
       {items && <div className="flex gap-x-2">
       {title.split('').map((letter,index)=>(
         <AnimatedText  key={index}>

@@ -23,9 +23,11 @@ import Pagignation from "@/components/ui/Pagignation";
 
 
 export default function Home() {
-  // get all billboards
+
   const [page,setPage]=useState<number>(1)
+  const [showCategories, setShowCategories] = useState<boolean>(true);
   const [renderPagination,setRenderPagination]=useState<boolean>(false)
+  const [showButton,setShowButton]=useState<boolean>(false)
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const {data:billboard,isLoading}=useGetAllBillboards()
   // get all categories for men
@@ -43,35 +45,50 @@ export default function Home() {
     },2000);
 
   }, []);
-  if(mancategoriesLoadin || femalecategoriesLoading || isLoading || ProductsLoading ) {
+  if(mancategoriesLoadin || femalecategoriesLoading ) {
     return (
       <Loader />
     )
   }
+  // scroll to section
+  const handleScroll = () => {
+    if (sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+      setShowCategories(prev => !prev);
+    }
+
+  };
+ 
 // pagination
  const nextPage = () => {
-    setPage((prevPage) => prevPage + 1);
+   setShowCategories(false);
+   setPage(prev => prev + 1);
+   setShowButton(true)
   };
-  const prevPage = () => setPage(prev => prev - 1)
-  const handleNextButtonClick = () => {
-    if(sectionRef.current){
-    sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+  const prevPage = () => {
+    setShowCategories(false);
+    setPage(prev => prev - 1);
+    setShowButton(true)
   }
-  nextPage()
-  };
+
   return (
     <>
    {billboard && <Billboards data={billboard} /> }
   <Container>
-    {mancategories && <ManCategories data={mancategories} title="Men Categories" />   } 
-
-    {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
- 
-        <section id='section-1' className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
-         {currentProducts &&<ProductList title="Featured Products" items={currentProducts}  /> } 
-        </section>
+  {showCategories && (
+          <>
+            {mancategories && <ManCategories data={mancategories} title="Men Categories" />}
+            {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
+          </>
+        )}
+        {/* show button  */}
+      {showButton &&  <Button onClick={handleScroll} className="hidden md:block mt-5 mx-auto">
+       {showCategories ? "Hide Categories" : "Show Categories"}
+        </Button> } 
+        {/* featured products */}
+          {currentProducts && <ProductList sectionRef={sectionRef} title="Featured Products" items={currentProducts} />}
         {/* pagination */}      
-        {renderPagination && <Pagignation page={page} prev={prevPage} next={handleNextButtonClick} productLength={currentProducts?.length} /> }
+        {renderPagination  && <Pagignation page={page}  prev={prevPage} next={nextPage} productLength={currentProducts?.length} /> }
   </Container>
     </>
   )

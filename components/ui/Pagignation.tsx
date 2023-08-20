@@ -5,8 +5,7 @@ type PagignationProps = {
     page:number;
     prev():void;
     next():void;
-    productLength:number|undefined;
-    
+    productLength:number|undefined;  
 };
 
 const Pagignation:React.FC<PagignationProps> = ({prev,next,page, productLength}) => {
