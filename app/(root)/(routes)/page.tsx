@@ -86,7 +86,7 @@ export default function Home() {
        {showCategories ? "Hide Categories" : "Show Categories"}
         </Button> } 
         {/* featured products */}
-          {currentProducts && <ProductList sectionRef={sectionRef} title="Featured Products" items={currentProducts} />}
+          {currentProducts && <ProductList  title="Featured Products" items={currentProducts} sectionRef={sectionRef} />}
         {/* pagination */}      
         {renderPagination  && <Pagignation page={page}  prev={prevPage} next={nextPage} productLength={currentProducts?.length} /> }
   </Container>

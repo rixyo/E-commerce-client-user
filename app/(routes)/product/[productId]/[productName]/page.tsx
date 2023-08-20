@@ -9,7 +9,7 @@ import Container from '@/components/ui/container';
 import useGetProduct from '@/hooks/useGetProduct';
 import useGetProducts from '@/hooks/useGetProducts';
 
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 import Reviews from './components/reviews';
 import { Loader } from '@/components/ui/loader';
 import Pagignation from '@/components/ui/Pagignation';
@@ -24,6 +24,7 @@ type pageProps = {
 const Productpage:React.FC<pageProps> = ({params}) => {
   
     const [page,setPage]=useState<number>(1)
+    const sectionRef = useRef<HTMLDivElement | null>(null);
     // get product by id
     const {data,isLoading}=useGetProduct(params.productId)
     // get suggested products base on current product category
@@ -61,7 +62,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
              {data && <Reviews id={params.productId} /> }
             </div>
           <hr className="my-10" />
-         {data && suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} /> } 
+         {data && suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} sectionRef={sectionRef} /> } 
           <div className="flex items-center mb-2 mt-5 justify-center">
    <Pagignation page={page} prev={prevPage} next={nextPage} productLength={suggestedProducts?.length} />
         </div>
