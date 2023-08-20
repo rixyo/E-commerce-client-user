@@ -15,10 +15,15 @@ interface BillboardProps {
     data,
   }) => {
     const [mute, setMute] = useState<boolean>(false);
+    const [render, setRender] = useState<boolean>(false);
     useEffect(() => {
       setMute(true)
+      setTimeout(() => {
+        setRender(true)
+      }, 1000);
     }, []);
     if(!mute) return null
+  
     const divStyle = {
       display: 'flex',
       alignItems: 'center',
@@ -34,7 +39,7 @@ interface BillboardProps {
             <div key={index}>
               <div style={{ ...divStyle, 'backgroundImage': `url(${data.imageUrl})` }}>
               <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-8">
-          {data.imageUrl && <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs">
+          {render && <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs">
           <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs">
             {data.label}
           </div> 

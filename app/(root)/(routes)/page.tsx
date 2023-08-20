@@ -25,6 +25,7 @@ import Pagignation from "@/components/ui/Pagignation";
 export default function Home() {
   // get all billboards
   const [page,setPage]=useState<number>(1)
+  const [renderPagination,setRenderPagination]=useState<boolean>(false)
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const {data:billboard,isLoading}=useGetAllBillboards()
   // get all categories for men
@@ -37,6 +38,9 @@ export default function Home() {
     page: page,
   })
   useEffect(() => {
+    setTimeout(() => {
+      setRenderPagination(true)
+    },2000);
 
   }, []);
   if(mancategoriesLoadin || femalecategoriesLoading || isLoading || ProductsLoading ) {
@@ -67,7 +71,7 @@ export default function Home() {
          {currentProducts &&<ProductList title="Featured Products" items={currentProducts}  /> } 
         </section>
         {/* pagination */}      
-        <Pagignation page={page} prev={prevPage} next={handleNextButtonClick} productLength={currentProducts?.length} /> 
+        {renderPagination && <Pagignation page={page} prev={prevPage} next={handleNextButtonClick} productLength={currentProducts?.length} /> }
   </Container>
     </>
   )
