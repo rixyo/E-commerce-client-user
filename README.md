@@ -14,7 +14,7 @@
 
 * Personalized Recommendations: Utilizing advanced algorithms, the frontend provides personalized product recommendations based on user preferences and browsing history.
 
-*Community Interaction: Users can engage with the community by leaving reviews, ratings, and sharing their favorite products on social media platforms.
+* Community Interaction: Users can engage with the community by leaving reviews, ratings, and sharing their favorite products on social media platforms.
 
 ## Technologies Used 
 * Typescript, React.js, Next.js, Tailwind CSS
