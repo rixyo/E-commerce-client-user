@@ -1,4 +1,4 @@
-## E-commerc
+## E-commerce
  This project aims to revolutionize the online shopping experience through a sleek and user-friendly interface that brings a seamless connection between customers and products.
  ## Overview
  Our frontend is designed with both customers and developers in mind. It combines elegant aesthetics with efficient functionality, ensuring a delightful shopping experience for users while offering a well-organized codebase for developers to build upon.
