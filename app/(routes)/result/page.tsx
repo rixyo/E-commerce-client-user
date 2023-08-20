@@ -12,6 +12,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const SearchPage:React.FC = () => {
     const [page,setPage]=useState<number>(1)
+    const [renderPagination,setRenderPagination]=useState<boolean>(false)
     const sectionRef = useRef<HTMLDivElement | null>(null);
     const [mounted,setMounted]=useState<boolean>(false)
     const search=useSearchParams()
@@ -20,7 +21,11 @@ const SearchPage:React.FC = () => {
     const {data,isFetching,isLoading}=useGetResults(encodedSearchQuery,page)
     useEffect(() => {
         setMounted(true)
-    }, [])
+        setTimeout(() => {
+          setRenderPagination(true)
+        },2000);
+    
+      }, []);
     if(!mounted) return null
     if(isLoading) return (
         <Loader />
@@ -38,7 +43,7 @@ const SearchPage:React.FC = () => {
               <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
         {data &&  <ProductList title="Search Results"items={data} sectionRef={sectionRef}/>   }   
         </div>
-       <Pagination  page={page} prev={prevPage} next={nextPage} productLength={data?.length} />
+     {renderPagination && !isFetching &&  <Pagination  page={page} prev={prevPage} next={nextPage} productLength={data?.length} /> }
         </Container>
     )
 }

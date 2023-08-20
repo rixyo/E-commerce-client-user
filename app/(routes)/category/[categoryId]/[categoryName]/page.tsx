@@ -1,4 +1,5 @@
 "use client"
+import Pagination from '@/components/ui/Pagination';
 import Billboard from '@/components/ui/billboard';
 import { Button } from '@/components/ui/button';
 import Container from '@/components/ui/container';
@@ -19,6 +20,7 @@ type pageProps = {
 
 const Category:React.FC<pageProps> = ({params}) => {
   const [mounted,setMounted]=useState<boolean>(false)
+  const [renderPagination,setRenderPagination]=useState<boolean>(false)
     const encodedString = params.categoryName;
     const [page,setPage]=useState<number>(1)
     // remove %20 from string
@@ -33,6 +35,9 @@ const Category:React.FC<pageProps> = ({params}) => {
     // fixed bug when refresh page
     useEffect(() => {
         setMounted(true);
+        setTimeout(() => {
+          setRenderPagination(true)
+        },2000);
     }, [])
     if(!mounted) return null
     const nextPage=()=>{
@@ -64,12 +69,7 @@ const Category:React.FC<pageProps> = ({params}) => {
                     <ProductCard key={item.id} data={item} />
                   ))}
                 </div>
-                <div className="flex items-center mb-5 mt-5 justify-center">
-                {!isFetching && <Button onClick={prevPage} className="mr-5" disabled={page === 1}>Previous</Button>}
-     {data&&data.length>0 &&!isFetching && <Button disabled={data.length!==12} onClick={nextPage}>
-        Load More
-    </Button> } 
-        </div>
+            {!isFetching &&!renderPagination && <Pagination page={page} prev={prevPage} next={nextPage} productLength={data?.length} />}
               </div>
 
             </div>
