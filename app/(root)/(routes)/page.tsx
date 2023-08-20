@@ -18,7 +18,8 @@ import Container from "@/components/ui/container"
 import { Loader } from "@/components/ui/loader";
 import useGetMenCategories from "@/hooks/useGetMenCategories";
 import useGetWomenCategories from "@/hooks/useGetWomenCategories ";
-import Pagignation from "@/components/ui/Pagignation";
+import Pagination from "@/components/ui/Pagination";
+
 
 
 
@@ -35,7 +36,7 @@ export default function Home() {
   // get all categories for women
   const {data:womancategories,isLoading:femalecategoriesLoading}=useGetWomenCategories()
   // get all featured products 
-  const {data:currentProducts,isFetching,isLoading:ProductsLoading}=useGetProducts({
+  const {data:currentProducts,isFetching}=useGetProducts({
    isFeatured: true,
     page: page,
   })
@@ -59,17 +60,17 @@ export default function Home() {
 
   };
  
-// pagination
- const nextPage = () => {
-   setPage(prev => prev + 1);
-   setShowCategories(false);
-   setShowButton(true)
-  };
-  const prevPage = () => {
-    setPage(prev => prev - 1);
+  // pagination
+  const nextPage = () => {
+    setPage((prev) => prev + 1);
     setShowCategories(false);
     setShowButton(true)
-  }
+   };
+const prevPage = () => {
+  setPage(prev => prev - 1);
+  setShowCategories(false);
+  setShowButton(true)
+}
 
   return (
     <>
@@ -88,7 +89,8 @@ export default function Home() {
         {/* featured products */}
           {currentProducts && <ProductList  title="Featured Products" items={currentProducts} sectionRef={sectionRef} />}
         {/* pagination */}      
-        {renderPagination  && <Pagignation page={page}  prev={prevPage} next={nextPage} productLength={currentProducts?.length} /> }
+        
+        {renderPagination &&!isFetching && <Pagination prev={prevPage} next={nextPage} page={page} productLength={currentProducts?.length}   />}
   </Container>
     </>
   )

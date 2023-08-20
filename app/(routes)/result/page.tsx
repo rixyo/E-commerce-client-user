@@ -1,7 +1,7 @@
 // this component is for show search results
 "use client"
 import ProductList from '@/components/ProductList';
-import Pagignation from '@/components/ui/Pagignation';
+import Pagination from '@/components/ui/Pagination';
 import { Button } from '@/components/ui/button';
 import Container from '@/components/ui/container';
 import { Loader } from '@/components/ui/loader';
@@ -38,7 +38,7 @@ const SearchPage:React.FC = () => {
               <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
         {data &&  <ProductList title="Search Results"items={data} sectionRef={sectionRef}/>   }   
         </div>
-       <Pagignation page={page} prev={prevPage} next={nextPage} productLength={data?.length} />
+       <Pagination  page={page} prev={prevPage} next={nextPage} productLength={data?.length} />
         </Container>
     )
 }

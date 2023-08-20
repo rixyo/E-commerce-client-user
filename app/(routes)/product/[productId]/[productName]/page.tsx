@@ -12,7 +12,7 @@ import useGetProducts from '@/hooks/useGetProducts';
 import React, { Suspense, useRef, useState } from 'react';
 import Reviews from './components/reviews';
 import { Loader } from '@/components/ui/loader';
-import Pagignation from '@/components/ui/Pagignation';
+import Pagination from '@/components/ui/Pagination';
 
 type pageProps = {
     params:{
@@ -37,9 +37,6 @@ const Productpage:React.FC<pageProps> = ({params}) => {
             <Loader />
         )
     }
-
- 
-
     const nextPage=()=>{
         setPage(page+1)
     }
@@ -64,7 +61,7 @@ const Productpage:React.FC<pageProps> = ({params}) => {
           <hr className="my-10" />
          {data && suggestedProducts && <ProductList title="Related Items" items={suggestedProducts} sectionRef={sectionRef} /> } 
           <div className="flex items-center mb-2 mt-5 justify-center">
-   <Pagignation page={page} prev={prevPage} next={nextPage} productLength={suggestedProducts?.length} />
+   <Pagination page={page} prev={prevPage} next={nextPage} productLength={suggestedProducts?.length} />
         </div>
         </div>
       </Container>
