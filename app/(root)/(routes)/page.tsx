@@ -40,7 +40,7 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       setRenderPagination(true)
-    },6000);
+    },3000);
 
   }, []);
   if(mancategoriesLoadin || femalecategoriesLoading || isLoading || ProductsLoading ) {
