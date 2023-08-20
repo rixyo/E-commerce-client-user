@@ -45,7 +45,7 @@ export default function Home() {
     },2000);
 
   }, []);
-  if(mancategoriesLoadin || femalecategoriesLoading ) {
+  if(mancategoriesLoadin || femalecategoriesLoading ||isLoading ) {
     return (
       <Loader />
     )
