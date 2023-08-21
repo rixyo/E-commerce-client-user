@@ -12,7 +12,6 @@ import Billboards from "@/components/Billboards"
 import ManCategories from "@/components/ManCategories";
 import ProductList from "@/components/ProductList"
 import WomanCategories from "@/components/WomanCategories";
-import { Button } from "@/components/ui/button"
 import Container from "@/components/ui/container"
 
 import { Loader } from "@/components/ui/loader";
@@ -26,13 +25,15 @@ import { Product } from "@/type";
 export default function Home() {
   const [page,setPage]=useState<number>(1)
   const [products,setProducts]=useState<Product[]>([])
+  const [paginationData,setPaginationData]=useState<any>({})
+  const sectionRef = React.useRef<HTMLDivElement>(null);
   const {data:billboard,isLoading}=useGetAllBillboards()
   // get all categories for men
   const {data:mancategories,isLoading:mancategoriesLoadin}=useGetMenCategories()
   // get all categories for women
   const {data:womancategories,isLoading:femalecategoriesLoading}=useGetWomenCategories()
   // get all featured products 
-  const { data, hasNextPage,isFetchingNextPage,fetchNextPage,isFetching} = useTestInfinite({
+  const { data,fetchNextPage, isFetching} = useTestInfinite({
     page: page,
     isFeatured: true,
   })
@@ -40,25 +41,39 @@ export default function Home() {
     if (data) {
       data.pages.forEach((group:any) => {
         setProducts((prev) => [...prev, ...group.products]);
+        setPaginationData(group.pagination)
       });
     }
   }, [data]);
-  if(mancategoriesLoadin || femalecategoriesLoading ||isLoading  ) {
-    return (
-      <Loader />
-    )
-  }
+
+// infinite scroll
+  const handleScroll=async()=> { 
+    const isAtBottom = document.documentElement.scrollHeight - document.documentElement.scrollTop <= document.documentElement.clientHeight; 
+    if (isAtBottom) { 
+      // Load next posts 
+      nextPage()
+      // fetch next page
+     fetchNextPage()
+      
+    } 
+    
+  } 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  })
+
   // set page
   const nextPage = () => {
     setPage((prev) => prev + 1);
   
    };
-   // load more products
-const handleClick=async()=>{
-  nextPage()
-  await fetchNextPage()
-  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-}
+  if(mancategoriesLoadin || femalecategoriesLoading ||isLoading)   {
+    return (
+      <Loader />
+    )
+  }
+
 
   return (
     <>
@@ -69,25 +84,8 @@ const handleClick=async()=>{
             {mancategories && <ManCategories data={mancategories} title="Men Categories" />}
             {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
           </>
-        {/* featured products */}
-        <ProductList items={products} title="Feature Procusts" 
-          />
-      {/* pagination */}      
-   {hasNextPage && <div className="flex justify-center items-center">
-        <Button
-          onClick={handleClick}
-          disabled={!hasNextPage || isFetchingNextPage}
-        >
-          {
-            hasNextPage
-            && !isFetchingNextPage
-            && "Load More"
-           }
-        </Button>
-      </div> } 
-      <div>{isFetching && !isFetchingNextPage ? <Loader/>: null}</div>
-      { !hasNextPage && <p className="text-center text-gray-500 text-lg font-thin">Nothing to Show</p>}
-        
+        <ProductList items={products} title="Feature Procusts"  />  
+        {products?.length === paginationData?.total && <p className="text-center text-lg font-thing text-gray-400">Nothing to Show</p>} 
   </Container>
     </>
   )

@@ -19,7 +19,6 @@ type pageProps = {
 
 const Category:React.FC<pageProps> = ({params}) => {
   const [mounted,setMounted]=useState<boolean>(false)
-  const [renderPagination,setRenderPagination]=useState<boolean>(false)
     const encodedString = params.categoryName;
     const [page,setPage]=useState<number>(1)
     // remove %20 from string
@@ -34,9 +33,6 @@ const Category:React.FC<pageProps> = ({params}) => {
     // fixed bug when refresh page
     useEffect(() => {
         setMounted(true);
-        setTimeout(() => {
-          setRenderPagination(true)
-        },2000);
     }, [])
     if(!mounted) return null
     const nextPage=()=>{
@@ -68,7 +64,7 @@ const Category:React.FC<pageProps> = ({params}) => {
                     <ProductCard key={item.id} data={item} />
                   ))}
                 </div>
-            {!isFetching &&!renderPagination && <Pagination page={page} prev={prevPage} next={nextPage} productLength={data?.products?.length} />}
+            { <Pagination page={page} prev={prevPage} next={nextPage} productLength={data?.products?.length} />}
               </div>
 
             </div>

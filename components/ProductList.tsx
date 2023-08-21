@@ -7,7 +7,6 @@ import { Product } from "@/type";
 interface ProductListProps {
   title: string;
   items: Product[];
-  sectionRef?: React.RefObject<HTMLDivElement>;
 }
 
 const ProductList: React.FC<ProductListProps> = ({
@@ -28,8 +27,6 @@ const ProductList: React.FC<ProductListProps> = ({
 
       </div>
 }
-      
-       {items.length === 0 && <NoResults/>}
      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
         {items && items.map((item) => (
           <div key={item.id}>

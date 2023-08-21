@@ -32,6 +32,7 @@ const Navbar:React.FC = () => {
           </Link>
         {user && <DesktopNav user={user}/>  }
         {!user &&<UnAuthNav/>}
+        <NavbarAction/>
         </div>
        <MobileNav user={user}/>
       </Container>

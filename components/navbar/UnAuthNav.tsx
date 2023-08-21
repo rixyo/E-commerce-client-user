@@ -5,7 +5,7 @@ import React, { useCallback, useState } from 'react';
 import {cn} from '@/lib/utils';
 import { usePathname, useRouter } from 'next/navigation';
 import { Input } from '../ui/input';
-import NavbarAction from './NavbarAction';
+
 
 
 const UnAuthNav:React.FC= () => {
@@ -50,7 +50,6 @@ const UnAuthNav:React.FC= () => {
          value={search} type='search' placeholder='Search' />
               </form>
             </div>
-            <NavbarAction/>
             </div>
         </nav>
     )
