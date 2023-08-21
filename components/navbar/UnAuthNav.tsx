@@ -51,7 +51,6 @@ const UnAuthNav:React.FC= () => {
               </form>
             </div>
             <NavbarAction/>
-            
             </div>
         </nav>
     )

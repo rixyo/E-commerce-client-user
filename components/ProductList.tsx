@@ -7,19 +7,19 @@ import { Product } from "@/type";
 interface ProductListProps {
   title: string;
   items: Product[];
-  sectionRef: React.MutableRefObject<HTMLDivElement | null>;
-
+  sectionRef?: React.RefObject<HTMLDivElement>;
 }
 
 const ProductList: React.FC<ProductListProps> = ({
   title,
   items,
-  sectionRef
 }) => {
  
+ 
   return (
-    <div ref={sectionRef} id='section-1' className="space-y-4">
-      {items && <div className="flex gap-x-2">
+    <>
+    <div className="space-y-4">
+      {items && <div className="flex gap-x-2 p-2">
       {title.split('').map((letter,index)=>(
         <AnimatedText  key={index}>
           {letter === " " ? "\u00A0" : letter}
@@ -29,7 +29,7 @@ const ProductList: React.FC<ProductListProps> = ({
       </div>
 }
       
-       {items?.length === 0 && <NoResults/>}
+       {items.length === 0 && <NoResults/>}
      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
         {items && items.map((item) => (
           <div key={item.id}>
@@ -38,6 +38,7 @@ const ProductList: React.FC<ProductListProps> = ({
         ))}
       </div>
     </div>
+    </>
    );
 }
  

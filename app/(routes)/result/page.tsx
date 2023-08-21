@@ -7,13 +7,12 @@ import Container from '@/components/ui/container';
 import { Loader } from '@/components/ui/loader';
 import useGetResults from '@/hooks/useGetResults';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,useState } from 'react';
 
 
 const SearchPage:React.FC = () => {
     const [page,setPage]=useState<number>(1)
     const [renderPagination,setRenderPagination]=useState<boolean>(false)
-    const sectionRef = useRef<HTMLDivElement | null>(null);
     const [mounted,setMounted]=useState<boolean>(false)
     const search=useSearchParams()
     const serachQuery=search?search.get("search_query"):null
@@ -41,7 +40,7 @@ const SearchPage:React.FC = () => {
     return (
         <Container>
               <div className="flex flex-col  px-4 sm:px-6 lg:px-8 mt-2">
-        {data &&  <ProductList title="Search Results"items={data} sectionRef={sectionRef}/>   }   
+        {data &&  <ProductList title="Search Results"items={data} />   }   
         </div>
      {renderPagination && !isFetching &&  <Pagination  page={page} prev={prevPage} next={nextPage} productLength={data?.length} /> }
         </Container>

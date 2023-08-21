@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import qs from "query-string"
-import { Product } from "@/type";
+import { ProductResponse } from "@/type";
 interface Query {
     page: number;
     isFeatured?: boolean;
@@ -29,7 +29,7 @@ const useGetProducts =  (query:Query) => {
         queryKey: ['products',query.page,query.isFeatured,query['category[name]']],
         queryFn: async () => {
             const {data} = await axios.get(`${url}`);
-            return data as Product[];
+            return data as ProductResponse;
         },
         keepPreviousData: true,
     });

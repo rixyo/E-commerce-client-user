@@ -8,7 +8,7 @@ import useMobileNaveOpen from '@/hooks/useHandleMobileNav';
 import { usePathname,useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-import {X,AlignJustifyIcon, Smile, Star, Package, LogOut} from "lucide-react"
+import {X,AlignJustifyIcon, Smile, Star, Package, LogOut, ShoppingBag} from "lucide-react"
 import AnimatedText from '../ui/AnimatedText';
 import NavbarAction from './NavbarAction';
 import {Button} from '@/components/ui/button';
@@ -67,12 +67,13 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
       isActive:pathname.includes(`/user/${user?.id}/${user?.displayName}/reviews`)
     }
   ];
+
     return (
       <>
       <div className='fixed z-50 w-screen flex justify-between top-0 left-0 p-5   items-center bg-white border-t-[1px] md:hidden'>
         <AlignJustifyIcon onClick={navHandle.onOpen}   className='cursor-pointer ' size={30}/>
       <div className='flex gap-x-2 mx-3'>
-        <Link href='/' className='flex gap-x-2 mx-3'>
+        <Link href='/' className='flex gap-x-2'>
         {sentence.map((letter,index)=>(
         <AnimatedText className='hover:text-pink-600' key={index}>
             {letter  === " " ? "\u00A0" : letter}
@@ -80,7 +81,9 @@ const MobileNav:React.FC<MainNavProps> = ({user}) => {
         ))}
         </Link>
         </div>
-        <NavbarAction/>
+      {/** Navbar Action */}
+   
+     <NavbarAction/>
       </div>
          <div className={`fixed top-0 left-0 w-full h-screen bg-white z-50 transform transition-all duration-300 ease-in-out ${navHandle.isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div>

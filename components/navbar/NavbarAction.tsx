@@ -15,8 +15,7 @@ const NavbarAction:React.FC = () => {
     const previewModal = usePreviewModal();
     const router=useRouter()
     useEffect(() => {
-        setIsMounted(true);
-        
+        setIsMounted(true);   
     }, [mounted])
     if(!mounted){
         return null

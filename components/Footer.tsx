@@ -1,15 +1,16 @@
 // this component is for footer
 "use client";
+import { set } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import AnimatedText from './ui/AnimatedText';
-
-
 
 const Footer:React.FC = () => {
   const [mounted,setIsMounted]=useState<boolean>(false)
-  const sentence='© 2023 E-commerce, Inc. All rights reserved.'.split('')
+  const [show,setShow]=useState<boolean>(false)
   useEffect(() => {
       setIsMounted(true);
+      setTimeout(() => {
+        setShow(true)
+      }, 1000);
   }, []);
   if(!mounted){
       return null
@@ -17,11 +18,11 @@ const Footer:React.FC = () => {
     
     return (
         <footer className="mb-10 md:mb-1  bg-white border-t text-center">
-       {sentence.map((letter,index)=>(
-        <AnimatedText key={index}>
-            {letter === ' ' ? "\u00A0" : letter}
-        </AnimatedText>
-       ))}
+      <div className="mx-auto py-10">
+       {show && <p className="text-center text-xs text-black">
+          &copy; 2023 Store, Inc. All rights reserved.
+        </p> } 
+      </div>
       </footer>
     )
 }

@@ -12,6 +12,7 @@ import useCurrentUser from '@/hooks/useCurrentUser';
 import MobileNav from './MobileNav';
 
 import UnAuthNav from './UnAuthNav';
+import NavbarAction from './NavbarAction';
 
 const Navbar:React.FC = () => {
   // convert string to array of letters

@@ -1,7 +1,6 @@
 "use client"
 import Pagination from '@/components/ui/Pagination';
 import Billboard from '@/components/ui/billboard';
-import { Button } from '@/components/ui/button';
 import Container from '@/components/ui/container';
 import { Loader } from '@/components/ui/loader';
 import NoResults from '@/components/ui/no-results';
@@ -9,7 +8,7 @@ import ProductCard from '@/components/ui/product-card';
 import useGetCategoryById from '@/hooks/useGetCategoryById';
 import useGetProducts from '@/hooks/useGetProducts';
 import { Product } from '@/type';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type pageProps = {
     params:{
@@ -53,7 +52,7 @@ const Category:React.FC<pageProps> = ({params}) => {
     }
 
     return (
-      <Suspense fallback>
+      <>
         <div className="bg-white">
         <Container>
        {category &&  <Billboard data={category.billboard} /> }
@@ -63,13 +62,13 @@ const Category:React.FC<pageProps> = ({params}) => {
               
               </div>
                <div className="mt-6 lg:col-span-4 lg:mt-0">
-                {data?.length === 0 && <NoResults />}
+                {data?.products.length === 0 && <NoResults />}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                  {data?.map((item:Product) => (
+                  {data?.products?.map((item:Product) => (
                     <ProductCard key={item.id} data={item} />
                   ))}
                 </div>
-            {!isFetching &&!renderPagination && <Pagination page={page} prev={prevPage} next={nextPage} productLength={data?.length} />}
+            {!isFetching &&!renderPagination && <Pagination page={page} prev={prevPage} next={nextPage} productLength={data?.products?.length} />}
               </div>
 
             </div>
@@ -77,7 +76,7 @@ const Category:React.FC<pageProps> = ({params}) => {
           </div>
         </Container>
       </div>
-        </ Suspense>
+        </>
     )
 }
 export default Category;

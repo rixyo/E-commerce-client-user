@@ -12,6 +12,10 @@ type Category ={
     imageUrl:string,
     billboard:Billboard,
 }
+type ProductResponse ={
+    products:Product[],
+    pagination:pagination,
+}
 type Product ={
     id:string,
     name:string,
@@ -23,6 +27,12 @@ type Product ={
     Colors:ProductColor[],
     rewiews:Review[],
 }
+type pagination ={
+    total:number,
+    per_page:number,
+    page:number,
+   total_pages:number,
+};
 type Image ={
     id:string,
     url:string,

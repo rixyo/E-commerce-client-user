@@ -5,8 +5,6 @@ import React from 'react';
 import useGetProductReviews from '@/hooks/useGetProductReviews';
 import ReviewItem from './review-item';
 import { Button } from '@/components/ui/button';
-
-
 type reviewcardProps = {
    id:string
 };
