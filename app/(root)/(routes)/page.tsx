@@ -1,11 +1,10 @@
 // home page 
 "use client"
-// revalidate every 10 seconds and if there is a new data
+// 
 export const revalidate = 0;
 
 import {useEffect,  useState } from "react"
 import useGetAllBillboards from "@/hooks/useGetAllBillboards"
-import useTestInfinite from "@/hooks/useGetProductsInfiniteQuery";
 
 
 import Billboards from "@/components/Billboards"
@@ -18,62 +17,43 @@ import { Loader } from "@/components/ui/loader";
 import useGetMenCategories from "@/hooks/useGetMenCategories";
 import useGetWomenCategories from "@/hooks/useGetWomenCategories ";
 import React from "react";
-import { Product } from "@/type";
+import useGetProducts from "@/hooks/useGetProducts";
+
+import NumberPagination from "@/components/ui/NumberPagination";
+import { Button } from "@/components/ui/button";
 
 
 
 export default function Home() {
   const [page,setPage]=useState<number>(1)
-  const [products,setProducts]=useState<Product[]>([])
-  const [paginationData,setPaginationData]=useState<any>({})
-  const sectionRef = React.useRef<HTMLDivElement>(null);
+  const [showButton,setShowButton]=useState<boolean>(false)
   const {data:billboard,isLoading}=useGetAllBillboards()
   // get all categories for men
   const {data:mancategories,isLoading:mancategoriesLoadin}=useGetMenCategories()
   // get all categories for women
   const {data:womancategories,isLoading:femalecategoriesLoading}=useGetWomenCategories()
-  // get all featured products 
-  const { data,fetchNextPage, isFetching} = useTestInfinite({
-    page: page,
-    isFeatured: true,
+  const {data:productsData,isLoading:productsLoading,isPreviousData}=useGetProducts({
+    page:page,
+    isFeatured:true
   })
   useEffect(() => {
-    if (data) {
-      data.pages.forEach((group:any) => {
-        setProducts((prev) => [...prev, ...group.products]);
-        setPaginationData(group.pagination)
-      });
-    }
-  }, [data]);
+    setTimeout(() => {
+      setShowButton(true)
+    }, 2000);
 
-// infinite scroll
-  const handleScroll=async()=> { 
-    const isAtBottom = document.documentElement.scrollHeight - document.documentElement.scrollTop <= document.documentElement.clientHeight; 
-    if (isAtBottom) { 
-      // Load next posts 
-      nextPage()
-      // fetch next page
-     fetchNextPage()
-      
-    } 
-    
-  } 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   })
-
-  // set page
-  const nextPage = () => {
-    setPage((prev) => prev + 1);
-  
-   };
-  if(mancategoriesLoadin || femalecategoriesLoading ||isLoading)   {
+  const totalPages = productsData?.pagination.total_pages || 0;
+const totalPagesArray = Array.from({ length: totalPages }, (_, index) => index + 1);
+ 
+  if(mancategoriesLoadin || femalecategoriesLoading ||isLoading || productsLoading)   {
     return (
       <Loader />
     )
   }
 
+ const prevPage=()=>{
+    setPage(page-1)
+ }
 
   return (
     <>
@@ -84,8 +64,17 @@ export default function Home() {
             {mancategories && <ManCategories data={mancategories} title="Men Categories" />}
             {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
           </>
-        <ProductList items={products} title="Feature Procusts"  />  
-        {products?.length === paginationData?.total && <p className="text-center text-lg font-thing text-gray-400">Nothing to Show</p>} 
+          {productsData?.products &&<ProductList items={productsData?.products} title="Feature Prouducts" />}
+         {showButton &&productsData?.products && <div  className="flex items-center mb-2 mt-5 justify-center gap-5 p-2">
+          <Button onClick={prevPage} disabled={isPreviousData || page === 1}>&lt;&lt;</Button>
+       {totalPagesArray.map((page,index) => (
+          <NumberPagination key={page} page={page} setPage={setPage} />
+          ))}
+                    <Button onClick={()=>{
+                      setPage(totalPages)
+                    }} disabled={isPreviousData || page === totalPages}>&gt;&gt;</Button>
+          </div> } 
+         
   </Container>
     </>
   )

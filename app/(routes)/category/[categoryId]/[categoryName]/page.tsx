@@ -58,7 +58,7 @@ const Category:React.FC<pageProps> = ({params}) => {
               
               </div>
                <div className="mt-6 lg:col-span-4 lg:mt-0">
-                {data?.products.length === 0 && <NoResults />}
+                {data?.products?.length === 0 && <NoResults />}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {data?.products?.map((item:Product) => (
                     <ProductCard key={item.id} data={item} />

@@ -15,7 +15,7 @@ interface Query {
       isFetchingNextPage,
       status,
     } = useInfiniteQuery({
-      queryKey: ['products',query],
+      queryKey: ['productsquery',JSON.stringify(query)],
       queryFn: () => getPosts(query), 
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.pagination.page < lastPage.pagination.total_pages) {
