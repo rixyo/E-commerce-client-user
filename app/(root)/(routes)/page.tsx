@@ -3,7 +3,7 @@
 // 
 export const revalidate = 0;
 
-import {useEffect,  useState } from "react"
+import {useEffect,  useMemo,  useState } from "react"
 import useGetAllBillboards from "@/hooks/useGetAllBillboards"
 
 
@@ -42,6 +42,13 @@ export default function Home() {
     }, 2000);
 
   })
+  const mergedData = useMemo(() => {
+   return {
+     billboard,
+     mancategories,
+     womancategories,
+   };
+  }, [billboard, mancategories, womancategories]);
   const totalPages = productsData?.pagination.total_pages || 0;
 const totalPagesArray = Array.from({ length: totalPages }, (_, index) => index + 1);
  
@@ -57,12 +64,12 @@ const totalPagesArray = Array.from({ length: totalPages }, (_, index) => index +
 
   return (
     <>
-   {billboard && <Billboards data={billboard} /> }
+   {mergedData.billboard && <Billboards data={mergedData.billboard} /> }
   <Container>
   
           <>
-            {mancategories && <ManCategories data={mancategories} title="Men Categories" />}
-            {womancategories && <WomanCategories data={womancategories} title="Women Categories" />}
+            {mergedData.mancategories && <ManCategories data={mergedData.mancategories} title="Men Categories" />}
+            {mergedData.womancategories && <WomanCategories data={mergedData.womancategories} title="Women Categories" />}
           </>
           {productsData?.products &&<ProductList items={productsData?.products} title="Feature Prouducts" />}
          {showButton &&productsData?.products && <div  className="flex items-center mb-2 mt-5 justify-center gap-5 p-2">

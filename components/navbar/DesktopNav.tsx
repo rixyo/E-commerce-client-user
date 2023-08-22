@@ -59,7 +59,7 @@ const DesktopNav:React.FC<MainNavProps> = ({user}) => {
          value={search} type='search' placeholder='Search' />
               </form>
             </div>
-          <NavbarAction/>
+            {/** this component is responsible for user profile review order route*/}
             <Menubar className='w-full'>
             <MenubarMenu>
               <MenubarTrigger className='hover:cursor-pointer hover:text-red-600 hover:underline text-lg'>{user.displayName} &apos;s Profile</MenubarTrigger>
