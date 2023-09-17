@@ -8,6 +8,7 @@ const useGetWomenCategories = () => {
     const {data,isLoading,isFetching} = useQuery({
         queryKey:['womencategories'],
         queryFn: async () => {
+               await new Promise((resolve) => setTimeout(resolve, 1000));
             const {data} = await axios.get(`${baseUrl}`);
             return data as Category[];
         }

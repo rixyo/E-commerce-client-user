@@ -32,6 +32,8 @@ const Gallery: React.FC<GalleryProps> = ({
                 fill
                 src={image.url}
                 alt="Image"
+                loader={({ src }) => src}
+                loading="lazy"
                 className="object-cover object-center"
               />
             </div>

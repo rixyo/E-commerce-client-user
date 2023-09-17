@@ -31,6 +31,7 @@ export default function Home() {
   // get all categories for men
   const {data:mancategories,isLoading:mancategoriesLoadin}=useGetMenCategories()
   // get all categories for women
+ 
   const {data:womancategories,isLoading:femalecategoriesLoading}=useGetWomenCategories()
   const {data:productsData,isLoading:productsLoading,isPreviousData}=useGetProducts({
     page:page,

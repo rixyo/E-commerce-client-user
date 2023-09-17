@@ -22,6 +22,8 @@ const GalleryTab: React.FC<GalleryTabProps> = ({
               fill 
               src={image.url} 
               alt="E-commerce" 
+              loader={({ src }) => src}
+              loading="lazy"
               className="object-cover object-center" 
             />
           </span>
